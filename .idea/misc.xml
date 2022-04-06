@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/drawable/button_bg.xml" value="0.1745" />
+        <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/drawable/facebook_button_bg.xml" value="0.1745" />
+        <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/drawable/getstart_bg.xml" value="0.1475" />
+        <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/drawable/ic_outline_email_24.xml" value="0.1745" />
+        <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/drawable/ic_outline_phone_24.xml" value="0.1745" />
+        <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/layout/activity_get_start_one.xml" value="0.20416666666666666" />
+        <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/layout/activity_sign_up.xml" value="0.20416666666666666" />
+        <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/layout/activity_splash.xml" value="0.20416666666666666" />
+        <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/layout/activity_welcome.xml" value="0.20416666666666666" />
+        <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/layout/get_started_item.xml" value="0.20416666666666666" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
