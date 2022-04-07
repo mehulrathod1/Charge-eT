@@ -28,6 +28,19 @@
     <string name="Enter_Password">Enter Password</string>
     <string name="Country">Country</string>
     <string name="Select_Country">Select Country</string>
+    <string name="login">Login</string>
 
 
+    <!--    login-->
+    <string name="Forgot_Password">Forgot Password?</string>
+    <string name="Secured_Login">Secured Login</string>
+
+    <!--    forgot_password-->
+    <string name="Forgot_Pwd">Forgot Password</string>
+    <string name="POPUP">POPUP</string>
+    <string name="Continue">Continue</string>
+    <string name="otp">OTP</string>
+    <string name="enter_otp">Enter OTP</string>
+    <string name="resend">Resend</string>
+    <string name="otp_msg">An OTP has been sent to your registered mobile number &amp; Email-id.</string>
 </resources>

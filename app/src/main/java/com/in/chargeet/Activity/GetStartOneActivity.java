@@ -27,7 +27,7 @@ public class GetStartOneActivity extends AppCompatActivity {
     LinearLayout layout_dot;
     TextView[] dot;
     Button getStart;
-
+    TextView skip;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +45,7 @@ public class GetStartOneActivity extends AppCompatActivity {
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         layout_dot = (LinearLayout) findViewById(R.id.layout_dot);
         getStart = findViewById(R.id.getStart);
-
+        skip = findViewById(R.id.skip);
 
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -83,6 +83,16 @@ public class GetStartOneActivity extends AppCompatActivity {
             }
         });
 
+
+        skip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(getApplicationContext(), WelcomeActivity.class);
+                startActivity(intent);
+
+            }
+        });
 
     }
 

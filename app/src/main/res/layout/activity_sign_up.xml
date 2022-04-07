@@ -7,173 +7,205 @@
     android:background="@color/light_green"
     tools:context=".Activity.SignUpActivity">
 
-    <RelativeLayout
-        android:id="@+id/pagerLayout"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/_200sdp"
-        android:background="@drawable/get_start_bg"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/_12sdp"
-            android:layout_marginRight="@dimen/_14sdp"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
 
-
-            <LinearLayout
+            <RelativeLayout
+                android:id="@+id/pagerLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_8sdp"
-                android:layout_marginBottom="@dimen/_8sdp"
+                android:layout_marginTop="@dimen/_200sdp"
+                android:background="@drawable/get_start_bg"
                 android:orientation="vertical">
 
-                <TextView
+
+                <LinearLayout
+                    android:id="@+id/linear"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/playfair_display_semi_bold"
-                    android:gravity="center"
-                    android:text="@string/Sign_Up"
-                    android:textColor="@color/black_text_color"
-                    android:textSize="@dimen/_40sdp" />
+                    android:layout_marginLeft="@dimen/_12sdp"
+                    android:layout_marginRight="@dimen/_14sdp"
+                    android:orientation="vertical">
 
-            </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_16sdp"
-                android:layout_marginBottom="@dimen/_8sdp"
-                android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:layout_marginBottom="@dimen/_8sdp"
+                        android:orientation="vertical">
 
-                <TextView
-                    style="@style/mont_semi_black_14"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/Email" />
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/playfair_display_semi_bold"
+                            android:gravity="center"
+                            android:text="@string/Sign_Up"
+                            android:textColor="@color/black_text_color"
+                            android:textSize="@dimen/_40sdp" />
 
-                <EditText
-                    style="@style/mont_reg_black_14"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_6sdp"
-                    android:drawableLeft="@drawable/ic_outline_email_24"
-                    android:drawablePadding="@dimen/_12sdp"
-                    android:ellipsize="end"
-                    android:hint="@string/Enter_Email"
-                    android:maxLines="1"
-                    android:singleLine="true" />
-            </LinearLayout>
+                    </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_16sdp"
-                android:layout_marginBottom="@dimen/_8sdp"
-                android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_16sdp"
+                        android:layout_marginBottom="@dimen/_8sdp"
+                        android:orientation="vertical">
 
-                <TextView
-                    style="@style/mont_semi_black_14"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/Phone_Number" />
+                        <TextView
+                            style="@style/mont_semi_black_14"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/Email" />
 
-                <EditText
-                    style="@style/mont_reg_black_14"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_6sdp"
-                    android:drawableLeft="@drawable/ic_outline_phone_24"
-                    android:drawablePadding="@dimen/_12sdp"
-                    android:ellipsize="end"
-                    android:hint="@string/Enter_Phone_Number"
-                    android:maxLines="1"
-                    android:singleLine="true" />
+                        <EditText
+                            style="@style/mont_reg_black_14"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_6sdp"
+                            android:drawableLeft="@drawable/ic_outline_email_24"
+                            android:drawablePadding="@dimen/_12sdp"
+                            android:ellipsize="end"
+                            android:hint="@string/Enter_Email"
+                            android:maxLines="1"
+                            android:singleLine="true" />
+                    </LinearLayout>
 
-            </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_16sdp"
+                        android:layout_marginBottom="@dimen/_8sdp"
+                        android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_16sdp"
-                android:layout_marginBottom="@dimen/_8sdp"
-                android:orientation="vertical">
+                        <TextView
+                            style="@style/mont_semi_black_14"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/Phone_Number" />
 
-                <TextView
-                    style="@style/mont_semi_black_14"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/Username" />
+                        <EditText
+                            style="@style/mont_reg_black_14"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_6sdp"
+                            android:drawableLeft="@drawable/ic_outline_phone_24"
+                            android:drawablePadding="@dimen/_12sdp"
+                            android:ellipsize="end"
+                            android:hint="@string/Enter_Phone_Number"
+                            android:maxLines="1"
+                            android:singleLine="true" />
 
-                <EditText
-                    style="@style/mont_reg_black_14"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_6sdp"
-                    android:drawableLeft="@drawable/ic_outline_email_24"
-                    android:drawablePadding="@dimen/_12sdp"
-                    android:ellipsize="end"
-                    android:hint="@string/Enter_Username"
-                    android:maxLines="1"
-                    android:singleLine="true" />
-            </LinearLayout>
+                    </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_16sdp"
-                android:layout_marginBottom="@dimen/_8sdp"
-                android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_16sdp"
+                        android:layout_marginBottom="@dimen/_8sdp"
+                        android:orientation="vertical">
 
-                <TextView
-                    style="@style/mont_semi_black_14"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/Email" />
+                        <TextView
+                            style="@style/mont_semi_black_14"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/Username" />
 
-                <EditText
-                    style="@style/mont_reg_black_14"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_6sdp"
-                    android:drawableLeft="@drawable/ic_outline_email_24"
-                    android:drawablePadding="@dimen/_12sdp"
-                    android:ellipsize="end"
-                    android:hint="@string/Enter_Email"
-                    android:maxLines="1"
-                    android:singleLine="true" />
-            </LinearLayout>
+                        <EditText
+                            style="@style/mont_reg_black_14"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_6sdp"
+                            android:drawableLeft="@drawable/ic_outline_email_24"
+                            android:drawablePadding="@dimen/_12sdp"
+                            android:ellipsize="end"
+                            android:hint="@string/Enter_Username"
+                            android:maxLines="1"
+                            android:singleLine="true" />
+                    </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_16sdp"
-                android:layout_marginBottom="@dimen/_8sdp"
-                android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_16sdp"
+                        android:layout_marginBottom="@dimen/_8sdp"
+                        android:orientation="vertical">
 
-                <TextView
-                    style="@style/mont_semi_black_14"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/Email" />
+                        <TextView
+                            style="@style/mont_semi_black_14"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/Password" />
 
-                <EditText
-                    style="@style/mont_reg_black_14"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_6sdp"
-                    android:drawableLeft="@drawable/ic_outline_email_24"
-                    android:drawablePadding="@dimen/_12sdp"
-                    android:ellipsize="end"
-                    android:hint="@string/Enter_Email"
-                    android:maxLines="1"
-                    android:singleLine="true" />
-            </LinearLayout>
+                        <EditText
+                            style="@style/mont_reg_black_14"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_6sdp"
+                            android:drawableLeft="@drawable/ic_outline_vpn_key_24"
+                            android:drawablePadding="@dimen/_12sdp"
+                            android:ellipsize="end"
+                            android:hint="@string/Enter_Password"
+                            android:maxLines="1"
+                            android:singleLine="true" />
+                    </LinearLayout>
 
-        </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_16sdp"
+                        android:layout_marginBottom="@dimen/_8sdp"
+                        android:orientation="vertical">
 
-    </RelativeLayout>
+                        <TextView
+                            style="@style/mont_semi_black_14"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/Country" />
+
+                        <EditText
+                            style="@style/mont_reg_black_14"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_6sdp"
+                            android:drawableLeft="@drawable/ic_outline_location_on_24"
+                            android:drawablePadding="@dimen/_12sdp"
+                            android:ellipsize="end"
+                            android:hint="@string/Select_Country"
+                            android:maxLines="1"
+                            android:singleLine="true" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_16sdp"
+                        android:layout_marginBottom="@dimen/_8sdp"
+                        android:orientation="vertical">
+
+                        <Button
+                            android:id="@+id/btnSignUp"
+                            style="@style/button_style"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_16sdp"
+                            android:layout_marginBottom="@dimen/_16sdp"
+                            android:text="@string/Sign_Up" />
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+            </RelativeLayout>
+        </RelativeLayout>
+    </ScrollView>
 
 </RelativeLayout>
+

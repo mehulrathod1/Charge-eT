@@ -10,25 +10,21 @@ import android.view.MenuItem;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.in.chargeet.R;
 
-public class MainActivity extends AppCompatActivity {
-
+public class FilterActivity extends AppCompatActivity {
     BottomNavigationView bottom_navigation;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
+        setContentView(R.layout.activity_filter);
         init();
     }
 
-    public void init() {
+    public void init(){
 
         bottom_navigation = findViewById(R.id.bottom_navigation);
 
-
-        bottom_navigation.getMenu().findItem(R.id.location).setChecked(true);
+        bottom_navigation.getMenu().findItem(R.id.filter).setChecked(true);
         bottom_navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -42,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
                         finish();
                         overridePendingTransition(0, 0);
                         break;
+
 
                     case R.id.order:
 //                        intent = new Intent(getApplicationContext(), MyAccountActivity.class);
@@ -70,6 +67,4 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-
-
 }
