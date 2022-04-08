@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/toolbar_bg"
+    >
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_56sdp"
+        android:background="@drawable/toolbar_bg"
+        >
+
+
+        <ImageView
+            android:id="@+id/backButton"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_baseline_keyboard_backspace_24"
+            android:layout_marginLeft="@dimen/_18sdp"
+            android:layout_centerVertical="true"/>
+
+        <TextView
+            android:id="@+id/toolbarHading"
+            style="@style/play_semi_black_20"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="toolbar" />
+
+    </RelativeLayout>
+
+</RelativeLayout>
