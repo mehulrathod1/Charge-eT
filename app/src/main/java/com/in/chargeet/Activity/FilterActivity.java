@@ -6,12 +6,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.in.chargeet.R;
 
 public class FilterActivity extends AppCompatActivity {
     BottomNavigationView bottom_navigation;
+    ImageView backButton;
+    TextView toolbarHading;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +29,9 @@ public class FilterActivity extends AppCompatActivity {
     public void init(){
 
         bottom_navigation = findViewById(R.id.bottom_navigation);
-
+        backButton = findViewById(R.id.backButton);
+        toolbarHading = findViewById(R.id.toolbarHading);
+        toolbarHading.setText("wallet");
         bottom_navigation.getMenu().findItem(R.id.filter).setChecked(true);
         bottom_navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -66,5 +74,17 @@ public class FilterActivity extends AppCompatActivity {
             }
         });
 
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent;
+                intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+                finish();
+                overridePendingTransition(0, 0);
+            }
+        });
     }
 }

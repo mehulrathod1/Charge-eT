@@ -43,4 +43,43 @@
     <string name="enter_otp">Enter OTP</string>
     <string name="resend">Resend</string>
     <string name="otp_msg">An OTP has been sent to your registered mobile number &amp; Email-id.</string>
+
+    <!--    account-->
+    <string name="Your_Personal_Information">Your Personal Information</string>
+    <string name="Account_Information">Account Information</string>
+    <string name="Username_">Username :</string>
+    <string name="Email_">Email :</string>
+    <string name="Mobile_Number_">Mobile Number :</string>
+    <string name="Name_">Name :</string>
+    <string name="Surname_">Surname :</string>
+    <string name="Surname">Surname</string>
+    <string name="Gender_">Gender :</string>
+    <string name="Town_">Town :</string>
+    <string name="Country_">Country :</string>
+    <string name="DOB_">DOB :</string>
+    <string name="Description_">Description :</string>
+    <string name="update">Update</string>
+
+<!--    wallet-->
+
+    <string name="Available_Balance">Available Balance</string>
+    <string name="Add_Money">Add Money</string>
+    <string name="Withdraw">Withdraw</string>
+    <string name="wallet">Wallet</string>
+
+<!--    filter-->
+    <string name="Power_Levels">Power Levels</string>
+    <string name="Connectors">Connectors</string>
+    <string name="Pin">3-Pin</string>
+    <string name="Type">Type 2</string>
+    <string name="Type_">Type 2 ( cable attached )</string>
+    <string name="combo_ccs_EU">combo ccs EU</string>
+    <string name="CHAdeMO">CHAdeMO</string>
+    <string name="GB_T">GB/T</string>
+    <string name="Tesla">Tesla</string>
+    <string name="Tesla_Supercharger_CCS">Tesla Supercharger CCS</string>
+    <string name="Free_Station">Free Station</string>
+    <string name="Working_Station">24/7 Working Station</string>
+    <string name="Apply_Filter">Apply Filter</string>
+
 </resources>

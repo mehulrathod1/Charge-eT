@@ -9,6 +9,8 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
+    <color name="blue_10">#6887E9</color>
+
 
 
     <color name="light_green">#60CAAB</color>
@@ -23,7 +25,7 @@
     <color name="light_blue">#6887E9</color>
     <color name="dark_green">#27AE61</color>
 
-
+    <color name="for_line">#1C1C1C</color>
 
     <color name="colorPrimary">#0288D1</color>
     <color name="colorPrimaryDark">#4fC3F7</color>
