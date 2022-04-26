@@ -199,8 +199,8 @@
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
-                                android:scaleType="centerCrop"
-                                android:src="@drawable/images" />
+                                android:background="@drawable/connectors_bg"
+                                android:scaleType="centerCrop" />
 
                             <TextView
                                 style="@style/mont_semi_black_16"
@@ -222,8 +222,8 @@
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
-                                android:scaleType="centerCrop"
-                                android:src="@drawable/images" />
+                                android:background="@drawable/connectors_bg"
+                                android:scaleType="centerCrop" />
 
                             <TextView
                                 style="@style/mont_semi_black_16"
@@ -256,7 +256,7 @@
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:scaleType="centerCrop"
-                                android:src="@drawable/images" />
+                                android:src="@drawable/connectors_bg" />
 
                             <TextView
                                 style="@style/mont_semi_black_16"
@@ -279,7 +279,7 @@
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:scaleType="centerCrop"
-                                android:src="@drawable/images" />
+                                android:src="@drawable/connectors_bg" />
 
                             <TextView
                                 style="@style/mont_semi_black_16"
@@ -312,7 +312,7 @@
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:scaleType="centerCrop"
-                                android:src="@drawable/images" />
+                                android:src="@drawable/connectors_bg" />
 
                             <TextView
                                 style="@style/mont_semi_black_16"
@@ -335,7 +335,7 @@
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:scaleType="centerCrop"
-                                android:src="@drawable/images" />
+                                android:src="@drawable/connectors_bg" />
 
                             <TextView
                                 style="@style/mont_semi_black_16"
@@ -368,7 +368,7 @@
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:scaleType="centerCrop"
-                                android:src="@drawable/images" />
+                                android:src="@drawable/connectors_bg" />
 
                             <TextView
                                 style="@style/mont_semi_black_16"
@@ -391,7 +391,7 @@
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:scaleType="centerCrop"
-                                android:src="@drawable/images" />
+                                android:src="@drawable/connectors_bg" />
 
                             <TextView
                                 style="@style/mont_semi_black_16"
@@ -424,7 +424,7 @@
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:scaleType="centerCrop"
-                                android:src="@drawable/images" />
+                                android:src="@drawable/connectors_bg" />
 
                             <TextView
                                 style="@style/mont_semi_black_16"
@@ -462,25 +462,25 @@
                         android:text="@string/Working_Station" />
                 </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_20sdp"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <Button
-                    style="@style/button_style"
-                    android:layout_width="@dimen/_200sdp"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_16sdp"
-                    android:layout_marginBottom="@dimen/_16sdp"
-                    android:backgroundTint="@color/blue_10"
-                    android:text="@string/Apply_Filter" />
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <Button
+                        style="@style/button_style"
+                        android:layout_width="@dimen/_200sdp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_16sdp"
+                        android:layout_marginBottom="@dimen/_16sdp"
+                        android:backgroundTint="@color/blue_10"
+                        android:text="@string/Apply_Filter" />
 
 
-            </LinearLayout>
+                </LinearLayout>
             </LinearLayout>
 
         </RelativeLayout>

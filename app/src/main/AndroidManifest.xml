@@ -12,6 +12,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ChargeEt">
         <activity
+            android:name=".Activity.ChargingActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.AddVehicleActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.MyVehicleActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.MyBookingActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activity.MyWalletActivity"
             android:exported="false" />
         <activity

@@ -60,14 +60,14 @@
     <string name="Description_">Description :</string>
     <string name="update">Update</string>
 
-<!--    wallet-->
+    <!--    wallet-->
 
     <string name="Available_Balance">Available Balance</string>
     <string name="Add_Money">Add Money</string>
     <string name="Withdraw">Withdraw</string>
     <string name="wallet">Wallet</string>
 
-<!--    filter-->
+    <!--    filter-->
     <string name="Power_Levels">Power Levels</string>
     <string name="Connectors">Connectors</string>
     <string name="Pin">3-Pin</string>
@@ -81,5 +81,19 @@
     <string name="Free_Station">Free Station</string>
     <string name="Working_Station">24/7 Working Station</string>
     <string name="Apply_Filter">Apply Filter</string>
+
+    <!--    my vehicle-->
+
+    <string name="Your_Vehicles">Your Vehicles</string>
+    <string name="Primary_Vehicles">Primary Vehicles</string>
+    <string name="Other_Vehicles">Other Vehicles</string>
+    <string name="EV_Models">EV Models</string>
+    <string name="Search_Vehicle">Search Vehicle</string>
+
+    <!--    booking-->
+    <string name="Scan_QR_Code">Scan QR Code</string>
+    <string name="Schedule_charging">Schedule charging</string>
+    <string name="Pay_for_Charging">Pay for Charging</string>
+
 
 </resources>

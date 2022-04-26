@@ -51,6 +51,11 @@
         <item name="android:textColor">@color/black_text_color</item>
         <item name="android:textSize">@dimen/_14sdp</item>
     </style>
+    <style name="mont_semi_white_14">
+        <item name="android:fontFamily">@font/montserrat_semi_bold</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/_14sdp</item>
+    </style>
 
     <style name="mont_semi_black_12">
         <item name="android:fontFamily">@font/montserrat_semi_bold</item>
@@ -63,7 +68,11 @@
         <item name="android:textColor">@color/black_text_color</item>
         <item name="android:textSize">@dimen/_16sdp</item>
     </style>
-
+    <style name="mont_semi_white_16">
+        <item name="android:fontFamily">@font/montserrat_semi_bold</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/_16sdp</item>
+    </style>
     <style name="mont_med_black_16">
         <item name="android:fontFamily">@font/montserrat_semi_bold</item>
         <item name="android:textColor">@color/black_text_color</item>

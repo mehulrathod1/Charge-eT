@@ -11,14 +11,59 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/_50sdp"
         android:layout_above="@+id/bottomMenu">
-
 
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            />
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/myVehicles"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/mont_semi_black_18"
+                android:layout_margin="@dimen/_16sdp"
+                android:text="My Vehicles"/>
+
+            <TextView
+                android:id="@+id/myBooking"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/mont_semi_black_18"
+                android:layout_margin="@dimen/_16sdp"
+                android:text="My Bookings"/>
+
+            <TextView
+                android:id="@+id/setting"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/mont_semi_black_18"
+                android:layout_margin="@dimen/_16sdp"
+                android:text="Settings"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/mont_semi_black_18"
+                android:layout_margin="@dimen/_16sdp"
+                android:text="Contact Us"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/mont_semi_black_18"
+                android:layout_margin="@dimen/_16sdp"
+                android:text="Privacy Policy"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/mont_semi_black_18"
+                android:layout_margin="@dimen/_16sdp"
+                android:text="Log Out"/>
+        </LinearLayout>
 
     </RelativeLayout>
 

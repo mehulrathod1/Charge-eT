@@ -26,12 +26,12 @@ public class FilterActivity extends AppCompatActivity {
         init();
     }
 
-    public void init(){
+    public void init() {
 
         bottom_navigation = findViewById(R.id.bottom_navigation);
         backButton = findViewById(R.id.backButton);
         toolbarHading = findViewById(R.id.toolbarHading);
-        toolbarHading.setText("wallet");
+        toolbarHading.setText("Filter");
         bottom_navigation.getMenu().findItem(R.id.filter).setChecked(true);
         bottom_navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
