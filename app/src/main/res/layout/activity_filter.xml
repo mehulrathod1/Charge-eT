@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/light_green"
+    android:background="@color/gray"
     tools:context=".Activity.FilterActivity">
 
     <LinearLayout
@@ -471,6 +471,7 @@
                     android:orientation="vertical">
 
                     <Button
+                        android:id="@+id/applyFilter"
                         style="@style/button_style"
                         android:layout_width="@dimen/_200sdp"
                         android:layout_height="wrap_content"

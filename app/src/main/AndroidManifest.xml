@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ChargeEt">
         <activity
+            android:name=".Activity.FilterResultActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activity.ChargingActivity"
             android:exported="false" />
         <activity

@@ -81,6 +81,12 @@
     <string name="Free_Station">Free Station</string>
     <string name="Working_Station">24/7 Working Station</string>
     <string name="Apply_Filter">Apply Filter</string>
+    <string name="Available">Available</string>
+    <string name="Not_Available">Not Available</string>
+    <string name="Estimated_Price">Estimated Price</string>
+    <string name="Session_Time">Session Time</string>
+    <string name="Vehicle_Range_increase_from_session">Vehicle Range increase from session</string>
+
 
     <!--    my vehicle-->
 
@@ -95,5 +101,14 @@
     <string name="Schedule_charging">Schedule charging</string>
     <string name="Pay_for_Charging">Pay for Charging</string>
 
+
+    <!--    home-->
+
+    <string name="Book_Now">Book Now</string>
+    <string name="Navigate_Location">Navigate to Location</string>
+    <!--    <string name="CHAdeMO">CHAdeMO</string>-->
+    <string name="Google_Pay">Google Pay</string>
+    <string name="Amazon_Pay">Amazon Pay</string>
+    <string name="Debit_Credit_Cards">Debit/ Credit Cards</string>
 
 </resources>

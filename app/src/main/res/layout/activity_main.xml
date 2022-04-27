@@ -4,16 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/light_green"
+    android:background="@color/gray"
     tools:context=".Activity.MainActivity">
 
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/_50sdp"
-        android:layout_above="@+id/bottomMenu">
-
+        android:layout_above="@+id/bottomMenu"
+        android:layout_marginTop="@dimen/_50sdp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -22,47 +21,57 @@
 
             <TextView
                 android:id="@+id/myVehicles"
+                style="@style/mont_semi_black_18"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                style="@style/mont_semi_black_18"
                 android:layout_margin="@dimen/_16sdp"
-                android:text="My Vehicles"/>
+                android:text="My Vehicles" />
 
             <TextView
                 android:id="@+id/myBooking"
+                style="@style/mont_semi_black_18"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                style="@style/mont_semi_black_18"
                 android:layout_margin="@dimen/_16sdp"
-                android:text="My Bookings"/>
+                android:text="My Bookings" />
 
             <TextView
                 android:id="@+id/setting"
+                style="@style/mont_semi_black_18"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                style="@style/mont_semi_black_18"
                 android:layout_margin="@dimen/_16sdp"
-                android:text="Settings"/>
+                android:text="Settings" />
 
             <TextView
+                style="@style/mont_semi_black_18"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                style="@style/mont_semi_black_18"
                 android:layout_margin="@dimen/_16sdp"
-                android:text="Contact Us"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                style="@style/mont_semi_black_18"
-                android:layout_margin="@dimen/_16sdp"
-                android:text="Privacy Policy"/>
+                android:text="Contact Us" />
 
             <TextView
+                style="@style/mont_semi_black_18"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                style="@style/mont_semi_black_18"
                 android:layout_margin="@dimen/_16sdp"
-                android:text="Log Out"/>
+                android:text="Privacy Policy" />
+
+            <TextView
+                style="@style/mont_semi_black_18"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_16sdp"
+                android:text="Log Out" />
+
+
+            <ImageView
+                android:id="@+id/location"
+                android:layout_width="50dp"
+                android:layout_height="@dimen/_50sdp"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/_50sdp"
+                android:src="@drawable/ic_outline_location_on_24" />
         </LinearLayout>
 
     </RelativeLayout>

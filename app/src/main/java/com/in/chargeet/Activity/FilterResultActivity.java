@@ -14,17 +14,16 @@ import android.widget.TextView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.in.chargeet.R;
 
-public class FilterActivity extends AppCompatActivity {
+public class FilterResultActivity extends AppCompatActivity {
+
     BottomNavigationView bottom_navigation;
     ImageView backButton;
     TextView toolbarHading;
     Button applyFilter;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_filter);
+        setContentView(R.layout.activity_filter_result);
         init();
     }
 
@@ -33,7 +32,7 @@ public class FilterActivity extends AppCompatActivity {
         bottom_navigation = findViewById(R.id.bottom_navigation);
         backButton = findViewById(R.id.backButton);
         toolbarHading = findViewById(R.id.toolbarHading);
-        toolbarHading.setText("Filter");
+        toolbarHading.setText("Filter Result");
         applyFilter = findViewById(R.id.applyFilter);
 
         bottom_navigation.getMenu().findItem(R.id.filter).setChecked(true);
@@ -91,24 +90,12 @@ public class FilterActivity extends AppCompatActivity {
             }
         });
 
-
-        applyFilter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent;
-                intent = new Intent(getApplicationContext(), FilterResultActivity.class);
-                startActivity(intent);
-                finish();
-                overridePendingTransition(0, 0);
-            }
-        });
     }
-
     @Override
     public void onBackPressed() {
 
         Intent intent;
-        intent = new Intent(getApplicationContext(), MainActivity.class);
+        intent = new Intent(getApplicationContext(), FilterActivity.class);
         startActivity(intent);
         finish();
         overridePendingTransition(0, 0);
