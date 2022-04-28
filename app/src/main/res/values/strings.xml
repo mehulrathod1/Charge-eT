@@ -86,6 +86,10 @@
     <string name="Estimated_Price">Estimated Price</string>
     <string name="Session_Time">Session Time</string>
     <string name="Vehicle_Range_increase_from_session">Vehicle Range increase from session</string>
+    <string name="Percentage">Percentage</string>
+    <string name="Units">Units</string>
+    <string name="Time">Time</string>
+    <string name="Enter_percentage">Enter percentage</string>
 
 
     <!--    my vehicle-->

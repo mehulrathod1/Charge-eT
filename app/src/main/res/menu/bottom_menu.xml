@@ -5,24 +5,24 @@
 
     <item
         android:id="@+id/location"
-        android:icon="@drawable/ic_outline_location_on_24"
+        android:icon="@drawable/map"
         android:enabled="true"
         android:title="" />
 
     <item
         android:id="@+id/order"
-        android:icon="@drawable/ic_outline_location_on_24"
+        android:icon="@drawable/direction_map"
         android:enabled="true"
         android:title="" />
 
     <item
         android:id="@+id/filter"
-        android:icon="@drawable/ic_outline_location_on_24"
+        android:icon="@drawable/filter"
         android:enabled="true"
         android:title="" />
     <item
         android:id="@+id/account"
-        android:icon="@drawable/ic_outline_location_on_24"
+        android:icon="@drawable/user_profile"
         android:enabled="true"
         android:title="" />
 

@@ -29,17 +29,17 @@
         android:layout_marginLeft="@dimen/_16sdp"
         android:layout_marginTop="@dimen/_16sdp"
         android:layout_marginRight="@dimen/_16sdp"
-        android:layout_marginBottom="@dimen/_16sdp"
         android:orientation="horizontal">
 
         <LinearLayout
+            android:id="@+id/layoutAvailable"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginRight="@dimen/_4sdp"
-            android:layout_weight="1"
-            android:background="@drawable/filter_heading_bg">
+            android:layout_weight="1">
 
             <TextView
+                android:id="@+id/availableText"
                 style="@style/mont_semi_white_14"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -49,14 +49,15 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/layoutNotAvailable"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginLeft="@dimen/_4sdp"
-            android:layout_weight="1"
-            android:background="@drawable/filter_heading_bg">
+            android:layout_weight="1">
 
             <TextView
-                style="@style/mont_semi_white_14"
+                android:id="@+id/notAvailableText"
+                style="@style/mont_semi_black_14"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
@@ -66,325 +67,36 @@
 
     </LinearLayout>
 
-    <ScrollView
+    <LinearLayout
+        android:id="@+id/headingg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/heading"
+        android:layout_marginLeft="@dimen/_16sdp"
+        android:layout_marginRight="@dimen/_16sdp"
+        android:layout_marginBottom="@dimen/_16sdp"
+        android:orientation="horizontal">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1sdp"
+            android:background="@color/gray_dark"/>
+    </LinearLayout>
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/bottomMenu"
-        android:layout_below="@id/heading">
+        android:layout_below="@id/headingg"
+        android:layout_marginStart="@dimen/_16sdp"
+        android:layout_marginEnd="@dimen/_16sdp"
+        android:orientation="vertical">
 
-        <RelativeLayout
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/filterRecycler"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_16sdp"
-            android:layout_marginTop="@dimen/_16sdp"
-            android:layout_marginEnd="@dimen/_16sdp"
-            android:layout_marginBottom="@dimen/_16sdp"
-            android:background="@drawable/line_bg"
-            android:orientation="vertical">
+            android:layout_height="wrap_content" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_16sdp"
-                android:layout_marginTop="@dimen/_16sdp"
-                android:layout_marginEnd="@dimen/_16sdp"
-                android:layout_marginBottom="@dimen/_16sdp"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <TextView
-                        style="@style/mont_semi_black_14"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Lorem ipsum dolor sit amet" />
-
-
-                    <TextView
-                        style="@style/mont_reg_black_14"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_8sdp"
-                        android:layout_marginRight="@dimen/_30sdp"
-                        android:lines="2"
-                        android:maxLines="2"
-                        android:text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos maxime voluptatum" />
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_16sdp"
-                    android:orientation="horizontal">
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/line_bg">
-
-                        <androidx.cardview.widget.CardView
-                            android:layout_width="@dimen/_60sdp"
-                            android:layout_height="@dimen/_60sdp"
-                            android:layout_margin="@dimen/_1sdp"
-                            app:cardCornerRadius="@dimen/_16sdp">
-
-                            <ImageView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:scaleType="centerCrop"
-                                android:src="@drawable/ola_electric" />
-
-                        </androidx.cardview.widget.CardView>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/_16sdp"
-                        android:orientation="vertical">
-
-
-                        <TextView
-                            style="@style/mont_semi_black_14"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Type 2 Charge" />
-
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_16sdp">
-
-                            <TextView
-                                style="@style/mont_semi_black_14"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Power - " />
-
-                            <TextView
-                                style="@style/mont_reg_black_14"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="15KW" />
-
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_16sdp">
-
-                            <TextView
-                                style="@style/mont_semi_black_14"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Rate - " />
-
-                            <TextView
-                                style="@style/mont_reg_black_14"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Rs 13 per kWh" />
-
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_16sdp"
-                    android:orientation="vertical">
-
-                    <Button
-                        style="@style/button_style"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/_56sdp"
-                        android:layout_marginTop="@dimen/_16sdp"
-                        android:backgroundTint="@color/light_green"
-                        android:text="@string/Schedule_charging" />
-
-
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_16sdp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        style="@style/mont_semi_black_14"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Select Percentage" />
-
-
-                </LinearLayout>
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_16sdp"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_baseline_battery_1_bar_24" />
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:src="@drawable/ic_baseline_battery_full_24" />
-                </RelativeLayout>
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_16sdp"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <TextView
-                            style="@style/mont_reg_black_14"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Estimates based on your usage from 25% to 85%" />
-
-                    </LinearLayout>
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_16sdp">
-
-                        <ImageView
-                            android:id="@+id/estimated"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/ic_outline_filter_none_24" />
-
-                        <TextView
-                            style="@style/mont_reg_black_14"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/_8sdp"
-                            android:layout_marginRight="@dimen/_8sdp"
-                            android:layout_toLeftOf="@id/rupee"
-                            android:layout_toRightOf="@+id/estimated"
-                            android:text="@string/Estimated_Price" />
-
-                        <TextView
-                            android:id="@+id/rupee"
-                            style="@style/mont_semi_black_14"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentRight="true"
-                            android:text="RS 150" />
-
-
-                    </RelativeLayout>
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_16sdp">
-
-                        <ImageView
-                            android:id="@+id/time"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/ic_outline_access_time_24" />
-
-                        <TextView
-                            style="@style/mont_reg_black_14"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/_8sdp"
-                            android:layout_marginRight="@dimen/_8sdp"
-                            android:layout_toLeftOf="@id/sessionTime"
-                            android:layout_toRightOf="@+id/time"
-                            android:text="@string/Session_Time" />
-
-                        <TextView
-                            android:id="@+id/sessionTime"
-                            style="@style/mont_semi_black_14"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentRight="true"
-                            android:text="1.5 Hrs" />
-
-
-                    </RelativeLayout>
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_16sdp">
-
-                        <ImageView
-                            android:id="@+id/vehicle"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/ic_outline_directions_car_green_24" />
-
-                        <TextView
-                            style="@style/mont_reg_black_14"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/_8sdp"
-                            android:layout_marginRight="@dimen/_8sdp"
-                            android:layout_toLeftOf="@id/km"
-                            android:layout_toRightOf="@+id/vehicle"
-                            android:text="@string/Estimated_Price" />
-
-                        <TextView
-                            android:id="@+id/km"
-                            style="@style/mont_semi_black_14"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentRight="true"
-                            android:text="150 KM" />
-
-
-                    </RelativeLayout>
-
-                </LinearLayout>
-
-
-            </LinearLayout>
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_margin="@dimen/_16sdp"
-                android:background="@drawable/send_round_bg"
-                android:padding="@dimen/_4sdp"
-                android:src="@drawable/ic_baseline_send_24" />
-
-        </RelativeLayout>
-
-    </ScrollView>
+    </RelativeLayout>
 
     <LinearLayout
         android:id="@+id/bottomMenu"

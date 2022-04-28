@@ -42,6 +42,7 @@ dependencies {
     implementation 'org.imaginativeworld.whynotimagecarousel:whynotimagecarousel:2.1.0' //    carousel slider
     implementation 'de.hdodenhof:circleimageview:3.1.0'   // circle image
 
+    implementation 'com.yahoo.mobile.client.android.util.rangeseekbar:rangeseekbar-library:0.1.0'
 
 
 }
