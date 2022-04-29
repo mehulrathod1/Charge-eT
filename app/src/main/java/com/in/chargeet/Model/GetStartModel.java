@@ -5,11 +5,11 @@ public class GetStartModel {
     String heading, subHeading, description;
     int image;
 
-
-    public GetStartModel(String heading, String subHeading, String description) {
+    public GetStartModel(String heading, String subHeading, String description, int image) {
         this.heading = heading;
         this.subHeading = subHeading;
         this.description = description;
+        this.image = image;
     }
 
     public String getHeading() {

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/gray"
+    android:background="@drawable/screen_bg"
     tools:context=".Activity.MyAccountActivity">
 
     <LinearLayout
@@ -126,20 +126,21 @@
                             android:layout_width="0dp"
                             android:layout_height="@dimen/_50sdp"
                             android:layout_weight="1"
-                            android:src="@drawable/gpay" />
+                            android:src="@drawable/amazon_pay_logo" />
 
                         <ImageView
                             android:layout_width="0dp"
                             android:layout_height="@dimen/_50sdp"
                             android:layout_weight="1"
-                            android:src="@drawable/gpay" />
+                            android:src="@drawable/master_card_logo" />
 
                         <ImageView
                             android:id="@+id/wallet"
                             android:layout_width="0dp"
                             android:layout_height="@dimen/_50sdp"
                             android:layout_weight="1"
-                            android:src="@drawable/gpay" />
+                            android:scaleType="centerInside"
+                            android:src="@drawable/ic_outline_account_balance_wallet_green_24" />
 
                         <ImageView
                             android:layout_width="0dp"

@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/drawable-v24/ic_outline_account_balance_wallet_green_24.xml" value="0.1305" />
         <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/drawable/bottom_navigation_bg.xml" value="0.161" />
         <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/drawable/button_bg.xml" value="0.1745" />
         <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/drawable/connecters_bg.xml" value="0.1765" />
@@ -11,18 +12,28 @@
         <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/drawable/edit_image_bg.xml" value="0.1555" />
         <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/drawable/edt_button_green_bg.xml" value="0.134" />
         <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/drawable/facebook_button_bg.xml" value="0.1745" />
+        <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/drawable/favorite.xml" value="0.1305" />
         <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/drawable/filter_heading_bg.xml" value="0.134" />
         <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/drawable/filter_heading_blue_bg.xml" value="0.1505" />
         <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/drawable/filter_heading_white_bg.xml" value="0.1505" />
         <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/drawable/get_start_bg.xml" value="0.1765" />
         <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/drawable/getstart_bg.xml" value="0.1475" />
+        <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.1305" />
         <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/drawable/ic_baseline_arrow_down_black_24.xml" value="0.134" />
         <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/drawable/ic_baseline_battery_1_bar_24.xml" value="0.134" />
         <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/drawable/ic_baseline_battery_full_24.xml" value="0.134" />
+        <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/drawable/ic_baseline_bookmark_border_24.xml" value="0.1305" />
+        <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/drawable/ic_baseline_close_24.xml" value="0.1305" />
         <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/drawable/ic_baseline_delete_outline_24.xml" value="0.164" />
+        <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/drawable/ic_baseline_filter_alt_off_24.xml" value="0.1305" />
         <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/drawable/ic_baseline_keyboard_arrow_down_24.xml" value="0.134" />
         <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/drawable/ic_baseline_keyboard_backspace_24.xml" value="0.1555" />
+        <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/drawable/ic_baseline_logout_24.xml" value="0.1305" />
+        <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/drawable/ic_baseline_manage_accounts_24.xml" value="0.1305" />
         <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/drawable/ic_baseline_memory_24.xml" value="0.1765" />
+        <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/drawable/ic_baseline_menu_24.xml" value="0.1305" />
+        <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/drawable/ic_baseline_my_location_24.xml" value="0.1305" />
+        <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/drawable/ic_baseline_remove_24.xml" value="0.1305" />
         <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.134" />
         <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/drawable/ic_baseline_send_24.xml" value="0.134" />
         <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/drawable/ic_baseline_send_white_24.xml" value="0.134" />
@@ -39,7 +50,9 @@
         <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/drawable/ic_outline_vpn_key_24.xml" value="0.152" />
         <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/drawable/layout_bg.xml" value="0.1765" />
         <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/drawable/line_bg.xml" value="0.1765" />
+        <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/drawable/perm_phone_msg.xml" value="0.1305" />
         <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/drawable/person.xml" value="0.1765" />
+        <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/drawable/security.xml" value="0.1305" />
         <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/drawable/send_round_bg.xml" value="0.134" />
         <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/drawable/toolbar_bg.xml" value="0.1555" />
         <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/layout/activity_add_vehicle.xml" value="0.20416666666666666" />
@@ -49,7 +62,7 @@
         <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/layout/activity_filter_result.xml" value="0.22" />
         <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/layout/activity_forgot_password.xml" value="0.20416666666666666" />
         <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/layout/activity_get_start_one.xml" value="0.20416666666666666" />
-        <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/layout/activity_main.xml" value="0.20416666666666666" />
+        <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/layout/activity_main.xml" value="0.18" />
         <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/layout/activity_my_account.xml" value="0.20416666666666666" />
         <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/layout/activity_my_booking.xml" value="0.20416666666666666" />
         <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/layout/activity_my_vehiecle.xml" value="0.25" />

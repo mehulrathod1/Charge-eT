@@ -6,32 +6,84 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.media.Image;
+import android.opengl.Visibility;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+
+import com.google.android.gms.common.api.Status;
+
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.libraries.places.api.Places;
+import com.google.android.libraries.places.api.model.Place;
+import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
+import com.google.android.libraries.places.widget.listener.PlaceSelectionListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.in.chargeet.R;
 
-public class MainActivity extends AppCompatActivity {
+import java.util.Arrays;
+
+public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     BottomNavigationView bottom_navigation;
-
-    TextView myVehicles, myBooking, setting,wallet,bookNow;
-    ImageView location;
+    TextView myVehicles, myBooking, setting, wallet, bookNow;
+    ImageView location, menuImage, zoomOut, zoomIn, goToCurrentLocation;
     BottomSheetDialog bottomSheetDialog;
-        AlertDialog alert;
-        AlertDialog.Builder alertDialog;
+    AlertDialog alert;
+    AlertDialog.Builder alertDialog;
+    LinearLayout menuLayout, menuButton;
+    GoogleMap mMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
+
+
+        if (!Places.isInitialized()) {
+            Places.initialize(getApplicationContext(), "AIzaSyCBZ1E4AGu6xP_VV4GWr_qjnOte9sFmh0A");
+        }
+
+// Initialize the AutocompleteSupportFragment.
+        AutocompleteSupportFragment autocompleteFragment = (AutocompleteSupportFragment)
+                getSupportFragmentManager().findFragmentById(R.id.autocomplete_fragment);
+
+        autocompleteFragment.setPlaceFields(Arrays.asList(Place.Field.ID, Place.Field.NAME));
+
+        autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
+            @Override
+            public void onPlaceSelected(Place place) {
+                // TODO: Get info about the selected place.
+                Log.i("TAG", "Place: " + place.getName() + ", " + place.getId());
+            }
+
+            @Override
+            public void onError(Status status) {
+                // TODO: Handle the error.
+                Log.i("TAG", "An error occurred: " + status);
+            }
+        });
         init();
+
+
     }
 
     public void init() {
@@ -41,8 +93,13 @@ public class MainActivity extends AppCompatActivity {
         myBooking = findViewById(R.id.myBooking);
         setting = findViewById(R.id.setting);
         location = findViewById(R.id.location);
-
-
+        menuLayout = findViewById(R.id.menuLayout);
+        menuButton = findViewById(R.id.menuButton);
+        menuImage = findViewById(R.id.menuImage);
+        menuImage.setImageResource(R.drawable.ic_baseline_menu_24);
+        zoomIn = findViewById(R.id.zoomIn);
+        zoomOut = findViewById(R.id.zoomOut);
+        goToCurrentLocation = findViewById(R.id.goToCurrentLocation);
         bottomSheetDialog = new BottomSheetDialog(MainActivity.this);
         bottomSheetDialog.setContentView(R.layout.select_charging_point_popup);
         bookNow = bottomSheetDialog.findViewById(R.id.bookNow);
@@ -54,7 +111,6 @@ public class MainActivity extends AppCompatActivity {
         View dialogLayout = inflater.inflate(R.layout.payment_option_layout, null);
         alertDialog.setView(dialogLayout);
         alert = alertDialog.create();
-
 
 
         bottom_navigation.getMenu().findItem(R.id.location).setChecked(true);
@@ -142,9 +198,73 @@ public class MainActivity extends AppCompatActivity {
         wallet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               alertDialog.show();
+                alertDialog.show();
             }
         });
+
+        menuButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if (menuLayout.getVisibility() == view.VISIBLE) {
+                    menuLayout.setVisibility(View.GONE);
+                    menuImage.setImageResource(R.drawable.ic_baseline_menu_24);
+
+                } else {
+                    menuLayout.setVisibility(View.VISIBLE);
+                    menuImage.setImageResource(R.drawable.ic_baseline_close_24);
+                }
+
+            }
+        });
+
+        zoomOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                mMap.animateCamera(CameraUpdateFactory.zoomOut());
+
+
+            }
+        });
+
+        zoomIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mMap.animateCamera(CameraUpdateFactory.zoomIn());
+
+            }
+        });
+
+        goToCurrentLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                LatLng pos = new LatLng(22.2587, 71.1924);
+                CameraUpdate update = CameraUpdateFactory.newLatLngZoom(pos, 15);
+                mMap.moveCamera(update);
+            }
+        });
+
+    }
+
+
+    @Override
+    public void onMapReady(@NonNull GoogleMap googleMap) {
+
+        mMap = googleMap;
+
+        // Add a marker in Sydney and move the camera
+        LatLng sydney = new LatLng(22.2587, 71.1924);
+        mMap.addMarker(new MarkerOptions()
+                .position(sydney)
+                .title("Marker in ahmedabad"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+        super.onPointerCaptureChanged(hasCapture);
     }
 
 

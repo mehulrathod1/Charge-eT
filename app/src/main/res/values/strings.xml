@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">ChargeEt</string>
 
-
+    <string name="Google_Map_API_Key">AIzaSyCBZ1E4AGu6xP_VV4GWr_qjnOte9sFmh0A</string>
     <!--    getStarted-->
 
     <string name="charge">Charge-et</string>
