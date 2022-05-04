@@ -54,10 +54,14 @@
     <string name="Surname_">Surname :</string>
     <string name="Surname">Surname</string>
     <string name="Gender_">Gender :</string>
+    <string name="Gender">Gender</string>
+
     <string name="Town_">Town :</string>
+    <string name="Town">Town</string>
     <string name="Country_">Country :</string>
     <string name="DOB_">DOB :</string>
     <string name="Description_">Description :</string>
+    <string name="Description">Description</string>
     <string name="update">Update</string>
 
     <!--    wallet-->

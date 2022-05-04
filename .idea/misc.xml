@@ -25,6 +25,8 @@
         <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/drawable/ic_baseline_bookmark_border_24.xml" value="0.1305" />
         <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/drawable/ic_baseline_close_24.xml" value="0.1305" />
         <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/drawable/ic_baseline_delete_outline_24.xml" value="0.164" />
+        <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/drawable/ic_baseline_description_24.xml" value="0.134" />
+        <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/drawable/ic_baseline_female_24.xml" value="0.134" />
         <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/drawable/ic_baseline_filter_alt_off_24.xml" value="0.1305" />
         <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/drawable/ic_baseline_keyboard_arrow_down_24.xml" value="0.134" />
         <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/drawable/ic_baseline_keyboard_backspace_24.xml" value="0.1555" />
@@ -40,6 +42,7 @@
         <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/drawable/ic_outline_access_time_24.xml" value="0.134" />
         <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/drawable/ic_outline_account_balance_wallet_24.xml" value="0.1765" />
         <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/drawable/ic_outline_close_24.xml" value="0.161" />
+        <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/drawable/ic_outline_description_24.xml" value="0.134" />
         <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/drawable/ic_outline_directions_car_24.xml" value="0.164" />
         <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/drawable/ic_outline_directions_car_green_24.xml" value="0.134" />
         <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/drawable/ic_outline_edit_24.xml" value="0.1555" />
@@ -57,6 +60,7 @@
         <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/drawable/toolbar_bg.xml" value="0.1555" />
         <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/layout/activity_add_vehicle.xml" value="0.20416666666666666" />
         <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/layout/activity_charging.xml" value="0.22" />
+        <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/layout/activity_direction.xml" value="0.16259057971014493" />
         <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/layout/activity_edit_profile.xml" value="0.20416666666666666" />
         <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/layout/activity_filter.xml" value="0.20416666666666666" />
         <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/layout/activity_filter_result.xml" value="0.22" />

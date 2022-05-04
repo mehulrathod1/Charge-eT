@@ -1,15 +1,10 @@
 package com.in.chargeet.Activity;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 
-import android.Manifest;
 import android.app.AlertDialog;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,23 +13,15 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
 
 import com.google.android.gms.common.api.Status;
-
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.model.Place;
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
@@ -45,7 +32,7 @@ import com.in.chargeet.R;
 
 import java.util.Arrays;
 
-public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
+public class DirectionActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     BottomNavigationView bottom_navigation;
     TextView myVehicles, myBooking, setting, wallet, bookNow;
@@ -57,24 +44,15 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     GoogleMap mMap;
 
 
-    Location currentLocation;
-    FusedLocationProviderClient fusedLocationProviderClient;
-    private static final int REQUEST_CODE = 101;
-
-    Place places;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_direction);
 
-
-        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
-        fetchLocation();
-
-//        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-//                .findFragmentById(R.id.map);
-//        mapFragment.getMapAsync(this);
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
 
 
         if (!Places.isInitialized()) {
@@ -85,28 +63,21 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         AutocompleteSupportFragment autocompleteFragment = (AutocompleteSupportFragment)
                 getSupportFragmentManager().findFragmentById(R.id.autocomplete_fragment);
 
-        autocompleteFragment.setPlaceFields(Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.LAT_LNG));
+        autocompleteFragment.setPlaceFields(Arrays.asList(Place.Field.ID, Place.Field.NAME));
 
         autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
             @Override
             public void onPlaceSelected(Place place) {
                 // TODO: Get info about the selected place.
-                places = place;
-                Log.e("TAG", "Place: " + place.getName() + ", " + place.getId());
-                Log.e("TAG", "latlong: " + place.getLatLng());
-
-
-
+                Log.i("TAG", "Place: " + place.getName() + ", " + place.getId());
             }
 
             @Override
             public void onError(Status status) {
                 // TODO: Handle the error.
-                Log.e("TAG", "An error occurred: " + status);
+                Log.i("TAG", "An error occurred: " + status);
             }
         });
-
-
         init();
 
 
@@ -126,20 +97,20 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         zoomIn = findViewById(R.id.zoomIn);
         zoomOut = findViewById(R.id.zoomOut);
         goToCurrentLocation = findViewById(R.id.goToCurrentLocation);
-        bottomSheetDialog = new BottomSheetDialog(MainActivity.this);
+        bottomSheetDialog = new BottomSheetDialog(DirectionActivity.this);
         bottomSheetDialog.setContentView(R.layout.select_charging_point_popup);
         bookNow = bottomSheetDialog.findViewById(R.id.bookNow);
         wallet = bottomSheetDialog.findViewById(R.id.wallet);
 
 
-        alertDialog = new AlertDialog.Builder(MainActivity.this);
+        alertDialog = new AlertDialog.Builder(DirectionActivity.this);
         LayoutInflater inflater = getLayoutInflater();
         View dialogLayout = inflater.inflate(R.layout.payment_option_layout, null);
         alertDialog.setView(dialogLayout);
         alert = alertDialog.create();
 
 
-        bottom_navigation.getMenu().findItem(R.id.location).setChecked(true);
+        bottom_navigation.getMenu().findItem(R.id.order).setChecked(true);
         bottom_navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -208,10 +179,9 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             @Override
             public void onClick(View view) {
 
+
                 bottomSheetDialog.show();
-
             }
-
         });
 
         bookNow.setOnClickListener(new View.OnClickListener() {
@@ -267,7 +237,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             @Override
             public void onClick(View view) {
 
-                LatLng pos = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
+                LatLng pos = new LatLng(22.2587, 71.1924);
                 CameraUpdate update = CameraUpdateFactory.newLatLngZoom(pos, 15);
                 mMap.moveCamera(update);
             }
@@ -276,87 +246,17 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
 
-//    @Override
-//    public void onMapReady(@NonNull GoogleMap googleMap) {
-//
-//        mMap = googleMap;
-//
-//        // Add a marker in Sydney and move the camera
-//        LatLng sydney = new LatLng(23.0225, 72.5714);
-//        mMap.addMarker(new MarkerOptions()
-//                .position(sydney)
-//                .title("Ahmedabad"));
-//        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
-//        CameraUpdate update = CameraUpdateFactory.newLatLngZoom(sydney, 15);
-//        mMap.moveCamera(update);
-//
-//        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-//            @Override
-//            public boolean onMarkerClick(@NonNull Marker marker) {
-//
-//                bottomSheetDialog.show();
-//                return false;
-//
-//
-//            }
-//        });
-//
-//    }
-
-
     @Override
-    public void onMapReady(GoogleMap googleMap) {
+    public void onMapReady(@NonNull GoogleMap googleMap) {
+
         mMap = googleMap;
-        LatLng latLng = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
-        MarkerOptions markerOptions = new MarkerOptions().position(latLng).title("");
-        googleMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
-        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
-        googleMap.addMarker(markerOptions);
 
-        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-            @Override
-            public boolean onMarkerClick(@NonNull Marker marker) {
-
-                bottomSheetDialog.show();
-                return false;
-
-            }
-        });
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        switch (requestCode) {
-            case REQUEST_CODE:
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    fetchLocation();
-                }
-                break;
-        }
-    }
-
-    private void fetchLocation() {
-        if (ActivityCompat.checkSelfPermission(
-                this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE);
-            return;
-        }
-        Task<Location> task = fusedLocationProviderClient.getLastLocation();
-        task.addOnSuccessListener(new OnSuccessListener<Location>() {
-            @Override
-            public void onSuccess(Location location) {
-                if (location != null) {
-                    currentLocation = location;
-//                    Toast.makeText(getApplicationContext(), currentLocation.getLatitude() + "" + currentLocation.getLongitude(), Toast.LENGTH_SHORT).show();
-                    SupportMapFragment supportMapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
-                    assert supportMapFragment != null;
-                    supportMapFragment.getMapAsync(MainActivity.this);
-                }
-            }
-        });
+        // Add a marker in Sydney and move the camera
+        LatLng sydney = new LatLng(22.2587, 71.1924);
+        mMap.addMarker(new MarkerOptions()
+                .position(sydney)
+                .title("Marker in ahmedabad"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
     }
 
     @Override
@@ -365,9 +265,15 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+    public void onBackPressed() {
 
+        Intent intent;
+        intent = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(intent);
+        finish();
+        overridePendingTransition(0, 0);
+        super.onBackPressed();
 
     }
+
 }

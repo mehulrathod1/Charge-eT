@@ -118,7 +118,7 @@
                             android:layout_height="@dimen/_30sdp"
                             android:layout_marginTop="@dimen/_16sdp"
                             android:layout_marginBottom="@dimen/_12sdp"
-                            android:text="Re_Book"
+                            android:text="Re-Book"
                             style="@style/mont_semi_white_14"
                             android:gravity="center"
                             android:background="@drawable/facebook_button_bg"/>
@@ -191,7 +191,7 @@
                             android:layout_height="@dimen/_30sdp"
                             android:layout_marginTop="@dimen/_16sdp"
                             android:layout_marginBottom="@dimen/_12sdp"
-                            android:text="Re_Book"
+                            android:text="Re-Book"
                             style="@style/mont_semi_white_14"
                             android:gravity="center"
                             android:background="@drawable/facebook_button_bg"/>
@@ -264,7 +264,7 @@
                             android:layout_height="@dimen/_30sdp"
                             android:layout_marginTop="@dimen/_16sdp"
                             android:layout_marginBottom="@dimen/_12sdp"
-                            android:text="Re_Book"
+                            android:text="Re-Book"
                             style="@style/mont_semi_white_14"
                             android:gravity="center"
                             android:background="@drawable/facebook_button_bg"/>
@@ -338,7 +338,7 @@
                             android:layout_height="@dimen/_30sdp"
                             android:layout_marginTop="@dimen/_16sdp"
                             android:layout_marginBottom="@dimen/_12sdp"
-                            android:text="Re_Book"
+                            android:text="Re-Book"
                             style="@style/mont_semi_white_14"
                             android:gravity="center"
                             android:background="@drawable/facebook_button_bg"/>

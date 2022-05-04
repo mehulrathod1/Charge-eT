@@ -13,6 +13,7 @@ public class SplashActivity extends AppCompatActivity {
     private static int SPLASH_SCREEN_TIME_OUT = 2000;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

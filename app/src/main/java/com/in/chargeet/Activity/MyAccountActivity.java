@@ -28,7 +28,7 @@ public class MyAccountActivity extends AppCompatActivity {
 
     BottomNavigationView bottom_navigation;
 
-    ImageView backButton,edtAccount,wallet;
+    ImageView backButton, edtAccount, wallet;
     TextView toolbarHading;
     ImageCarousel carousel;
 
@@ -69,7 +69,7 @@ public class MyAccountActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Intent intent = new Intent(getApplicationContext(),EditProfileActivity.class);
+                Intent intent = new Intent(getApplicationContext(), EditProfileActivity.class);
                 startActivity(intent);
             }
         });
@@ -78,7 +78,7 @@ public class MyAccountActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Intent intent = new Intent(getApplicationContext(),MyWalletActivity.class);
+                Intent intent = new Intent(getApplicationContext(), MyWalletActivity.class);
                 startActivity(intent);
             }
         });
@@ -100,10 +100,10 @@ public class MyAccountActivity extends AppCompatActivity {
 
 
                     case R.id.order:
-//                        intent = new Intent(getApplicationContext(), MyAccountActivity.class);
-//                        startActivity(intent);
-//                        finish();
-//                        overridePendingTransition(0, 0);
+                        intent = new Intent(getApplicationContext(), DirectionActivity.class);
+                        startActivity(intent);
+                        finish();
+                        overridePendingTransition(0, 0);
                         break;
 
                     case R.id.filter:
