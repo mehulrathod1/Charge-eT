@@ -19,7 +19,7 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        moveNext(MainActivity.class);
+        moveNext(GetStartOneActivity.class);
     }
 
     public void moveNext(Class c) {

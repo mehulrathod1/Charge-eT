@@ -10,10 +10,9 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/undraw_nature"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/_80sdp"
-        />
+        android:src="@drawable/undraw_nature" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -73,6 +72,7 @@
                             android:text="@string/Email" />
 
                         <EditText
+                            android:id="@+id/edtEmail"
                             style="@style/mont_reg_black_14"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -81,6 +81,7 @@
                             android:drawablePadding="@dimen/_12sdp"
                             android:ellipsize="end"
                             android:hint="@string/Enter_Email"
+                            android:inputType="textEmailAddress"
                             android:maxLines="1"
                             android:singleLine="true" />
                     </LinearLayout>
@@ -99,6 +100,7 @@
                             android:text="@string/Phone_Number" />
 
                         <EditText
+                            android:id="@+id/edtPhoneNo"
                             style="@style/mont_reg_black_14"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -126,11 +128,12 @@
                             android:text="@string/Username" />
 
                         <EditText
+                            android:id="@+id/edtUserName"
                             style="@style/mont_reg_black_14"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_6sdp"
-                            android:drawableLeft="@drawable/ic_outline_email_24"
+                            android:drawableLeft="@drawable/person"
                             android:drawablePadding="@dimen/_12sdp"
                             android:ellipsize="end"
                             android:hint="@string/Enter_Username"
@@ -152,6 +155,7 @@
                             android:text="@string/Password" />
 
                         <EditText
+                            android:id="@+id/edtPassword"
                             style="@style/mont_reg_black_14"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -178,6 +182,7 @@
                             android:text="@string/Country" />
 
                         <EditText
+                            android:id="@+id/edtCountry"
                             style="@style/mont_reg_black_14"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -187,6 +192,7 @@
                             android:ellipsize="end"
                             android:hint="@string/Select_Country"
                             android:maxLines="1"
+                            android:editable="false"
                             android:singleLine="true" />
 
                     </LinearLayout>
