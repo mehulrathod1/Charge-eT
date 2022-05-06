@@ -10,10 +10,9 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/undraw_nature"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/_80sdp"
-        />
+        android:src="@drawable/undraw_nature" />
 
 
     <ScrollView
@@ -116,8 +115,10 @@
                             android:drawablePadding="@dimen/_12sdp"
                             android:ellipsize="end"
                             android:hint="@string/Enter_Password"
+                            android:inputType="textPassword"
                             android:maxLines="1"
                             android:singleLine="true" />
+
                     </LinearLayout>
 
                     <LinearLayout
@@ -167,6 +168,4 @@
             </RelativeLayout>
         </RelativeLayout>
     </ScrollView>
-
-
 </RelativeLayout>

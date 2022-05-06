@@ -188,6 +188,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_6sdp"
                             android:drawableLeft="@drawable/ic_outline_location_on_24"
+                            android:drawableRight="@drawable/ic_baseline_arrow_down_black_24"
                             android:drawablePadding="@dimen/_12sdp"
                             android:ellipsize="end"
                             android:hint="@string/Select_Country"

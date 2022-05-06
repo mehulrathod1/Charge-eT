@@ -9,10 +9,12 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.in.chargeet.Adapter.CountryAdapter;
 import com.in.chargeet.Model.CountryModel;
@@ -69,6 +71,8 @@ public class SignUpActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 alert.show();
+//                getCountryData(Glob.token);
+
             }
         });
 
@@ -112,17 +116,18 @@ public class SignUpActivity extends AppCompatActivity {
 
                 CountryModel countryModel = response.body();
 
-                List<CountryModel.Country> dataList = countryModel.getDataList();
 
-                for (int i = 0; i < dataList.size(); i++) {
+                    List<CountryModel.Country> dataList = countryModel.getDataList();
+                    for (int i = 0; i < dataList.size(); i++) {
 
-                    CountryModel.Country model = dataList.get(i);
-                    CountryModel.Country data = new CountryModel.Country(model.getId(), model.getName());
+                        CountryModel.Country model = dataList.get(i);
+                        CountryModel.Country data = new CountryModel.Country(model.getId(), model.getName());
 
-                    Log.e("onResponse", "onResponse: " + data.getName());
-                    countryList.add(data);
-                }
-                setCountryData();
+                        Log.e("onResponse", "onResponse: " + data.getName());
+                        countryList.add(data);
+                    }
+                    setCountryData();
+
             }
 
             @Override
@@ -139,6 +144,11 @@ public class SignUpActivity extends AppCompatActivity {
             @Override
             public void itemClick(int position) {
 
+                String countryId = countryList.get(position).getId();
+                String countryName = countryList.get(position).getName();
+                alert.dismiss();
+                edtCountry.setText(countryName);
+
             }
         });
 
@@ -147,4 +157,44 @@ public class SignUpActivity extends AppCompatActivity {
         countryRecycler.setAdapter(countryAdapter);
 
     }
+
+    public void emailValidator(EditText etMail) {
+
+        String emailToText = etMail.getText().toString();
+        String password = edtPassword.getText().toString().trim();
+        String phoneNumber = edtPhoneNo.getText().toString().trim();
+
+        if (!emailToText.isEmpty() && Patterns.EMAIL_ADDRESS.matcher(emailToText).matches()) {
+
+
+            if (phoneNumber.equals("") || password.length() < 10) {
+                edtPassword.setError("Please Enter Valid Mobile Number");
+
+            } else if (password.equals("") || (password.length() < 8)) {
+
+                edtPassword.setError("Please Enter valid password");
+
+            } else if (edtUserName.getText().toString().trim().equals("")) {
+
+                edtPassword.setError("Please Enter Username");
+
+            } else if (password.equals("") || (password.length() < 8)) {
+
+                edtPassword.setError("Please Enter valid password");
+
+
+            } else if (edtCountry.getText().toString().trim().equals("")) {
+
+                edtCountry.setError("Please Select Country");
+
+            } else {
+
+
+            }
+        } else {
+            edtEmail.setError("Please Enter valid Email address");
+        }
+
+    }
+
 }
