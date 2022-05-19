@@ -6,7 +6,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/_18sdp"
         android:orientation="vertical">
 
 
@@ -14,9 +13,16 @@
             android:id="@+id/radioButton"
             style="@style/mont_semi_black_14"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/_50sdp"
+            android:layout_marginLeft="@dimen/_18sdp"
+            android:layout_marginRight="@dimen/_18sdp"
+            android:gravity="center_vertical"
             android:paddingLeft="@dimen/_18sdp"
             android:text="@string/Google_Pay" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1sdp"
+            android:background="@color/gray_dark"/>
     </LinearLayout>
 
 </RelativeLayout>

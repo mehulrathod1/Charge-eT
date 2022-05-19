@@ -84,6 +84,7 @@
                             android:text="@string/Email" />
 
                         <EditText
+                            android:id="@+id/edtEmail"
                             style="@style/mont_reg_black_14"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -111,6 +112,7 @@
                             android:text="@string/Phone_Number" />
 
                         <EditText
+                            android:id="@+id/edtPhoneNo"
                             style="@style/mont_reg_black_14"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -138,11 +140,12 @@
                             android:text="@string/Username" />
 
                         <EditText
+                            android:id="@+id/edtUserName"
                             style="@style/mont_reg_black_14"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_6sdp"
-                            android:drawableLeft="@drawable/ic_outline_email_24"
+                            android:drawableLeft="@drawable/person"
                             android:drawablePadding="@dimen/_12sdp"
                             android:ellipsize="end"
                             android:hint="@string/Enter_Username"
@@ -164,6 +167,7 @@
                             android:text="@string/Surname" />
 
                         <EditText
+                            android:id="@+id/edtSurname"
                             style="@style/mont_reg_black_14"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -190,6 +194,7 @@
                             android:text="@string/Gender" />
 
                         <EditText
+                            android:id="@+id/gender"
                             style="@style/mont_reg_black_14"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -217,6 +222,7 @@
                             android:text="@string/Town" />
 
                         <EditText
+                            android:id="@+id/edtTown"
                             style="@style/mont_reg_black_14"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -243,6 +249,7 @@
                             android:text="@string/Country" />
 
                         <EditText
+                            android:id="@+id/edtCountry"
                             style="@style/mont_reg_black_14"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -270,6 +277,7 @@
 
                         <EditText
                             style="@style/mont_reg_black_14"
+                            android:id="@+id/edtDescription"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_6sdp"
@@ -290,7 +298,7 @@
                         android:orientation="vertical">
 
                         <Button
-                            android:id="@+id/btnSignUp"
+                            android:id="@+id/update"
                             style="@style/button_style"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"

@@ -67,7 +67,7 @@
         <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/layout/activity_forgot_password.xml" value="0.20416666666666666" />
         <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/layout/activity_get_start_one.xml" value="0.20416666666666666" />
         <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/layout/activity_main.xml" value="0.18" />
-        <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/layout/activity_my_account.xml" value="0.20416666666666666" />
+        <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/layout/activity_my_account.xml" value="0.33" />
         <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/layout/activity_my_booking.xml" value="0.20416666666666666" />
         <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/layout/activity_my_vehiecle.xml" value="0.25" />
         <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/layout/activity_my_wallet.xml" value="0.20416666666666666" />
@@ -81,6 +81,7 @@
         <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/layout/country_popup.xml" value="0.1" />
         <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/layout/get_started_item.xml" value="0.20416666666666666" />
         <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/layout/not_available_filter_item.xml" value="0.20416666666666666" />
+        <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/layout/other_vehicle_item.xml" value="0.1956521739130435" />
         <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/layout/payment_option_layout.xml" value="0.20416666666666666" />
         <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/layout/popup_forgot_password.xml" value="0.22" />
         <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/layout/select_charging_point_popup.xml" value="0.20416666666666666" />
@@ -88,6 +89,7 @@
         <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/layout/toolbar.xml" value="0.20416666666666666" />
         <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/layout/tootlbar.xml" value="0.20416666666666666" />
         <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/layout/vehicle_item.xml" value="0.20416666666666666" />
+        <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/layout/vehicle_otem.xml" value="0.15172101449275363" />
         <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/menu/bottom_menu.xml" value="0.20416666666666666" />
         <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/menu/menu.xml" value="0.20416666666666666" />
       </map>

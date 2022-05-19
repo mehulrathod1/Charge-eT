@@ -6,14 +6,21 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.in.chargeet.Model.ProfileDetail;
 import com.in.chargeet.R;
+import com.in.chargeet.Retrofit.Api;
+import com.in.chargeet.Retrofit.RetrofitClient;
+import com.in.chargeet.Utils.Glob;
 
 import org.imaginativeworld.whynotimagecarousel.ImageCarousel;
 import org.imaginativeworld.whynotimagecarousel.model.CarouselItem;
@@ -24,32 +31,51 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.security.auth.login.LoginException;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class MyAccountActivity extends AppCompatActivity {
 
     BottomNavigationView bottom_navigation;
 
-    ImageView backButton, edtAccount, wallet;
-    TextView toolbarHading;
+    ImageView backButton, edtAccount, wallet, profileImage;
+    TextView toolbarHading, userName, email, mobileNumber, name, surname, gender, town, country, dob, description;
     ImageCarousel carousel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_account);
+
         init();
+        getProfile(Glob.token, "1");
     }
 
     public void init() {
 
+        Glob.progressDialog(this);
         bottom_navigation = findViewById(R.id.bottom_navigation);
         carousel = findViewById(R.id.carousel);
         edtAccount = findViewById(R.id.edtAccount);
         wallet = findViewById(R.id.wallet);
+        profileImage = findViewById(R.id.profileImage);
         bottom_navigation.getMenu().findItem(R.id.account).setChecked(true);
-
 
         backButton = findViewById(R.id.backButton);
         toolbarHading = findViewById(R.id.toolbarHading);
+        userName = findViewById(R.id.userName);
+        email = findViewById(R.id.Email);
+        mobileNumber = findViewById(R.id.mobileNumber);
+        name = findViewById(R.id.name);
+        surname = findViewById(R.id.surname);
+        gender = findViewById(R.id.gender);
+        town = findViewById(R.id.town);
+        country = findViewById(R.id.country);
+        dob = findViewById(R.id.dob);
+        description = findViewById(R.id.description);
         toolbarHading.setText("Profile");
 
 
@@ -82,6 +108,7 @@ public class MyAccountActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
 
         bottom_navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -185,6 +212,50 @@ public class MyAccountActivity extends AppCompatActivity {
 //        carousel.setShowNavigationButtons(true);
 //        carousel.setImageScaleType(ImageView.ScaleType.CENTER);
 //        carousel.setCarouselBackground(new ColorDrawable(Color.parseColor("#333333")));
+    }
+
+
+    public void getProfile(String token, String userId) {
+
+        Api call = RetrofitClient.getClient(Glob.baseUrl).create(Api.class);
+        Glob.dialog.show();
+
+
+        call.getProfile(token, userId).enqueue(new Callback<ProfileDetail>() {
+            @Override
+            public void onResponse(Call<ProfileDetail> call, Response<ProfileDetail> response) {
+
+                ProfileDetail profileDetail = response.body();
+                ProfileDetail.Detail model = profileDetail.getData();
+
+                userName.setText(model.getUsername());
+                email.setText(model.getEmail());
+                mobileNumber.setText(model.getPhone_number());
+
+                name.setText(model.getName());
+                surname.setText(model.getSurname());
+                gender.setText(model.getGender());
+                town.setText(model.getTown());
+                country.setText(model.getCountry());
+                dob.setText(model.getDob());
+                description.setText(model.getDescription());
+
+
+                Glide.with(getApplicationContext()).load(model.getProfile_image()).into(profileImage);
+
+
+                Log.e("TAG", "onResponse: " + model.getProfile_image());
+
+                Glob.dialog.dismiss();
+
+
+            }
+
+            @Override
+            public void onFailure(Call<ProfileDetail> call, Throwable t) {
+                Glob.dialog.dismiss();
+            }
+        });
     }
 
     @Override

@@ -54,10 +54,11 @@
 
 
                         <ImageView
+                            android:id="@+id/profileImage"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:scaleType="fitXY"
-                            android:src="@drawable/images" />
+                            android:scaleType="centerInside"
+                            />
                     </RelativeLayout>
 
 
@@ -226,12 +227,14 @@
                             android:orientation="horizontal">
 
                             <TextView
+
                                 style="@style/mont_semi_black_16"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/Username_" />
 
                             <TextView
+                                android:id="@+id/userName"
                                 style="@style/mont_reg_black_16"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -253,6 +256,7 @@
                                 android:text="@string/Email_" />
 
                             <TextView
+                                android:id="@+id/Email"
                                 style="@style/mont_reg_black_16"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -274,6 +278,7 @@
                                 android:text="@string/Mobile_Number_" />
 
                             <TextView
+                                android:id="@+id/mobileNumber"
                                 style="@style/mont_reg_black_16"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -350,6 +355,7 @@
                                     android:text="@string/Name_" />
 
                                 <TextView
+                                    android:id="@+id/name"
                                     style="@style/mont_reg_black_16"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -371,6 +377,7 @@
                                     android:text="@string/Surname_" />
 
                                 <TextView
+                                    android:id="@+id/surname"
                                     style="@style/mont_reg_black_16"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -392,6 +399,7 @@
                                     android:text="@string/Gender_" />
 
                                 <TextView
+                                    android:id="@+id/gender"
                                     style="@style/mont_reg_black_16"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -413,6 +421,7 @@
                                     android:text="@string/Town_" />
 
                                 <TextView
+                                    android:id="@+id/town"
                                     style="@style/mont_reg_black_16"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -434,6 +443,7 @@
                                     android:text="@string/Country_" />
 
                                 <TextView
+                                    android:id="@+id/country"
                                     style="@style/mont_reg_black_16"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -455,6 +465,7 @@
                                     android:text="@string/DOB_" />
 
                                 <TextView
+                                    android:id="@+id/dob"
                                     style="@style/mont_reg_black_16"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -476,12 +487,17 @@
                                     android:text="@string/Description_" />
 
                                 <TextView
+                                    android:id="@+id/description"
                                     style="@style/mont_reg_black_16"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_8sdp" />
 
+
+
                             </LinearLayout>
+
+
 
                         </LinearLayout>
 

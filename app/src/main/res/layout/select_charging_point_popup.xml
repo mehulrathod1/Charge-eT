@@ -49,12 +49,14 @@
 
 
                 <TextView
+                    android:id="@+id/StationName"
                     style="@style/mont_semi_black_14"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Type 2 Charge" />
 
                 <TextView
+                    android:id="@+id/stationPower"
                     style="@style/mont_reg_black_14"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -100,6 +102,7 @@
 
 
                         <ImageView
+                            android:id="@+id/connector1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -134,6 +137,7 @@
 
 
                         <ImageView
+                            android:id="@+id/connector2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -167,6 +171,7 @@
 
 
                         <ImageView
+                            android:id="@+id/connector3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -203,6 +208,7 @@
 
 
                 <TextView
+                    android:id="@+id/power"
                     style="@style/mont_semi_black_14"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -234,6 +240,8 @@
 
 
                 <TextView
+
+                    android:id="@+id/stationRate"
                     style="@style/mont_semi_black_14"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -267,7 +275,7 @@
                     android:drawableRight="@drawable/ic_baseline_keyboard_arrow_down_24"
                     android:drawablePadding="@dimen/_18sdp"
                     android:gravity="center"
-                    android:text="@string/wallet"/>
+                    android:text="@string/wallet" />
             </LinearLayout>
 
             <LinearLayout
@@ -299,17 +307,18 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:background="@drawable/edt_button_green_bg"
-                android:gravity="center"
-                android:layout_height="wrap_content">
-            <TextView
-                style="@style/mont_semi_white_14"
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/_40sdp"
-                android:gravity="center"
-                android:drawablePadding="@dimen/_18sdp"
-                android:drawableLeft="@drawable/ic_baseline_send_white_24"
-                android:text="@string/Navigate_Location" />
+                android:gravity="center">
+
+                <TextView
+                    style="@style/mont_semi_white_14"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/_40sdp"
+                    android:drawableLeft="@drawable/ic_baseline_send_white_24"
+                    android:drawablePadding="@dimen/_18sdp"
+                    android:gravity="center"
+                    android:text="@string/Navigate_Location" />
             </LinearLayout>
         </LinearLayout>
 

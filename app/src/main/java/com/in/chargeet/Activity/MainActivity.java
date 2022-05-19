@@ -21,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.common.api.Status;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -30,6 +31,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -41,27 +43,49 @@ import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.in.chargeet.Model.PowerStationDetailModel;
+import com.in.chargeet.Model.PowerStationModel;
 import com.in.chargeet.R;
+import com.in.chargeet.Retrofit.Api;
+import com.in.chargeet.Retrofit.RetrofitClient;
+import com.in.chargeet.Utils.Glob;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     BottomNavigationView bottom_navigation;
-    TextView myVehicles, myBooking, setting, wallet, bookNow;
-    ImageView location, menuImage, zoomOut, zoomIn, goToCurrentLocation;
+    TextView myVehicles, myBooking, setting, wallet, bookNow, StationName, stationPower, power, stationRate;
+    ImageView location, menuImage, zoomOut, zoomIn, goToCurrentLocation, connector3, connector2, connector1;
     BottomSheetDialog bottomSheetDialog;
     AlertDialog alert;
     AlertDialog.Builder alertDialog;
     LinearLayout menuLayout, menuButton;
     GoogleMap mMap;
 
-
     Location currentLocation;
     FusedLocationProviderClient fusedLocationProviderClient;
     private static final int REQUEST_CODE = 101;
 
     Place places;
+
+    ArrayList<PowerStationModel.PowerStation> markersArray = new ArrayList<>();
+
+
+//    LatLng sydney = new LatLng(-34, 151);
+//    LatLng TamWorth = new LatLng(-31.083332, 150.916672);
+//    LatLng NewCastle = new LatLng(-32.916668, 151.750000);
+//    LatLng Brisbane = new LatLng(-27.470125, 153.021072);
+
+    // creating array list for adding all our locations.
+    public ArrayList<LatLng> locationArrayList = new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,11 +115,10 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             @Override
             public void onPlaceSelected(Place place) {
                 // TODO: Get info about the selected place.
+
                 places = place;
                 Log.e("TAG", "Place: " + place.getName() + ", " + place.getId());
                 Log.e("TAG", "latlong: " + place.getLatLng());
-
-
 
             }
 
@@ -104,16 +127,113 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 // TODO: Handle the error.
                 Log.e("TAG", "An error occurred: " + status);
             }
+
+
         });
 
 
+        // on below line we are adding our
+        // locations in our array list.
+//        locationArrayList.add(sydney);
+//        locationArrayList.add(TamWorth);
+//        locationArrayList.add(NewCastle);
+//        locationArrayList.add(Brisbane);
+//
         init();
+
+    }
+
+
+//    @Override
+//    public void onMapReady(@NonNull GoogleMap googleMap) {
+//
+//        mMap = googleMap;
+//
+//        // Add a marker in Sydney and move the camera
+//        LatLng sydney = new LatLng(23.0225, 72.5714);
+//        mMap.addMarker(new MarkerOptions()
+//                .position(sydney)
+//                .title("Ahmedabad"));
+//        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+//        CameraUpdate update = CameraUpdateFactory.newLatLngZoom(sydney, 15);
+//        mMap.moveCamera(update);
+//
+//        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+//            @Override
+//            public boolean onMarkerClick(@NonNull Marker marker) {
+//
+//                bottomSheetDialog.show();
+//                return false;
+//
+//
+//            }
+//        });
+//
+//    }
+
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+
+        getPowerStation(Glob.token);
+
+
+        mMap = googleMap;
+
+//        LatLng latLng = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
+//        LatLng latLng2 = new LatLng(23.053262798651392, 72.51482667850078);
+//        MarkerOptions markerOptions = new MarkerOptions().position(latLng).title("");
+//        MarkerOptions markerOptions2 = new MarkerOptions().position(latLng2).title("");
+//        googleMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
+//        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
+//        googleMap.addMarker(markerOptions);
+//        googleMap.addMarker(markerOptions2);
+
+        Log.e("index", "onResponse: " + locationArrayList.toString());
+
+
+//
+        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(@NonNull Marker marker) {
+
+                getPowerStationDetail(Glob.token, "2");
+                bottomSheetDialog.show();
+
+                return false;
+
+            }
+        });
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case REQUEST_CODE:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    fetchLocation();
+                }
+                break;
+        }
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+        super.onPointerCaptureChanged(hasCapture);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
 
 
     }
 
     public void init() {
 
+        Glob.progressDialog(this);
         bottom_navigation = findViewById(R.id.bottom_navigation);
         myVehicles = findViewById(R.id.myVehicles);
         myBooking = findViewById(R.id.myBooking);
@@ -128,8 +248,16 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         goToCurrentLocation = findViewById(R.id.goToCurrentLocation);
         bottomSheetDialog = new BottomSheetDialog(MainActivity.this);
         bottomSheetDialog.setContentView(R.layout.select_charging_point_popup);
+
         bookNow = bottomSheetDialog.findViewById(R.id.bookNow);
         wallet = bottomSheetDialog.findViewById(R.id.wallet);
+        StationName = bottomSheetDialog.findViewById(R.id.StationName);
+        stationPower = bottomSheetDialog.findViewById(R.id.stationPower);
+        power = bottomSheetDialog.findViewById(R.id.power);
+        stationRate = bottomSheetDialog.findViewById(R.id.stationRate);
+        connector1 = bottomSheetDialog.findViewById(R.id.connector1);
+        connector2 = bottomSheetDialog.findViewById(R.id.connector2);
+        connector3 = bottomSheetDialog.findViewById(R.id.connector3);
 
 
         alertDialog = new AlertDialog.Builder(MainActivity.this);
@@ -275,66 +403,103 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     }
 
+    public void getPowerStation(String token) {
 
-//    @Override
-//    public void onMapReady(@NonNull GoogleMap googleMap) {
-//
-//        mMap = googleMap;
-//
-//        // Add a marker in Sydney and move the camera
-//        LatLng sydney = new LatLng(23.0225, 72.5714);
-//        mMap.addMarker(new MarkerOptions()
-//                .position(sydney)
-//                .title("Ahmedabad"));
-//        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
-//        CameraUpdate update = CameraUpdateFactory.newLatLngZoom(sydney, 15);
-//        mMap.moveCamera(update);
-//
-//        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-//            @Override
-//            public boolean onMarkerClick(@NonNull Marker marker) {
-//
-//                bottomSheetDialog.show();
-//                return false;
-//
-//
-//            }
-//        });
-//
-//    }
+        Api call = RetrofitClient.getClient(Glob.baseUrl).create(Api.class);
+        Glob.dialog.show();
 
 
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
-        LatLng latLng = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
-        MarkerOptions markerOptions = new MarkerOptions().position(latLng).title("");
-        googleMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
-        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
-        googleMap.addMarker(markerOptions);
-
-        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+        call.getPowerStation(token).enqueue(new Callback<PowerStationModel>() {
             @Override
-            public boolean onMarkerClick(@NonNull Marker marker) {
+            public void onResponse(Call<PowerStationModel> call, Response<PowerStationModel> response) {
 
-                bottomSheetDialog.show();
-                return false;
+                PowerStationModel powerStationModel = response.body();
+                List<PowerStationModel.PowerStation> dataList = powerStationModel.getDataList();
+
+                for (int i = 0; i < dataList.size(); i++) {
+
+                    PowerStationModel.PowerStation model = dataList.get(i);
+                    PowerStationModel.PowerStation data = new PowerStationModel.PowerStation(
+                            model.getId(), model.getName(), model.getLatitude(), model.getLongitude(), model.getIcon()
+
+                    );
+                    markersArray.add(data);
+
+
+                    Log.e("data", "onResponse: " + model.getId());
+                }
+                for (int j = 0; j < markersArray.size(); j++) {
+                    locationArrayList.add(new LatLng(Double.parseDouble(markersArray.get(j).getLatitude()), Double.parseDouble(markersArray.get(j).getLongitude())));
+
+                    Log.e("index", "onResponse: " + locationArrayList.get(j).toString());
+                }
+                for (int i = 0; i < locationArrayList.size(); i++) {
+                    Log.e("index", "onResponse: " + locationArrayList.get(i).toString());
+
+                    // below line is use to add marker to each location of our array list.
+                    mMap.addMarker(new MarkerOptions().position(locationArrayList.get(i)));
+
+                    // below lin is use to zoom our camera on map.
+                    mMap.animateCamera(CameraUpdateFactory.zoomTo(18.0f));
+
+                    // below line is use to move our camera to the specific location.
+                    mMap.moveCamera(CameraUpdateFactory.newLatLng(locationArrayList.get(i)));
+
+
+                }
+
+                Glob.dialog.dismiss();
+
+            }
+
+            @Override
+            public void onFailure(Call<PowerStationModel> call, Throwable t) {
+                Glob.dialog.dismiss();
 
             }
         });
+
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+    public void getPowerStationDetail(String token, String powerStationId) {
 
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        switch (requestCode) {
-            case REQUEST_CODE:
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    fetchLocation();
+        Api call = RetrofitClient.getClient(Glob.baseUrl).create(Api.class);
+        Glob.dialog.show();
+
+
+        call.getPowerStationDetail(token, powerStationId).enqueue(new Callback<PowerStationDetailModel>() {
+            @Override
+            public void onResponse(Call<PowerStationDetailModel> call, Response<PowerStationDetailModel> response) {
+
+                PowerStationDetailModel powerStationDetailModel = response.body();
+                PowerStationDetailModel.PowerStationData powerStationData = powerStationDetailModel.getData();
+
+                StationName.setText(powerStationData.getName());
+                stationPower.setText(powerStationData.getPower());
+                power.setText(powerStationData.getPower());
+                stationRate.setText(powerStationData.getRate());
+
+
+                List<PowerStationDetailModel.PowerStationData.Connectors> connectorsList = powerStationData.getConnectors();
+
+                Glide.with(getApplicationContext()).load(connectorsList.get(0).getImage()).into(connector1);
+                Glide.with(getApplicationContext()).load(connectorsList.get(1).getImage()).into(connector2);
+                Glide.with(getApplicationContext()).load(connectorsList.get(2).getImage()).into(connector3);
+
+                for (int i = 0; i < connectorsList.size(); i++) {
+
                 }
-                break;
-        }
+
+                Glob.dialog.dismiss();
+            }
+
+            @Override
+            public void onFailure(Call<PowerStationDetailModel> call, Throwable t) {
+                Glob.dialog.dismiss();
+                Log.e("myError", "onFailure: " + t.getMessage());
+            }
+        });
+
     }
 
     private void fetchLocation() {
@@ -359,15 +524,13 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         });
     }
 
-    @Override
-    public void onPointerCaptureChanged(boolean hasCapture) {
-        super.onPointerCaptureChanged(hasCapture);
+    protected Marker createMarker(double latitude, double longitude, String title) {
+
+        return mMap.addMarker(new MarkerOptions()
+                .position(new LatLng(latitude, longitude))
+                .title(title)
+
+        );
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-
-    }
 }
