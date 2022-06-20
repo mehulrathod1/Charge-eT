@@ -51,7 +51,7 @@ public class MyAccountActivity extends AppCompatActivity {
         setContentView(R.layout.activity_my_account);
 
         init();
-        getProfile(Glob.token, "1");
+        getProfile(Glob.token, Glob.userId);
     }
 
     public void init() {

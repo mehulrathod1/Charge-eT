@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
 import android.app.AlertDialog;
@@ -68,15 +69,14 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     AlertDialog.Builder alertDialog;
     LinearLayout menuLayout, menuButton;
     GoogleMap mMap;
-
+    String TAG = "MainActivity";
     Location currentLocation;
     FusedLocationProviderClient fusedLocationProviderClient;
     private static final int REQUEST_CODE = 101;
-
     Place places;
-
     ArrayList<PowerStationModel.PowerStation> markersArray = new ArrayList<>();
 
+    RecyclerView connectorRecycler;
 
 //    LatLng sydney = new LatLng(-34, 151);
 //    LatLng TamWorth = new LatLng(-31.083332, 150.916672);
@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 //        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
 //                .findFragmentById(R.id.map);
 //        mapFragment.getMapAsync(this);
-
+//
 
         if (!Places.isInitialized()) {
             Places.initialize(getApplicationContext(), "AIzaSyCBZ1E4AGu6xP_VV4GWr_qjnOte9sFmh0A");
@@ -197,9 +197,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             @Override
             public boolean onMarkerClick(@NonNull Marker marker) {
 
-                getPowerStationDetail(Glob.token, "2");
                 bottomSheetDialog.show();
-
+                getPowerStationDetail(Glob.token, "2");
                 return false;
 
             }
@@ -249,6 +248,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         bottomSheetDialog = new BottomSheetDialog(MainActivity.this);
         bottomSheetDialog.setContentView(R.layout.select_charging_point_popup);
 
+        connectorRecycler = bottomSheetDialog.findViewById(R.id.connectorRecycler);
         bookNow = bottomSheetDialog.findViewById(R.id.bookNow);
         wallet = bottomSheetDialog.findViewById(R.id.wallet);
         StationName = bottomSheetDialog.findViewById(R.id.StationName);
@@ -395,9 +395,15 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             @Override
             public void onClick(View view) {
 
-                LatLng pos = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
-                CameraUpdate update = CameraUpdateFactory.newLatLngZoom(pos, 15);
-                mMap.moveCamera(update);
+
+                if (currentLocation != null) {
+                    LatLng pos = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
+
+
+                    CameraUpdate update = CameraUpdateFactory.newLatLngZoom(pos, 15);
+                    mMap.moveCamera(update);
+                }
+
             }
         });
 
@@ -532,5 +538,4 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         );
     }
-
 }

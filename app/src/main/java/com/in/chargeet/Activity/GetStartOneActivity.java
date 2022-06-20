@@ -100,7 +100,7 @@ public class GetStartOneActivity extends AppCompatActivity {
 
 
         GetStartModel model = new GetStartModel("Charg-eT", "Easy To Use",
-                "Lorem, ipsum dolor sit amet consectet adipisicing elit. Pariatur, iste veritatis enim aut molestiae id fuga ne doloremque sed esse", R.drawable.undraw_mobile
+                "Lorem, ipsum dolor sit amet consectet adipisicing elit. Pariatur", R.drawable.undraw_mobile
         );
 
 

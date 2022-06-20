@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,23 +38,26 @@ public class MyVehicleActivity extends AppCompatActivity {
     ImageView backButton, vehicleImage, delete;
     TextView toolbarHading, vehicleName, vehicleDescription, vehicleSpeed;
     Button addVehicle;
-
+    LinearLayout primaryLayout;
     RecyclerView otherVehicleRecycler;
     List<OtherVehicleModel.OtherVehicle> otherVehicleList = new ArrayList<>();
     OtherVehicleAdapter otherVehicleAdapter;
     String vehicleId;
+
+    String TAG = "MyVehicleActivity";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_vehiecle);
         init();
-        getPrimaryVehicle(Glob.token, "1");
-        getOtherVehicle(Glob.token, "1");
+        getPrimaryVehicle(Glob.token, Glob.userId);
+        getOtherVehicle(Glob.token, Glob.userId);
 
+        Log.e(TAG, "onCreate: " + Glob.userId);
     }
 
     public void init() {
-
 
         Glob.progressDialog(this);
         backButton = findViewById(R.id.backButton);
@@ -66,13 +70,14 @@ public class MyVehicleActivity extends AppCompatActivity {
         vehicleSpeed = findViewById(R.id.vehicleSpeed);
         otherVehicleRecycler = findViewById(R.id.otherVehicleRecycler);
         delete = findViewById(R.id.delete);
+        primaryLayout = findViewById(R.id.primaryLayout);
 
 
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                removeVehicle(Glob.token,"1",vehicleId);
+                removeVehicle(Glob.token, Glob.userId, vehicleId);
 
             }
         });
@@ -111,18 +116,26 @@ public class MyVehicleActivity extends AppCompatActivity {
                 Glide.with(getApplicationContext()).load(model.getImage()).into(vehicleImage);
                 vehicleName.setText(model.getName());
                 vehicleDescription.setText(model.getDescription());
-                vehicleSpeed.setText(model.getRate());
-
+                vehicleSpeed.setText(model.getRate() + " / ");
                 vehicleId = model.getUser_vehicle_id();
                 Glob.dialog.dismiss();
+
+                Log.e(TAG, "onResponse: " + model.getName());
+
+                if (vehicleName.getText().toString().equals("")) {
+                    primaryLayout.setVisibility(View.GONE);
+                }
 
             }
 
             @Override
             public void onFailure(Call<PrimaryVehicleModel> call, Throwable t) {
+                Log.e(TAG, "onResponse: " + t.getMessage());
 
                 Glob.dialog.dismiss();
-
+                if (vehicleName.getText().toString().equals("")) {
+                    primaryLayout.setVisibility(View.GONE);
+                }
             }
         });
     }
@@ -179,7 +192,7 @@ public class MyVehicleActivity extends AppCompatActivity {
 
                 String vehicleId = otherVehicleList.get(position).getUser_vehicle_id();
 
-                makePrimary(Glob.token, "1", vehicleId);
+                makePrimary(Glob.token, Glob.userId, vehicleId);
 
 
             }
@@ -205,8 +218,8 @@ public class MyVehicleActivity extends AppCompatActivity {
                 CommonModel commonModel = response.body();
                 Toast.makeText(MyVehicleActivity.this, "" + commonModel.getMessage(), Toast.LENGTH_SHORT).show();
                 Glob.dialog.dismiss();
-                getOtherVehicle(Glob.token, "1");
-                getPrimaryVehicle(Glob.token, "1");
+                getOtherVehicle(Glob.token, Glob.userId);
+                getPrimaryVehicle(Glob.token, Glob.userId);
 
             }
 
@@ -232,9 +245,12 @@ public class MyVehicleActivity extends AppCompatActivity {
 
                 Toast.makeText(MyVehicleActivity.this, "" + commonModel.getMessage(), Toast.LENGTH_SHORT).show();
 
-                getPrimaryVehicle(Glob.token, "1");
-//                getOtherVehicle(Glob.token, "1");
+
+                Log.e(TAG, "onResponse: " + commonModel.getMessage());
+                getPrimaryVehicle(Glob.token, Glob.userId);
+
                 Glob.dialog.dismiss();
+
 
             }
 

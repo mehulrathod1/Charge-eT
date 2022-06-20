@@ -61,7 +61,7 @@
                             android:gravity="center"
                             android:text="@string/Secured_Login"
                             android:textColor="@color/black_text_color"
-                            android:textSize="@dimen/_40sdp" />
+                            android:textSize="@dimen/_30sdp" />
 
                     </LinearLayout>
 
@@ -83,7 +83,6 @@
                             style="@style/mont_reg_black_14"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_6sdp"
                             android:drawableLeft="@drawable/ic_outline_email_24"
                             android:drawablePadding="@dimen/_12sdp"
                             android:ellipsize="end"
@@ -95,7 +94,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_16sdp"
+                        android:layout_marginTop="@dimen/_8sdp"
                         android:layout_marginBottom="@dimen/_8sdp"
                         android:orientation="vertical">
 
@@ -110,7 +109,6 @@
                             style="@style/mont_reg_black_14"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_6sdp"
                             android:drawableLeft="@drawable/ic_outline_vpn_key_24"
                             android:drawablePadding="@dimen/_12sdp"
                             android:ellipsize="end"

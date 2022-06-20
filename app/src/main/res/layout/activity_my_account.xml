@@ -57,8 +57,7 @@
                             android:id="@+id/profileImage"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:scaleType="centerInside"
-                            />
+                            android:scaleType="centerCrop" />
                     </RelativeLayout>
 
 
@@ -188,7 +187,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/_14sdp"
-                        android:layout_marginTop="@dimen/_16sdp"
+                        android:layout_marginTop="@dimen/_8sdp"
                         android:layout_marginRight="@dimen/_14sdp"
                         android:orientation="vertical">
 
@@ -207,8 +206,8 @@
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/_1sdp"
-                            android:layout_marginTop="@dimen/_16sdp"
-                            android:layout_marginBottom="@dimen/_16sdp"
+                            android:layout_marginTop="@dimen/_8sdp"
+                            android:layout_marginBottom="@dimen/_8sdp"
                             android:background="@color/for_line" />
                     </LinearLayout>
 
@@ -223,7 +222,7 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="@dimen/_16sdp"
+                            android:layout_marginBottom="@dimen/_8sdp"
                             android:orientation="horizontal">
 
                             <TextView
@@ -268,7 +267,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_8sdp"
-                            android:layout_marginBottom="@dimen/_16sdp"
+                            android:layout_marginBottom="@dimen/_8sdp"
                             android:orientation="horizontal">
 
                             <TextView
@@ -310,7 +309,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/_14sdp"
-                            android:layout_marginTop="@dimen/_16sdp"
+                            android:layout_marginTop="@dimen/_8sdp"
                             android:layout_marginRight="@dimen/_14sdp"
                             android:orientation="vertical">
 
@@ -318,7 +317,7 @@
                                 style="@style/mont_semi_black_16"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="@string/Account_Information" />
+                                android:text="@string/Personal_Information" />
                         </LinearLayout>
 
 
@@ -329,8 +328,8 @@
                             <View
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/_1sdp"
-                                android:layout_marginTop="@dimen/_16sdp"
-                                android:layout_marginBottom="@dimen/_16sdp"
+                                android:layout_marginTop="@dimen/_8sdp"
+                                android:layout_marginBottom="@dimen/_8sdp"
                                 android:background="@color/for_line" />
                         </LinearLayout>
 
@@ -345,7 +344,7 @@
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginBottom="@dimen/_16sdp"
+                                android:layout_marginBottom="@dimen/_8sdp"
                                 android:orientation="horizontal">
 
                                 <TextView
@@ -389,7 +388,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/_8sdp"
-                                android:layout_marginBottom="@dimen/_16sdp"
+                                android:layout_marginBottom="@dimen/_8sdp"
                                 android:orientation="horizontal">
 
                                 <TextView
@@ -411,7 +410,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/_8sdp"
-                                android:layout_marginBottom="@dimen/_16sdp"
+                                android:layout_marginBottom="@dimen/_8sdp"
                                 android:orientation="horizontal">
 
                                 <TextView
@@ -433,7 +432,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/_8sdp"
-                                android:layout_marginBottom="@dimen/_16sdp"
+                                android:layout_marginBottom="@dimen/_8sdp"
                                 android:orientation="horizontal">
 
                                 <TextView
@@ -455,7 +454,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/_8sdp"
-                                android:layout_marginBottom="@dimen/_16sdp"
+                                android:layout_marginBottom="@dimen/_8sdp"
                                 android:orientation="horizontal">
 
                                 <TextView
@@ -477,7 +476,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/_8sdp"
-                                android:layout_marginBottom="@dimen/_16sdp"
+                                android:layout_marginBottom="@dimen/_8sdp"
                                 android:orientation="horizontal">
 
                                 <TextView
@@ -494,9 +493,7 @@
                                     android:layout_marginLeft="@dimen/_8sdp" />
 
 
-
                             </LinearLayout>
-
 
 
                         </LinearLayout>

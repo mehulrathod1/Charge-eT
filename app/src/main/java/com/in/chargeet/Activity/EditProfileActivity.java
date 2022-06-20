@@ -1,10 +1,14 @@
 package com.in.chargeet.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -12,12 +16,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.in.chargeet.Adapter.CountryAdapter;
 import com.in.chargeet.Model.CommonModel;
+import com.in.chargeet.Model.CountryModel;
 import com.in.chargeet.Model.ProfileDetail;
 import com.in.chargeet.R;
 import com.in.chargeet.Retrofit.Api;
 import com.in.chargeet.Retrofit.RetrofitClient;
 import com.in.chargeet.Utils.Glob;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -28,6 +37,11 @@ public class EditProfileActivity extends AppCompatActivity {
     ImageView backButton;
     Button update;
     TextView toolbarHading, edtEmail, edtPhoneNo, edtUserName, edtSurname, gender, edtTown, edtCountry, edtDescription;
+    AlertDialog alert;
+    AlertDialog.Builder alertDialog;
+    RecyclerView countryRecycler;
+    CountryAdapter countryAdapter;
+    List<CountryModel.Country> countryList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +49,8 @@ public class EditProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit_profile);
 
         init();
-        getProfile(Glob.token, "1");
+        getProfile(Glob.token, Glob.userId);
+        getCountryData(Glob.token);
     }
 
     public void init() {
@@ -54,6 +69,24 @@ public class EditProfileActivity extends AppCompatActivity {
         edtDescription = findViewById(R.id.edtDescription);
         update = findViewById(R.id.update);
 
+
+        alertDialog = new AlertDialog.Builder(EditProfileActivity.this);
+        LayoutInflater inflater = getLayoutInflater();
+        View dialogLayout = inflater.inflate(R.layout.country_popup, null);
+        alertDialog.setView(dialogLayout);
+        alert = alertDialog.create();
+        countryRecycler = dialogLayout.findViewById(R.id.countryRecycler);
+
+
+
+        edtCountry.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alert.show();
+//                getCountryData(Glob.token);
+
+            }
+        });
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -66,7 +99,7 @@ public class EditProfileActivity extends AppCompatActivity {
         update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                updateProfile(Glob.token, "1", edtEmail.getText().toString().trim(),
+                updateProfile(Glob.token, Glob.userId, edtEmail.getText().toString().trim(),
                         edtPhoneNo.getText().toString().trim(),
                         edtUserName.getText().toString().trim(),
                         edtSurname.getText().toString().trim(),
@@ -143,6 +176,59 @@ public class EditProfileActivity extends AppCompatActivity {
                 Glob.dialog.dismiss();
             }
         });
+
+    }
+
+
+    public void getCountryData(String token) {
+
+        Api call = RetrofitClient.getClient(Glob.baseUrl).create(Api.class);
+
+        call.getCountry(token).enqueue(new Callback<CountryModel>() {
+            @Override
+            public void onResponse(Call<CountryModel> call, Response<CountryModel> response) {
+
+                CountryModel countryModel = response.body();
+
+
+                List<CountryModel.Country> dataList = countryModel.getDataList();
+                for (int i = 0; i < dataList.size(); i++) {
+
+                    CountryModel.Country model = dataList.get(i);
+                    CountryModel.Country data = new CountryModel.Country(model.getId(), model.getName());
+
+                    Log.e("onResponse", "onResponse: " + data.getName());
+                    countryList.add(data);
+                }
+                setCountryData();
+
+            }
+
+            @Override
+            public void onFailure(Call<CountryModel> call, Throwable t) {
+
+            }
+        });
+
+    }
+
+    public void setCountryData() {
+
+        countryAdapter = new CountryAdapter(countryList, getApplicationContext(), new CountryAdapter.Click() {
+            @Override
+            public void itemClick(int position) {
+
+                String countryId = countryList.get(position).getId();
+                String countryName = countryList.get(position).getName();
+                alert.dismiss();
+                edtCountry.setText(countryName);
+
+            }
+        });
+
+        countryRecycler.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        countryAdapter.notifyDataSetChanged();
+        countryRecycler.setAdapter(countryAdapter);
 
     }
 }

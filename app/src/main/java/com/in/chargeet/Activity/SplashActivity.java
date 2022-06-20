@@ -2,11 +2,14 @@ package com.in.chargeet.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 
 import com.in.chargeet.R;
+import com.in.chargeet.Utils.Glob;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -17,7 +20,21 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-        moveNext(MainActivity.class);
+
+
+        SharedPreferences sharedPref = getSharedPreferences("UserId", Context.MODE_PRIVATE);
+        String id = sharedPref.getString("UserId", "null");
+
+
+        if (id.equals("null")) {
+            moveNext(GetStartOneActivity.class);
+
+        } else {
+
+            moveNext(MainActivity.class);
+            Glob.userId = id;
+        }
+
     }
 
     public void moveNext(Class c) {

@@ -21,7 +21,7 @@
 
             <TextView
                 android:id="@+id/heading"
-                style="@style/play_semi_black_40"
+                style="@style/play_semi_black_30"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -51,14 +51,14 @@
 
             <TextView
                 android:id="@+id/description"
-                style="@style/mont_reg_black_18"
+                style="@style/mont_reg_black_16"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_12sdp"
                 android:layout_marginBottom="@dimen/_12sdp"
                 android:gravity="center"
                 android:maxLines="4"
-                android:text="Lorem, ipsum dolor sit amet consectet adipisicing elit. Pariatur, iste veritatis enim aut molestiae id fuga ne doloremque sed esse" />
+                android:text="Lorem, ipsum dolor sit amet consectet adipisicing elit. " />
 
 
         </LinearLayout>

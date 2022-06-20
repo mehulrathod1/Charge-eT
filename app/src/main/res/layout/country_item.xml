@@ -11,9 +11,10 @@
 
         <TextView
             android:id="@+id/radioButton"
-            style="@style/mont_semi_black_14"
+            style="@style/mont_reg_black_14"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_50sdp"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_4sdp"
             android:layout_marginLeft="@dimen/_18sdp"
             android:layout_marginRight="@dimen/_18sdp"
             android:gravity="center_vertical"
@@ -22,7 +23,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/_1sdp"
-            android:background="@color/gray_dark"/>
+            android:background="@color/gray"/>
     </LinearLayout>
 
 </RelativeLayout>

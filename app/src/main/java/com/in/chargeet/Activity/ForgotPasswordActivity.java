@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.in.chargeet.Model.CommonModel;
@@ -28,6 +29,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
     AlertDialog.Builder alertDialog;
     Button btnContinue, btnContinueToOtp;
     EditText edtEmail;
+    ImageView closePopup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +53,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         alertDialog.setView(dialogLayout);
         alert = alertDialog.create();
         btnContinueToOtp = dialogLayout.findViewById(R.id.btnContinueToOtp);
+        closePopup = dialogLayout.findViewById(R.id.closePopup);
 
 
         btnContinue.setOnClickListener(new View.OnClickListener() {
@@ -66,8 +69,17 @@ public class ForgotPasswordActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                forgotPassword(Glob.token, edtEmail.getText().toString());
+//                forgotPassword(Glob.token, edtEmail.getText().toString());
 
+                Intent intent = new Intent(getApplicationContext(), OtpActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        closePopup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alert.dismiss();
             }
         });
     }

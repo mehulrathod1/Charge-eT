@@ -54,7 +54,7 @@
                             android:gravity="center"
                             android:text="@string/Sign_Up"
                             android:textColor="@color/black_text_color"
-                            android:textSize="@dimen/_40sdp" />
+                            android:textSize="@dimen/_30sdp" />
 
                     </LinearLayout>
 
@@ -76,7 +76,6 @@
                             style="@style/mont_reg_black_14"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_6sdp"
                             android:drawableLeft="@drawable/ic_outline_email_24"
                             android:drawablePadding="@dimen/_12sdp"
                             android:ellipsize="end"
@@ -89,7 +88,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_16sdp"
+                        android:layout_marginTop="@dimen/_8sdp"
                         android:layout_marginBottom="@dimen/_8sdp"
                         android:orientation="vertical">
 
@@ -104,11 +103,12 @@
                             style="@style/mont_reg_black_14"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_6sdp"
                             android:drawableLeft="@drawable/ic_outline_phone_24"
                             android:drawablePadding="@dimen/_12sdp"
                             android:ellipsize="end"
                             android:hint="@string/Enter_Phone_Number"
+                            android:inputType="number"
+                            android:maxLength="10"
                             android:maxLines="1"
                             android:singleLine="true" />
 
@@ -117,7 +117,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_16sdp"
+                        android:layout_marginTop="@dimen/_8sdp"
                         android:layout_marginBottom="@dimen/_8sdp"
                         android:orientation="vertical">
 
@@ -132,19 +132,19 @@
                             style="@style/mont_reg_black_14"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_6sdp"
                             android:drawableLeft="@drawable/person"
                             android:drawablePadding="@dimen/_12sdp"
                             android:ellipsize="end"
                             android:hint="@string/Enter_Username"
                             android:maxLines="1"
                             android:singleLine="true" />
+
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_16sdp"
+                        android:layout_marginTop="@dimen/_8sdp"
                         android:layout_marginBottom="@dimen/_8sdp"
                         android:orientation="vertical">
 
@@ -159,7 +159,6 @@
                             style="@style/mont_reg_black_14"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_6sdp"
                             android:drawableLeft="@drawable/ic_outline_vpn_key_24"
                             android:drawablePadding="@dimen/_12sdp"
                             android:ellipsize="end"
@@ -171,7 +170,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_16sdp"
+                        android:layout_marginTop="@dimen/_8sdp"
                         android:layout_marginBottom="@dimen/_8sdp"
                         android:orientation="vertical">
 
@@ -186,14 +185,13 @@
                             style="@style/mont_reg_black_14"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_6sdp"
                             android:drawableLeft="@drawable/ic_outline_location_on_24"
                             android:drawableRight="@drawable/ic_baseline_arrow_down_black_24"
                             android:drawablePadding="@dimen/_12sdp"
+                            android:editable="false"
                             android:ellipsize="end"
                             android:hint="@string/Select_Country"
                             android:maxLines="1"
-                            android:editable="false"
                             android:singleLine="true" />
 
                     </LinearLayout>

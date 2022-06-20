@@ -10,8 +10,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/_56sdp"
-        android:background="@drawable/toolbar_bg"
-        >
+        android:background="@drawable/toolbar_bg">
 
 
         <ImageView
@@ -24,11 +23,11 @@
 
         <TextView
             android:id="@+id/toolbarHading"
-            style="@style/play_semi_black_20"
+            style="@style/mont_semi_black_20"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="toolbar" />
+            android:text="toolbar"/>
 
     </RelativeLayout>
 

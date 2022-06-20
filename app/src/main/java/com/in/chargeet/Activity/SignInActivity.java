@@ -2,7 +2,9 @@ package com.in.chargeet.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.Patterns;
@@ -114,26 +116,32 @@ public class SignInActivity extends AppCompatActivity {
                     Glob.userId = model.getUser_id();
                     Glob.dialog.dismiss();
 
+
+                    SharedPreferences sharedPref = getSharedPreferences("UserId", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPref.edit();
+                    editor.putString("UserId", Glob.userId);
+                    editor.apply();
+
+
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(intent);
 
 
-                }
-                else {
+                } else {
 
                     Glob.dialog.dismiss();
                     Toast.makeText(SignInActivity.this, "" + loginModel.getMessage(), Toast.LENGTH_SHORT).show();
 
                 }
 
-
             }
 
             @Override
             public void onFailure(Call<LoginModel> call, Throwable t) {
-                Glob.dialog.dismiss();
 
+                Glob.dialog.dismiss();
                 Log.e("onFailure:", "onFailure: " + t.getMessage());
+
             }
         });
 

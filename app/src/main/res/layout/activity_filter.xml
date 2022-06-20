@@ -28,7 +28,9 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@drawable/line_bg"
+            android:layout_margin="@dimen/_8sdp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -200,6 +202,7 @@
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:background="@drawable/connectors_bg"
+                                android:src="@drawable/three_pin"
                                 android:scaleType="centerCrop" />
 
                             <TextView
@@ -223,6 +226,7 @@
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:background="@drawable/connectors_bg"
+                                android:src="@drawable/three_pinn"
                                 android:scaleType="centerCrop" />
 
                             <TextView
@@ -256,7 +260,8 @@
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:scaleType="centerCrop"
-                                android:src="@drawable/connectors_bg" />
+                                android:background="@drawable/connectors_bg"
+                                android:src="@drawable/thye_two" />
 
                             <TextView
                                 style="@style/mont_semi_black_16"
@@ -279,7 +284,9 @@
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:scaleType="centerCrop"
-                                android:src="@drawable/connectors_bg" />
+                                android:src="@drawable/type_twoo"
+                                android:background="@drawable/connectors_bg"
+                                 />
 
                             <TextView
                                 style="@style/mont_semi_black_16"

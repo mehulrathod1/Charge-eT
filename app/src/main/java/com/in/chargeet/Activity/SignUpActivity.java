@@ -79,29 +79,35 @@ public class SignUpActivity extends AppCompatActivity {
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String email = edtEmail.getText().toString().trim();
-                String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+                String emailToText = edtEmail.getText().toString().trim();
+                String password = edtPassword.getText().toString().trim();
 
-                if (edtEmail.getText().toString().trim().equals("")) {
 
-                    edtEmail.setError("Please  Email");
+                if (!emailToText.isEmpty() && Patterns.EMAIL_ADDRESS.matcher(emailToText).matches()) {
 
-                } else if (edtPhoneNo.getText().toString().trim().equals("")) {
-                    edtPhoneNo.setError("Please Enter edtPhoneNo");
 
-                } else if (edtUserName.getText().toString().trim().equals("")) {
-                    edtUserName.setError("Please Enter edtUserName");
+                    if (edtPhoneNo.getText().toString().trim().equals("")) {
+                        edtPhoneNo.setError("Please Enter PhoneNo");
 
-                } else if (edtPassword.getText().toString().trim().equals("")) {
-                    edtPassword.setError("Please Enter Password");
+                    } else if (edtUserName.getText().toString().trim().equals("")) {
+                        edtUserName.setError("Please Enter UserName");
 
-                } else if (edtCountry.getText().toString().trim().equals("")) {
-                    edtCountry.setError("Please Enter edtCountry");
+                    } else if (password.equals("") || (password.length() < 8)) {
+                        edtPassword.setError("Please Enter valid Password");
 
+                    } else if (edtCountry.getText().toString().trim().equals("")) {
+                        edtCountry.setError("Please Select Country");
+
+                    } else {
+                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                        startActivity(intent);
+                    }
                 } else {
-                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                    startActivity(intent);
+                    edtEmail.setError("Please Enter valid Email address");
+
                 }
+
+
             }
         });
     }
@@ -117,16 +123,16 @@ public class SignUpActivity extends AppCompatActivity {
                 CountryModel countryModel = response.body();
 
 
-                    List<CountryModel.Country> dataList = countryModel.getDataList();
-                    for (int i = 0; i < dataList.size(); i++) {
+                List<CountryModel.Country> dataList = countryModel.getDataList();
+                for (int i = 0; i < dataList.size(); i++) {
 
-                        CountryModel.Country model = dataList.get(i);
-                        CountryModel.Country data = new CountryModel.Country(model.getId(), model.getName());
+                    CountryModel.Country model = dataList.get(i);
+                    CountryModel.Country data = new CountryModel.Country(model.getId(), model.getName());
 
-                        Log.e("onResponse", "onResponse: " + data.getName());
-                        countryList.add(data);
-                    }
-                    setCountryData();
+                    Log.e("onResponse", "onResponse: " + data.getName());
+                    countryList.add(data);
+                }
+                setCountryData();
 
             }
 

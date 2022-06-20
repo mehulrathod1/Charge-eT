@@ -49,9 +49,7 @@
                     android:id="@+id/menuImage"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-
-                    />
+                    android:layout_gravity="center" />
 
             </LinearLayout>
 
@@ -75,9 +73,10 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/search_layout"
             android:layout_marginTop="@dimen/_8sdp"
-            android:background="@color/white"
+            android:background="@drawable/connectors_bg"
             android:orientation="vertical"
             android:visibility="gone">
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -93,17 +92,19 @@
 
                 <TextView
                     android:id="@+id/myVehicles"
-                    style="@style/mont_semi_black_18"
+                    style="@style/mont_semi_black_14"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_16sdp"
+                    android:layout_margin="@dimen/_8sdp"
                     android:text="My Vehicles" />
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_1sdp"
-                android:background="@color/black_text_color" />
+                android:layout_marginLeft="@dimen/_1sdp"
+                android:layout_marginRight="@dimen/_1sdp"
+                android:background="@color/gray" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -119,17 +120,19 @@
 
                 <TextView
                     android:id="@+id/myBooking"
-                    style="@style/mont_semi_black_18"
+                    style="@style/mont_semi_black_14"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_16sdp"
+                    android:layout_margin="@dimen/_8sdp"
                     android:text="My Bookings" />
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_1sdp"
-                android:background="@color/black_text_color" />
+                android:layout_marginLeft="@dimen/_1sdp"
+                android:layout_marginRight="@dimen/_1sdp"
+                android:background="@color/gray" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -145,17 +148,19 @@
 
                 <TextView
                     android:id="@+id/setting"
-                    style="@style/mont_semi_black_18"
+                    style="@style/mont_semi_black_14"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_16sdp"
+                    android:layout_margin="@dimen/_8sdp"
                     android:text="Settings" />
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_1sdp"
-                android:background="@color/black_text_color" />
+                android:layout_marginLeft="@dimen/_1sdp"
+                android:layout_marginRight="@dimen/_1sdp"
+                android:background="@color/gray" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -170,17 +175,19 @@
                     android:src="@drawable/perm_phone_msg" />
 
                 <TextView
-                    style="@style/mont_semi_black_18"
+                    style="@style/mont_semi_black_14"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_16sdp"
+                    android:layout_margin="@dimen/_8sdp"
                     android:text="Contact Us" />
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_1sdp"
-                android:background="@color/black_text_color" />
+                android:layout_marginLeft="@dimen/_1sdp"
+                android:layout_marginRight="@dimen/_1sdp"
+                android:background="@color/gray" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -195,17 +202,19 @@
                     android:src="@drawable/security" />
 
                 <TextView
-                    style="@style/mont_semi_black_18"
+                    style="@style/mont_semi_black_14"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_16sdp"
+                    android:layout_margin="@dimen/_8sdp"
                     android:text="Privacy Policy" />
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_1sdp"
-                android:background="@color/black_text_color" />
+                android:layout_marginLeft="@dimen/_1sdp"
+                android:layout_marginRight="@dimen/_1sdp"
+                android:background="@color/gray" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -220,18 +229,14 @@
                     android:src="@drawable/ic_baseline_logout_24" />
 
                 <TextView
-                    style="@style/mont_semi_black_18"
+                    style="@style/mont_semi_black_14"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_16sdp"
+                    android:layout_margin="@dimen/_8sdp"
                     android:text="Log Out" />
 
             </LinearLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_1sdp"
-                android:background="@color/black_text_color" />
 
             <ImageView
                 android:id="@+id/location"
@@ -239,7 +244,8 @@
                 android:layout_height="@dimen/_50sdp"
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/_50sdp"
-                android:src="@drawable/ic_outline_location_on_24" />
+                android:src="@drawable/ic_outline_location_on_24"
+                android:visibility="gone" />
         </LinearLayout>
 
 
@@ -258,7 +264,6 @@
 
                 <ImageView
                     android:id="@+id/zoomIn"
-
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_40sdp"
                     android:scaleType="centerInside"

@@ -150,9 +150,9 @@ public class AddVehicleActivity extends AppCompatActivity {
 
                 String vehicleId = vehicleList.get(position).getId();
 
-                Log.e("vehicleId", "onSelectClick: "+vehicleId );
+                Log.e("vehicleId", "onSelectClick: " + vehicleId);
 
-                selectVehicle(Glob.token,"4",vehicleId);
+                selectVehicle(Glob.token, Glob.userId, vehicleId);
             }
         });
 
@@ -278,6 +278,7 @@ public class AddVehicleActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<CommonModel> call, Response<CommonModel> response) {
 
+
                 CommonModel commonModel = response.body();
                 Toast.makeText(AddVehicleActivity.this, "" + commonModel.getMessage(), Toast.LENGTH_SHORT).show();
                 Glob.dialog.dismiss();
@@ -285,6 +286,7 @@ public class AddVehicleActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<CommonModel> call, Throwable t) {
+
 
                 Glob.dialog.dismiss();
 

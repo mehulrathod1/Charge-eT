@@ -22,6 +22,9 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polygon;
+import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.model.Place;
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
@@ -32,7 +35,9 @@ import com.in.chargeet.R;
 
 import java.util.Arrays;
 
-public class DirectionActivity extends AppCompatActivity implements OnMapReadyCallback {
+public class DirectionActivity extends AppCompatActivity implements OnMapReadyCallback,
+        GoogleMap.OnPolylineClickListener,
+        GoogleMap.OnPolygonClickListener {
 
     BottomNavigationView bottom_navigation;
     TextView myVehicles, myBooking, setting, wallet, bookNow;
@@ -252,11 +257,28 @@ public class DirectionActivity extends AppCompatActivity implements OnMapReadyCa
         mMap = googleMap;
 
         // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(22.2587, 71.1924);
-        mMap.addMarker(new MarkerOptions()
-                .position(sydney)
-                .title("Marker in ahmedabad"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+//        LatLng sydney = new LatLng(22.2587, 71.1924);
+//        mMap.addMarker(new MarkerOptions()
+//                .position(sydney)
+//                .title("Marker in ahmedabad"));
+//        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+//        // Set listeners for click events.
+
+        Polyline polyline1 = googleMap.addPolyline(new PolylineOptions()
+                        .clickable(true)
+                        .add(
+                                new LatLng(22.3038945, 70.8021598),
+                                new LatLng(23.0476079, 72.5155059)
+
+                        )
+        );
+        polyline1.setTag("A");
+        // Position the map's camera near Alice Springs in the center of Australia,
+        // and set the zoom factor so most of Australia shows on the screen.
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(22.3038945, 70.8021598), 15));
+
+        googleMap.setOnPolylineClickListener(this);
+        googleMap.setOnPolygonClickListener(this);
     }
 
     @Override
@@ -275,5 +297,16 @@ public class DirectionActivity extends AppCompatActivity implements OnMapReadyCa
         super.onBackPressed();
 
     }
+
+    @Override
+    public void onPolygonClick(@NonNull Polygon polygon) {
+
+    }
+
+    @Override
+    public void onPolylineClick(@NonNull Polyline polyline) {
+
+    }
+
 
 }

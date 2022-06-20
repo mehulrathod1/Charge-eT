@@ -40,7 +40,7 @@
                     android:gravity="center"
                     android:text="Welcome to "
                     android:textColor="@color/black_text_color"
-                    android:textSize="40dp" />
+                    android:textSize="30dp" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -50,7 +50,7 @@
                     android:gravity="center"
                     android:text="Charge-eT"
                     android:textColor="@color/black_text_color"
-                    android:textSize="40dp" />
+                    android:textSize="30dp" />
 
             </LinearLayout>
 
@@ -59,7 +59,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_50sdp"
                 android:layout_gravity="center"
-                android:layout_marginTop="@dimen/_18sdp"
+                android:layout_marginTop="@dimen/_28sdp"
                 android:background="@drawable/facebook_button_bg"
                 android:orientation="horizontal">
 

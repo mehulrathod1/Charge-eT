@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">ChargeEt</string>
-
+    <!--    -->
+    <!--    AIzaSyCBZ1E4AGu6xP_VV4GWr_qjnOte9sFmh0A-->
     <string name="Google_Map_API_Key">AIzaSyCBZ1E4AGu6xP_VV4GWr_qjnOte9sFmh0A</string>
     <!--    getStarted-->
 
@@ -30,7 +31,6 @@
     <string name="Select_Country">Select Country</string>
     <string name="login">Login</string>
 
-
     <!--    login-->
     <string name="Forgot_Password">Forgot Password?</string>
     <string name="Secured_Login">Secured Login</string>
@@ -47,6 +47,7 @@
     <!--    account-->
     <string name="Your_Personal_Information">Your Personal Information</string>
     <string name="Account_Information">Account Information</string>
+    <string name="Personal_Information">Personal Information</string>
     <string name="Username_">Username :</string>
     <string name="Email_">Email :</string>
     <string name="Mobile_Number_">Mobile Number :</string>

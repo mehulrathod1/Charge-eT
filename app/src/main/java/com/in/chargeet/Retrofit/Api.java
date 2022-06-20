@@ -155,4 +155,20 @@ public interface Api {
             @Field("power_station_id") String power_station_id
 
     );
+
+
+    @FormUrlEncoded
+    @POST("booking_charging_point")
+    Call<CommonModel> bookChargingPoint(
+
+            @Field("token") String token,
+            @Field("user_id") String user_id,
+            @Field("power_station_id") String power_station_id,
+            @Field("connectors_id") String connectors_id,
+            @Field("booking_date") String booking_date,
+                @Field("booking_time") String booking_time,
+            @Field("payment_method") String payment_method
+
+    );
+
 }
