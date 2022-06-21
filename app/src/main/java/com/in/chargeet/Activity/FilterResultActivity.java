@@ -155,6 +155,7 @@ public class FilterResultActivity extends AppCompatActivity {
 
     public void availableData() {
 
+        availableFilterList.clear();
         AvailableFilterModel model = new AvailableFilterModel("percentage", "units", "times");
         availableFilterList.add(model);
         availableFilterList.add(model);
@@ -185,7 +186,7 @@ public class FilterResultActivity extends AppCompatActivity {
         });
 
 
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.HORIZONTAL,false);
         filterRecycler.setLayoutManager(mLayoutManager);
         availableFilterAdapter.notifyDataSetChanged();
         filterRecycler.setAdapter(availableFilterAdapter);

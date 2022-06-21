@@ -17,7 +17,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_16sdp"
+            android:layout_marginTop="@dimen/_8sdp"
             android:orientation="horizontal">
 
             <LinearLayout
@@ -72,8 +72,8 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_60sdp"
-            android:layout_marginTop="@dimen/_16sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:layout_marginTop="@dimen/_8sdp"
             android:background="@drawable/line_bg"
             android:orientation="horizontal">
 
@@ -86,7 +86,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/_60sdp"
-            android:layout_marginTop="@dimen/_16sdp"
+            android:layout_marginTop="@dimen/_8sdp"
             android:background="@drawable/line_bg"
             android:orientation="horizontal"
             android:visibility="gone">
@@ -199,8 +199,8 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_60sdp"
-            android:layout_marginTop="@dimen/_16sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:layout_marginTop="@dimen/_8sdp"
             android:background="@drawable/line_bg"
             android:orientation="horizontal">
 
@@ -268,7 +268,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_16sdp"
+            android:layout_marginTop="@dimen/_8sdp"
             android:orientation="horizontal">
 
             <LinearLayout
@@ -315,8 +315,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_16sdp"
-            android:layout_marginBottom="@dimen/_30sdp"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:layout_marginBottom="@dimen/_20sdp"
             android:orientation="horizontal">
 
             <LinearLayout
@@ -326,6 +326,7 @@
                 android:gravity="center">
 
                 <TextView
+                    android:id="@+id/navigateLocation"
                     style="@style/mont_semi_white_14"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/_40sdp"

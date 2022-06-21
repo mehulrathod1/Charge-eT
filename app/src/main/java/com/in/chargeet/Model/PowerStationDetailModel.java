@@ -43,7 +43,7 @@ public class PowerStationDetailModel {
         this.data = data;
     }
 
-    public class PowerStationData {
+    public static class PowerStationData {
 
         @SerializedName("id")
         @Expose
@@ -161,7 +161,7 @@ public class PowerStationDetailModel {
             this.connectors = connectors;
         }
 
-        public class Connectors {
+        public static class Connectors {
 
             @SerializedName("id")
             @Expose
@@ -196,6 +196,12 @@ public class PowerStationDetailModel {
             }
 
             public void setImage(String image) {
+                this.image = image;
+            }
+
+            public Connectors(String id, String connectors, String image) {
+                this.id = id;
+                this.connectors = connectors;
                 this.image = image;
             }
         }

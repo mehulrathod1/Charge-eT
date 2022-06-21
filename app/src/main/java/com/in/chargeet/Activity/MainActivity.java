@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
@@ -44,6 +45,7 @@ import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.in.chargeet.Adapter.ConnectorsAdapter;
 import com.in.chargeet.Model.PowerStationDetailModel;
 import com.in.chargeet.Model.PowerStationModel;
 import com.in.chargeet.R;
@@ -62,7 +64,7 @@ import retrofit2.Response;
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     BottomNavigationView bottom_navigation;
-    TextView myVehicles, myBooking, setting, wallet, bookNow, StationName, stationPower, power, stationRate;
+    TextView myVehicles, myBooking, setting, wallet, bookNow, StationName, stationPower, power, stationRate, navigateLocation;
     ImageView location, menuImage, zoomOut, zoomIn, goToCurrentLocation, connector3, connector2, connector1;
     BottomSheetDialog bottomSheetDialog;
     AlertDialog alert;
@@ -76,7 +78,9 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     Place places;
     ArrayList<PowerStationModel.PowerStation> markersArray = new ArrayList<>();
 
+    List<PowerStationDetailModel.PowerStationData.Connectors> connectorsList = new ArrayList<>();
     RecyclerView connectorRecycler;
+    ConnectorsAdapter connectorsAdapter;
 
 //    LatLng sydney = new LatLng(-34, 151);
 //    LatLng TamWorth = new LatLng(-31.083332, 150.916672);
@@ -176,33 +180,48 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void onMapReady(GoogleMap googleMap) {
 
         getPowerStation(Glob.token);
-
-
         mMap = googleMap;
 
+
 //        LatLng latLng = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
-//        LatLng latLng2 = new LatLng(23.053262798651392, 72.51482667850078);
 //        MarkerOptions markerOptions = new MarkerOptions().position(latLng).title("");
-//        MarkerOptions markerOptions2 = new MarkerOptions().position(latLng2).title("");
 //        googleMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
 //        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
 //        googleMap.addMarker(markerOptions);
-//        googleMap.addMarker(markerOptions2);
 
         Log.e("index", "onResponse: " + locationArrayList.toString());
 
 
-//
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(@NonNull Marker marker) {
 
-                bottomSheetDialog.show();
-                getPowerStationDetail(Glob.token, "2");
+
+                LatLng markerLocation = marker.getPosition();
+                String markerLocationString = String.valueOf(markerLocation);
+                String[] separated = markerLocationString.split(",");
+
+
+                Log.e(TAG, "onMarkerClick: " + markerLocation);
+                Log.e(TAG, "onMarkerClick:2 " + separated[0] + "-----" + separated[1]);
+
+                String one = separated[0];
+                String two = separated[1];
+
+                Log.e(TAG, "onMarkerClick:2 " + one + "-----" + "72.5155059550399");
+
+                if (!one.equals("")) {
+                    getPowerStationDetail(Glob.token, "23.047607986591494", "72.5155059550399");
+                    bottomSheetDialog.show();
+                }
+
+
                 return false;
 
             }
         });
+
+
     }
 
     @Override
@@ -258,7 +277,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         connector1 = bottomSheetDialog.findViewById(R.id.connector1);
         connector2 = bottomSheetDialog.findViewById(R.id.connector2);
         connector3 = bottomSheetDialog.findViewById(R.id.connector3);
-
+        navigateLocation = bottomSheetDialog.findViewById(R.id.navigateLocation);
 
         alertDialog = new AlertDialog.Builder(MainActivity.this);
         LayoutInflater inflater = getLayoutInflater();
@@ -400,13 +419,27 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                     LatLng pos = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
 
 
-                    CameraUpdate update = CameraUpdateFactory.newLatLngZoom(pos, 15);
-                    mMap.moveCamera(update);
+                    MarkerOptions markerOptions = new MarkerOptions().position(pos).title("");
+
+                    markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.map));
+                    mMap.animateCamera(CameraUpdateFactory.newLatLng(pos));
+                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(pos, 15));
+                    mMap.addMarker(markerOptions);
+
+//                    CameraUpdate update = CameraUpdateFactory.newLatLngZoom(pos, 15);
+//                    mMap.moveCamera(update);
                 }
 
             }
         });
 
+        navigateLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), DirectionActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     public void getPowerStation(String token) {
@@ -426,12 +459,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                     PowerStationModel.PowerStation model = dataList.get(i);
                     PowerStationModel.PowerStation data = new PowerStationModel.PowerStation(
-                            model.getId(), model.getName(), model.getLatitude(), model.getLongitude(), model.getIcon()
-
-                    );
+                            model.getId(), model.getName(), model.getLatitude(), model.getLongitude(), model.getIcon());
                     markersArray.add(data);
-
-
                     Log.e("data", "onResponse: " + model.getId());
                 }
                 for (int j = 0; j < markersArray.size(); j++) {
@@ -443,13 +472,15 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                     Log.e("index", "onResponse: " + locationArrayList.get(i).toString());
 
                     // below line is use to add marker to each location of our array list.
-                    mMap.addMarker(new MarkerOptions().position(locationArrayList.get(i)));
 
                     // below lin is use to zoom our camera on map.
-                    mMap.animateCamera(CameraUpdateFactory.zoomTo(18.0f));
+                    mMap.animateCamera(CameraUpdateFactory.zoomTo(40));
+                    mMap.animateCamera(CameraUpdateFactory.newLatLng(locationArrayList.get(i)));
+                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(locationArrayList.get(i), 15));
 
                     // below line is use to move our camera to the specific location.
                     mMap.moveCamera(CameraUpdateFactory.newLatLng(locationArrayList.get(i)));
+                    mMap.addMarker(new MarkerOptions().position(locationArrayList.get(i)));
 
 
                 }
@@ -467,13 +498,13 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     }
 
-    public void getPowerStationDetail(String token, String powerStationId) {
+    public void getPowerStationDetail(String token, String latitude, String longitude) {
 
         Api call = RetrofitClient.getClient(Glob.baseUrl).create(Api.class);
         Glob.dialog.show();
 
 
-        call.getPowerStationDetail(token, powerStationId).enqueue(new Callback<PowerStationDetailModel>() {
+        call.getPowerStationDetail(token, latitude, longitude).enqueue(new Callback<PowerStationDetailModel>() {
             @Override
             public void onResponse(Call<PowerStationDetailModel> call, Response<PowerStationDetailModel> response) {
 
@@ -486,15 +517,22 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 stationRate.setText(powerStationData.getRate());
 
 
-                List<PowerStationDetailModel.PowerStationData.Connectors> connectorsList = powerStationData.getConnectors();
-
-                Glide.with(getApplicationContext()).load(connectorsList.get(0).getImage()).into(connector1);
-                Glide.with(getApplicationContext()).load(connectorsList.get(1).getImage()).into(connector2);
-                Glide.with(getApplicationContext()).load(connectorsList.get(2).getImage()).into(connector3);
-
                 for (int i = 0; i < connectorsList.size(); i++) {
 
+                    PowerStationDetailModel.PowerStationData.Connectors model = connectorsList.get(i);
+                    PowerStationDetailModel.PowerStationData.Connectors data = new PowerStationDetailModel.PowerStationData.Connectors(
+                            model.getId(), model.getConnectors(), model.getImage()
+                    );
+                    connectorsList.add(data);
+
+                    Log.e(TAG, "onResponse: "+model.getImage() );
                 }
+                setConnector();
+//                List<PowerStationDetailModel.PowerStationData.Connectors> connectorsList = powerStationData.getConnectors();
+//
+//                Glide.with(getApplicationContext()).load(connectorsList.get(0).getImage()).into(connector1);
+//                Glide.with(getApplicationContext()).load(connectorsList.get(1).getImage()).into(connector2);
+//                Glide.with(getApplicationContext()).load(connectorsList.get(2).getImage()).into(connector3);
 
                 Glob.dialog.dismiss();
             }
@@ -525,6 +563,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                     SupportMapFragment supportMapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
                     assert supportMapFragment != null;
                     supportMapFragment.getMapAsync(MainActivity.this);
+
+
                 }
             }
         });
@@ -537,5 +577,18 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 .title(title)
 
         );
+    }
+
+    public void setConnector() {
+
+        connectorsAdapter = new ConnectorsAdapter(connectorsList, getApplicationContext(), new ConnectorsAdapter.Click() {
+            @Override
+            public void onConnectorClick(int position) {
+
+            }
+        });
+        connectorRecycler.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        connectorsAdapter.notifyDataSetChanged();
+        connectorRecycler.setAdapter(connectorsAdapter);
     }
 }

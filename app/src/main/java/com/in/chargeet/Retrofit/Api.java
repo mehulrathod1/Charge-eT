@@ -152,7 +152,8 @@ public interface Api {
     Call<PowerStationDetailModel> getPowerStationDetail(
 
             @Field("token") String token,
-            @Field("power_station_id") String power_station_id
+            @Field("latitude") String latitude,
+            @Field("longitude") String longitude
 
     );
 

@@ -72,23 +72,25 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/heading"
-        android:layout_marginLeft="@dimen/_16sdp"
-        android:layout_marginRight="@dimen/_16sdp"
-        android:layout_marginBottom="@dimen/_16sdp"
+        android:layout_marginLeft="@dimen/_8sdp"
+        android:layout_marginRight="@dimen/_8sdp"
+        android:layout_marginBottom="@dimen/_8sdp"
         android:orientation="horizontal">
 
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/_1sdp"
             android:background="@color/gray_dark"/>
+
+
     </LinearLayout>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/bottomMenu"
         android:layout_below="@id/headingg"
-        android:layout_marginStart="@dimen/_16sdp"
-        android:layout_marginEnd="@dimen/_16sdp"
+        android:layout_marginStart="@dimen/_8sdp"
+        android:layout_marginEnd="@dimen/_8sdp"
         android:orientation="vertical">
 
         <androidx.recyclerview.widget.RecyclerView
@@ -119,5 +121,7 @@
             app:labelVisibilityMode="unlabeled"
             app:menu="@menu/bottom_menu" />
     </LinearLayout>
+
+
 
 </RelativeLayout>

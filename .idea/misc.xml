@@ -23,6 +23,7 @@
         <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/drawable/ic_baseline_battery_1_bar_24.xml" value="0.134" />
         <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/drawable/ic_baseline_battery_full_24.xml" value="0.134" />
         <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/drawable/ic_baseline_bookmark_border_24.xml" value="0.1305" />
+        <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/drawable/ic_baseline_circle_24.xml" value="0.136" />
         <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/drawable/ic_baseline_close_24.xml" value="0.1305" />
         <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/drawable/ic_baseline_delete_outline_24.xml" value="0.164" />
         <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/drawable/ic_baseline_description_24.xml" value="0.134" />
@@ -83,6 +84,7 @@
         <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/layout/country_item.xml" value="0.18614130434782608" />
         <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/layout/country_popup.xml" value="0.2" />
         <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/layout/get_started_item.xml" value="0.20416666666666666" />
+        <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/layout/layout_seekbar_thumb.xml" value="0.5" />
         <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/layout/not_available_filter_item.xml" value="0.20416666666666666" />
         <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/layout/other_vehicle_item.xml" value="0.1956521739130435" />
         <entry key="..\:/NotionInfosoftProject/ChargeEt/app/src/main/res/layout/payment_option_layout.xml" value="0.20416666666666666" />

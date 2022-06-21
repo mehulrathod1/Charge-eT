@@ -2,11 +2,16 @@ package com.in.chargeet.Adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 
@@ -14,6 +19,7 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.in.chargeet.Activity.MyBookingActivity;
 import com.in.chargeet.Model.AvailableFilterModel;
 import com.in.chargeet.R;
 
@@ -25,7 +31,7 @@ public class AvailableFilterAdapter extends RecyclerView.Adapter<AvailableFilter
     List<AvailableFilterModel> list;
     Context context;
     Click click;
-
+    View thumbView ;
     public interface Click {
         void onBookClick(int position);
 
@@ -59,6 +65,27 @@ public class AvailableFilterAdapter extends RecyclerView.Adapter<AvailableFilter
         holder.percentage.setText(model.getPercentage());
         holder.units.setText(model.getUnits());
         holder.time.setText(model.getTimes());
+
+        thumbView =  LayoutInflater.from(context).inflate(R.layout.layout_seekbar_thumb, null, false);
+
+        holder.seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+
+                // You can have your own calculation for progress
+                seekBar.setThumb(getThumb(progress));
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
 
 
         holder.percentage.setOnClickListener(new View.OnClickListener() {
@@ -135,6 +162,7 @@ public class AvailableFilterAdapter extends RecyclerView.Adapter<AvailableFilter
 
         TextView percentage, units, time, bookNow;
         LinearLayout percentageLayout, unitLayout, timeLayout;
+        SeekBar seekBar;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -145,6 +173,20 @@ public class AvailableFilterAdapter extends RecyclerView.Adapter<AvailableFilter
             percentageLayout = itemView.findViewById(R.id.percentageLayout);
             unitLayout = itemView.findViewById(R.id.unitLayout);
             timeLayout = itemView.findViewById(R.id.timeLayout);
+            seekBar = itemView.findViewById(R.id.seekBar);
         }
     }
+
+    public Drawable getThumb(int progress) {
+        ((TextView) thumbView.findViewById(R.id.tvProgress)).setText(progress + "");
+
+        thumbView.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
+        Bitmap bitmap = Bitmap.createBitmap(thumbView.getMeasuredWidth(), thumbView.getMeasuredHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        thumbView.layout(0, 0, thumbView.getMeasuredWidth(), thumbView.getMeasuredHeight());
+        thumbView.draw(canvas);
+
+        return new BitmapDrawable(context.getResources(), bitmap);
+    }
+
 }
