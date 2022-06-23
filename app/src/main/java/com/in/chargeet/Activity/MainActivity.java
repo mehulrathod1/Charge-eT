@@ -19,6 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -69,6 +70,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     BottomSheetDialog bottomSheetDialog;
     AlertDialog alert;
     AlertDialog.Builder alertDialog;
+    RadioButton googlePay,amazonPay,radioWallet,creditCard;
     LinearLayout menuLayout, menuButton;
     GoogleMap mMap;
     String TAG = "MainActivity";
@@ -91,6 +93,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     public ArrayList<LatLng> locationArrayList = new ArrayList<>();
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -100,16 +103,10 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         fetchLocation();
 
-//        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-//                .findFragmentById(R.id.map);
-//        mapFragment.getMapAsync(this);
-//
-
         if (!Places.isInitialized()) {
             Places.initialize(getApplicationContext(), "AIzaSyCBZ1E4AGu6xP_VV4GWr_qjnOte9sFmh0A");
         }
 
-// Initialize the AutocompleteSupportFragment.
         AutocompleteSupportFragment autocompleteFragment = (AutocompleteSupportFragment)
                 getSupportFragmentManager().findFragmentById(R.id.autocomplete_fragment);
 
@@ -134,6 +131,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
 
         });
+
 
 
         // on below line we are adding our
@@ -285,6 +283,11 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         alertDialog.setView(dialogLayout);
         alert = alertDialog.create();
 
+        googlePay = dialogLayout.findViewById(R.id.googlePay);
+        amazonPay = dialogLayout.findViewById(R.id.amazonPay);
+        radioWallet = dialogLayout.findViewById(R.id.wallet);
+        creditCard = dialogLayout.findViewById(R.id.creditCard);
+
 
         bottom_navigation.getMenu().findItem(R.id.location).setChecked(true);
         bottom_navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -372,7 +375,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         wallet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                alertDialog.show();
+                alert.show();
+
             }
         });
 
@@ -421,7 +425,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                     MarkerOptions markerOptions = new MarkerOptions().position(pos).title("");
 
-                    markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.map));
+                    markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.car_location_green));
                     mMap.animateCamera(CameraUpdateFactory.newLatLng(pos));
                     mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(pos, 15));
                     mMap.addMarker(markerOptions);
@@ -437,7 +441,48 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), DirectionActivity.class);
+
                 startActivity(intent);
+            }
+        });
+
+
+        googlePay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                alert.dismiss();
+                wallet.setText(googlePay.getText().toString().trim());
+            }
+        });
+
+        amazonPay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+
+                alert.dismiss();
+                wallet.setText(amazonPay.getText().toString().trim());
+            }
+        });
+        radioWallet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                alert.dismiss();
+                wallet.setText(radioWallet.getText().toString().trim());
+            }
+        });
+
+        creditCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+
+                alert.dismiss();
+                wallet.setText(creditCard.getText().toString().trim());
             }
         });
     }
@@ -473,6 +518,10 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                     // below line is use to add marker to each location of our array list.
 
+                    MarkerOptions markerOptions = new MarkerOptions().position(locationArrayList.get(i)).title("");
+
+                    markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.location1));
+
                     // below lin is use to zoom our camera on map.
                     mMap.animateCamera(CameraUpdateFactory.zoomTo(40));
                     mMap.animateCamera(CameraUpdateFactory.newLatLng(locationArrayList.get(i)));
@@ -480,7 +529,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                     // below line is use to move our camera to the specific location.
                     mMap.moveCamera(CameraUpdateFactory.newLatLng(locationArrayList.get(i)));
-                    mMap.addMarker(new MarkerOptions().position(locationArrayList.get(i)));
+                    mMap.addMarker(markerOptions.position(locationArrayList.get(i)));
 
 
                 }
@@ -517,15 +566,17 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 stationRate.setText(powerStationData.getRate());
 
 
-                for (int i = 0; i < connectorsList.size(); i++) {
+                connectorsList.clear();
+                List<PowerStationDetailModel.PowerStationData.Connectors> dataList = powerStationData.getConnectors();
+                for (int i = 0; i < dataList.size(); i++) {
 
-                    PowerStationDetailModel.PowerStationData.Connectors model = connectorsList.get(i);
+                    PowerStationDetailModel.PowerStationData.Connectors model = dataList.get(i);
                     PowerStationDetailModel.PowerStationData.Connectors data = new PowerStationDetailModel.PowerStationData.Connectors(
                             model.getId(), model.getConnectors(), model.getImage()
                     );
                     connectorsList.add(data);
 
-                    Log.e(TAG, "onResponse: "+model.getImage() );
+                    Log.e(TAG, "onResponse: " + model.getImage());
                 }
                 setConnector();
 //                List<PowerStationDetailModel.PowerStationData.Connectors> connectorsList = powerStationData.getConnectors();
@@ -587,7 +638,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
             }
         });
-        connectorRecycler.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        connectorRecycler.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
         connectorsAdapter.notifyDataSetChanged();
         connectorRecycler.setAdapter(connectorsAdapter);
     }

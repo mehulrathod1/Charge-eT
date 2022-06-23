@@ -17,6 +17,7 @@
 
 
             <RadioButton
+                android:id="@+id/googlePay"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawableLeft="@drawable/ic_outline_account_balance_wallet_24"
@@ -30,6 +31,7 @@
                 android:background="@color/black_text_color" />
 
             <RadioButton
+                android:id="@+id/amazonPay"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawableLeft="@drawable/ic_outline_account_balance_wallet_24"
@@ -43,6 +45,7 @@
                 android:background="@color/black_text_color" />
 
             <RadioButton
+                android:id="@+id/wallet"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawableLeft="@drawable/ic_outline_account_balance_wallet_24"
@@ -56,6 +59,7 @@
                 android:background="@color/black_text_color" />
 
             <RadioButton
+                android:id="@+id/creditCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawableLeft="@drawable/ic_outline_account_balance_wallet_24"

@@ -1,25 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent">
 
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_16sdp"
-        android:layout_marginBottom="@dimen/_16sdp"
+        android:layout_margin="@dimen/_8sdp"
         android:background="@drawable/line_bg"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_16sdp"
-            android:layout_marginTop="@dimen/_16sdp"
-            android:layout_marginEnd="@dimen/_16sdp"
-            android:layout_marginBottom="@dimen/_16sdp"
+            android:layout_margin="@dimen/_8sdp"
             android:orientation="vertical">
 
             <LinearLayout
@@ -49,7 +45,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_16sdp"
+                android:layout_marginTop="@dimen/_8sdp"
                 android:orientation="horizontal">
 
                 <LinearLayout
@@ -76,7 +72,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/_16sdp"
+                    android:layout_marginLeft="@dimen/_8sdp"
                     android:orientation="vertical">
 
 
@@ -90,7 +86,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_16sdp">
+                        android:layout_marginTop="@dimen/_4sdp">
 
                         <TextView
                             style="@style/mont_semi_black_14"
@@ -110,7 +106,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_16sdp">
+                        android:layout_marginTop="@dimen/_4sdp">
 
                         <TextView
                             style="@style/mont_semi_black_14"
@@ -135,15 +131,15 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_16sdp"
+                android:layout_marginTop="@dimen/_8sdp"
                 android:orientation="vertical">
 
                 <Button
                     android:id="@+id/schedule"
                     style="@style/button_style"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_56sdp"
-                    android:layout_marginTop="@dimen/_16sdp"
+                    android:layout_height="@dimen/_46sdp"
+                    android:layout_marginTop="@dimen/_8sdp"
                     android:backgroundTint="@color/light_green"
                     android:text="@string/Schedule_charging" />
 
@@ -154,7 +150,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_16sdp"
+                android:layout_marginTop="@dimen/_8sdp"
                 android:orientation="vertical">
 
                 <TextView
@@ -169,7 +165,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_16sdp"
+                android:layout_marginTop="@dimen/_8sdp"
                 android:orientation="horizontal">
 
                 <ImageView
@@ -196,7 +192,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_16sdp"
+                android:layout_marginTop="@dimen/_8sdp"
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -215,7 +211,7 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_16sdp">
+                    android:layout_marginTop="@dimen/_8sdp">
 
                     <ImageView
                         android:id="@+id/estimated"
@@ -247,7 +243,7 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_16sdp">
+                    android:layout_marginTop="@dimen/_8sdp">
 
                     <ImageView
                         android:id="@+id/time"
@@ -279,7 +275,7 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_16sdp">
+                    android:layout_marginTop="@dimen/_8sdp">
 
                     <ImageView
                         android:id="@+id/vehicle"
