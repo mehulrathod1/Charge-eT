@@ -175,6 +175,17 @@ public class PowerStationDetailModel {
             @Expose
             String image;
 
+
+            private Boolean isSelected = false;
+
+            public Boolean getSelected() {
+                return isSelected;
+            }
+
+            public void setSelected(Boolean selected) {
+                isSelected = selected;
+            }
+
             public String getId() {
                 return id;
             }

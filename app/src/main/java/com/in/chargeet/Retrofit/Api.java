@@ -150,11 +150,9 @@ public interface Api {
     @FormUrlEncoded
     @POST("get_power_station_detail")
     Call<PowerStationDetailModel> getPowerStationDetail(
-
             @Field("token") String token,
             @Field("latitude") String latitude,
             @Field("longitude") String longitude
-
     );
 
 
@@ -167,7 +165,7 @@ public interface Api {
             @Field("power_station_id") String power_station_id,
             @Field("connectors_id") String connectors_id,
             @Field("booking_date") String booking_date,
-                @Field("booking_time") String booking_time,
+            @Field("booking_time") String booking_time,
             @Field("payment_method") String payment_method
 
     );

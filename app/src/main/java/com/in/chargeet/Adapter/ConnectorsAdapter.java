@@ -1,6 +1,8 @@
 package com.in.chargeet.Adapter;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.directions.route.Parser;
 import com.in.chargeet.Model.PowerStationDetailModel;
 import com.in.chargeet.R;
 
@@ -21,7 +24,6 @@ public class ConnectorsAdapter extends RecyclerView.Adapter<ConnectorsAdapter.Vi
     List<PowerStationDetailModel.PowerStationData.Connectors> connectorsList;
     Context context;
     Click click;
-
 
     public interface Click {
         void onConnectorClick(int position);
@@ -49,10 +51,24 @@ public class ConnectorsAdapter extends RecyclerView.Adapter<ConnectorsAdapter.Vi
 
         Glide.with(context).load(model.getImage()).into(holder.connector);
 
+
+        if (connectorsList.get(position).getSelected() == true) {
+
+            holder.layout.setBackgroundColor(Color.parseColor("#6887E9"));
+            Log.e("TAG", "onClick: "+"bhis");
+        } else {
+            holder.layout.setBackgroundColor(Color.parseColor("#FFFFFF"));
+            Log.e("TAG", "onClick: "+"bhisdfghjs");
+        }
+
+
         holder.layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 click.onConnectorClick(position);
+
+
+
             }
         });
 

@@ -9,9 +9,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
 import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -70,7 +73,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     BottomSheetDialog bottomSheetDialog;
     AlertDialog alert;
     AlertDialog.Builder alertDialog;
-    RadioButton googlePay,amazonPay,radioWallet,creditCard;
+    RadioButton googlePay, amazonPay, radioWallet, creditCard;
     LinearLayout menuLayout, menuButton;
     GoogleMap mMap;
     String TAG = "MainActivity";
@@ -92,6 +95,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     // creating array list for adding all our locations.
     public ArrayList<LatLng> locationArrayList = new ArrayList<>();
 
+    String Latitude, Longitude;
 
 
     @Override
@@ -101,8 +105,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
+        statusCheck();
         fetchLocation();
-
         if (!Places.isInitialized()) {
             Places.initialize(getApplicationContext(), "AIzaSyCBZ1E4AGu6xP_VV4GWr_qjnOte9sFmh0A");
         }
@@ -120,7 +124,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 places = place;
                 Log.e("TAG", "Place: " + place.getName() + ", " + place.getId());
                 Log.e("TAG", "latlong: " + place.getLatLng());
-
             }
 
             @Override
@@ -129,9 +132,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 Log.e("TAG", "An error occurred: " + status);
             }
 
-
         });
-
 
 
         // on below line we are adding our
@@ -203,15 +204,17 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 Log.e(TAG, "onMarkerClick: " + markerLocation);
                 Log.e(TAG, "onMarkerClick:2 " + separated[0] + "-----" + separated[1]);
 
-                String one = separated[0];
-                String two = separated[1];
+                Latitude = separated[0];
+                Longitude = separated[1];
 
-                Log.e(TAG, "onMarkerClick:2 " + one + "-----" + "72.5155059550399");
 
-                if (!one.equals("")) {
-                    getPowerStationDetail(Glob.token, "23.047607986591494", "72.5155059550399");
-                    bottomSheetDialog.show();
-                }
+                Log.e(TAG, "onMarkerClick:2 " + Latitude + "-----" + Longitude);
+
+//                if (!one.equals("")) {
+
+                bottomSheetDialog.show();
+                getPowerStationDetail(Glob.token, "23.047607986591494", "72.5155059550399");
+//                }
 
 
                 return false;
@@ -440,8 +443,10 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         navigateLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), DirectionActivity.class);
 
+                Intent intent = new Intent(getApplicationContext(), DirectionActivity.class);
+                intent.putExtra("Latitude",Latitude);
+                intent.putExtra("Longitude", Longitude);
                 startActivity(intent);
             }
         });
@@ -461,7 +466,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             public void onClick(View view) {
 
 
-
                 alert.dismiss();
                 wallet.setText(amazonPay.getText().toString().trim());
             }
@@ -478,7 +482,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         creditCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
 
 
                 alert.dismiss();
@@ -598,9 +601,9 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
     private void fetchLocation() {
-        if (ActivityCompat.checkSelfPermission(
-                this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE);
             return;
         }
@@ -610,7 +613,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             public void onSuccess(Location location) {
                 if (location != null) {
                     currentLocation = location;
-//                    Toast.makeText(getApplicationContext(), currentLocation.getLatitude() + "" + currentLocation.getLongitude(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), currentLocation.getLatitude() + "" + currentLocation.getLongitude(), Toast.LENGTH_SHORT).show();
+                    Log.e(TAG, "onSuccess: " + currentLocation.getLatitude() + "" + currentLocation.getLongitude());
                     SupportMapFragment supportMapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
                     assert supportMapFragment != null;
                     supportMapFragment.getMapAsync(MainActivity.this);
@@ -636,10 +640,56 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             @Override
             public void onConnectorClick(int position) {
 
+                changeSlotSelected();
+                connectorsList.get(position).setSelected(true);
+                connectorsAdapter.notifyDataSetChanged();
+
+                Log.e(TAG, "onConnectorClick: " + connectorsList.get(position).getSelected());
+
+
             }
         });
         connectorRecycler.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
-        connectorsAdapter.notifyDataSetChanged();
         connectorRecycler.setAdapter(connectorsAdapter);
+    }
+
+
+        public void statusCheck() {
+            final LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
+            if (!manager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+                buildAlertMessageNoGps();
+
+            }
+        }
+
+    private void buildAlertMessageNoGps() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Your GPS seems to be disabled, do you want to enable it?")
+                .setCancelable(false)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(final DialogInterface dialog, final int id) {
+                        startActivity(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(final DialogInterface dialog, final int id) {
+                        dialog.cancel();
+                    }
+                });
+        final AlertDialog alert = builder.create();
+        alert.show();
+    }
+
+    public void changeSlotSelected() {
+
+        for (int i = 0; i < connectorsList.size(); i++) {
+            connectorsList.get(i).setSelected(false);
+
+
+            Log.e(TAG, "changeSlotSelected: " + connectorsList.get(i).getSelected());
+        }
+        connectorsAdapter.notifyDataSetChanged();
+
     }
 }

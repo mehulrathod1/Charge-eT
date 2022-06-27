@@ -69,8 +69,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-//                forgotPassword(Glob.token, edtEmail.getText().toString());
-
+                forgotPassword(Glob.token, edtEmail.getText().toString());
                 Intent intent = new Intent(getApplicationContext(), OtpActivity.class);
                 startActivity(intent);
             }
