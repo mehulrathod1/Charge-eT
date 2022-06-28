@@ -2,15 +2,18 @@ package com.in.chargeet.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.opengl.Visibility;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,6 +37,12 @@ public class ChargingActivity extends AppCompatActivity {
     LinearLayout timeLayout;
     String manageSchedule;
 
+
+    AlertDialog alert;
+    AlertDialog.Builder alertDialog;
+    RadioButton googlePay, amazonPay, radioWallet, creditCard;
+    TextView wallet;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +65,19 @@ public class ChargingActivity extends AppCompatActivity {
         calenderLayout = findViewById(R.id.calenderLayout);
         timeLayout = findViewById(R.id.timeLayout);
         btnScanCode = findViewById(R.id.btnScanCode);
+        wallet = findViewById(R.id.wallet);
+
+        alertDialog = new AlertDialog.Builder(ChargingActivity.this);
+        LayoutInflater inflater = getLayoutInflater();
+        View dialogLayout = inflater.inflate(R.layout.payment_option_layout, null);
+        alertDialog.setView(dialogLayout);
+        alert = alertDialog.create();
+
+        googlePay = dialogLayout.findViewById(R.id.googlePay);
+        amazonPay = dialogLayout.findViewById(R.id.amazonPay);
+        radioWallet = dialogLayout.findViewById(R.id.wallet);
+        creditCard = dialogLayout.findViewById(R.id.creditCard);
+
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,11 +127,58 @@ public class ChargingActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Intent intent = new Intent(ChargingActivity.this,ScanCodeActivity.class);
+                Intent intent = new Intent(ChargingActivity.this, ScanCodeActivity.class);
                 startActivity(intent);
 
             }
         });
+
+        wallet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alert.show();
+
+            }
+        });
+
+
+        googlePay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                alert.dismiss();
+                wallet.setText(googlePay.getText().toString().trim());
+            }
+        });
+
+        amazonPay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+                alert.dismiss();
+                wallet.setText(amazonPay.getText().toString().trim());
+            }
+        });
+        radioWallet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                alert.dismiss();
+                wallet.setText(radioWallet.getText().toString().trim());
+            }
+        });
+
+        creditCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+                alert.dismiss();
+                wallet.setText(creditCard.getText().toString().trim());
+            }
+        });
+
     }
 
     public void bookChargingPoint(String token,

@@ -186,7 +186,7 @@ public class FilterResultActivity extends AppCompatActivity {
         });
 
 
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.HORIZONTAL,false);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         filterRecycler.setLayoutManager(mLayoutManager);
         availableFilterAdapter.notifyDataSetChanged();
         filterRecycler.setAdapter(availableFilterAdapter);
