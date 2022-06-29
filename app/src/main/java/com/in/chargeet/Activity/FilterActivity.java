@@ -17,7 +17,9 @@ import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.in.chargeet.Adapter.FilterConnectorAdapter;
+import com.in.chargeet.Adapter.WattAdapter;
 import com.in.chargeet.Model.FilterConnectorModel;
+import com.in.chargeet.Model.WattModel;
 import com.in.chargeet.R;
 
 import java.util.ArrayList;
@@ -29,9 +31,12 @@ public class FilterActivity extends AppCompatActivity {
     TextView toolbarHading;
     Button applyFilter;
 
-    RecyclerView filterConnectorRecycler;
+    RecyclerView filterConnectorRecycler, wattRecycler;
     FilterConnectorAdapter filterConnectorAdapter;
     List<FilterConnectorModel> filterConnectorModelList = new ArrayList<>();
+
+    WattAdapter wattAdapter;
+    List<WattModel> wattList = new ArrayList<>();
 
 
     @Override
@@ -40,6 +45,7 @@ public class FilterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_filter);
         init();
         setConnectorData();
+        setWattData();
     }
 
     public void init() {
@@ -50,6 +56,8 @@ public class FilterActivity extends AppCompatActivity {
         toolbarHading.setText("Filter");
         applyFilter = findViewById(R.id.applyFilter);
         filterConnectorRecycler = findViewById(R.id.filterConnectorRecycler);
+        wattRecycler = findViewById(R.id.wattRecycler);
+
         bottom_navigation.getMenu().findItem(R.id.filter).setChecked(true);
         bottom_navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -154,6 +162,41 @@ public class FilterActivity extends AppCompatActivity {
         filterConnectorRecycler.setAdapter(filterConnectorAdapter);
     }
 
+    public void setWattData() {
+
+        WattModel model = new WattModel("5kw");
+        WattModel model1 = new WattModel("10kw");
+        WattModel model2 = new WattModel("20kw");
+        WattModel model3 = new WattModel("50kw");
+        WattModel model4 = new WattModel("60kw");
+        WattModel model5 = new WattModel("80kw");
+        WattModel model6 = new WattModel("100kw");
+        WattModel model7 = new WattModel("120kw");
+        WattModel model8 = new WattModel("140kw");
+
+        wattList.add(model);
+        wattList.add(model1);
+        wattList.add(model2);
+        wattList.add(model3);
+        wattList.add(model4);
+        wattList.add(model5);
+        wattList.add(model6);
+        wattList.add(model7);
+        wattList.add(model8);
+
+
+        wattAdapter = new WattAdapter(wattList, getApplicationContext(), new WattAdapter.Click() {
+            @Override
+            public void OnItemClick(int position) {
+
+                changeWattSelected();
+                wattList.get(position).setSelected(true);
+                wattAdapter.notifyDataSetChanged();
+            }
+        });
+        wattRecycler.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
+        wattRecycler.setAdapter(wattAdapter);
+    }
 
     public void changeSelected() {
 
@@ -165,6 +208,17 @@ public class FilterActivity extends AppCompatActivity {
         filterConnectorAdapter.notifyDataSetChanged();
 
     }
+
+    public void changeWattSelected() {
+
+
+        for (int i = 0; i < wattList.size(); i++) {
+            wattList.get(i).setSelected(false);
+        }
+        wattAdapter.notifyDataSetChanged();
+
+    }
+
 
     @Override
     public void onBackPressed() {

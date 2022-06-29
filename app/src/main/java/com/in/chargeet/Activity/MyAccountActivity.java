@@ -241,7 +241,7 @@ public class MyAccountActivity extends AppCompatActivity {
                 description.setText(model.getDescription());
 
 
-                Glide.with(getApplicationContext()).load(model.getProfile_image()).into(profileImage);
+                Glide.with(getApplicationContext()).load("https://images.unsplash.com/photo-1534447677768-be436bb09401?w=1080").into(profileImage);
 
 
                 Log.e("TAG", "onResponse: " + model.getProfile_image());

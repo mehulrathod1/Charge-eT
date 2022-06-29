@@ -14,13 +14,12 @@
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/bottomMenu" />
+         />
 
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/bottomMenu"
         android:layout_marginStart="@dimen/_16sdp"
         android:layout_marginTop="@dimen/_16sdp"
         android:layout_marginEnd="@dimen/_16sdp"
@@ -245,6 +244,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/_56sdp"
             android:orientation="vertical">
 
             <LinearLayout
@@ -255,7 +255,6 @@
 
                 <ImageView
                     android:id="@+id/zoomIn"
-
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_40sdp"
                     android:scaleType="centerInside"
@@ -318,13 +317,13 @@
 
     </RelativeLayout>
 
-    <LinearLayout
-        android:id="@+id/bottomMenu"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_gravity="center_vertical"
-        android:orientation="horizontal">
+<!--    <LinearLayout-->
+<!--        android:id="@+id/bottomMenu"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_alignParentBottom="true"-->
+<!--        android:layout_gravity="center_vertical"-->
+<!--        android:orientation="horizontal">-->
 
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -338,6 +337,6 @@
             app:itemIconSize="@dimen/_28sdp"
             app:labelVisibilityMode="unlabeled"
             app:menu="@menu/bottom_menu" />
-    </LinearLayout>
+<!--    </LinearLayout>-->
 
 </RelativeLayout>

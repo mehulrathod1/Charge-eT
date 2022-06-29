@@ -88,8 +88,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/bottomMenu"
         android:layout_below="@id/headingg"
-        android:layout_marginStart="@dimen/_8sdp"
-        android:layout_marginEnd="@dimen/_8sdp"
+
         android:orientation="vertical">
 
         <androidx.recyclerview.widget.RecyclerView

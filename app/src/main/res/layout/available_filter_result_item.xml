@@ -11,17 +11,17 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_8sdp"
-            android:layout_marginBottom="@dimen/_8sdp"
             android:layout_marginLeft="@dimen/_8sdp"
+            android:layout_marginTop="@dimen/_8sdp"
             android:layout_marginRight="@dimen/_8sdp"
+            android:layout_marginBottom="@dimen/_8sdp"
             android:background="@drawable/line_bg"
             android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-               android:layout_margin="@dimen/_8sdp"
+                android:layout_margin="@dimen/_8sdp"
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -80,7 +80,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/_16sdp"
+                        android:layout_marginLeft="@dimen/_8sdp"
                         android:orientation="vertical">
 
                         <TextView
@@ -256,7 +256,7 @@
 
 
                     <SeekBar
-
+                        android:id="@+id/unitSeekbar"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
@@ -404,9 +404,10 @@
                         android:layout_height="match_parent"
                         android:background="@drawable/line_bg"
                         android:gravity="center_vertical"
-                        android:paddingLeft="@dimen/_16sdp"
+                        android:hint="@string/Enter_percentage"
                         android:inputType="number"
-                        android:hint="@string/Enter_percentage" />
+                        android:maxLength="3"
+                        android:paddingLeft="@dimen/_16sdp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -529,6 +530,7 @@
             </LinearLayout>
 
             <ImageView
+                android:id="@+id/showDirection"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"

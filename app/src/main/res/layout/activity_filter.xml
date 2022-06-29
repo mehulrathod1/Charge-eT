@@ -40,9 +40,9 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/_16sdp"
-                    android:layout_marginTop="@dimen/_30sdp"
-                    android:layout_marginRight="@dimen/_16sdp"
+                    android:layout_marginLeft="@dimen/_8sdp"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginRight="@dimen/_8sdp"
                     android:orientation="vertical">
 
 
@@ -62,7 +62,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_16sdp"
+                        android:layout_marginTop="@dimen/_8sdp"
                         android:orientation="horizontal">
 
                         <de.hdodenhof.circleimageview.CircleImageView
@@ -107,14 +107,15 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_50sdp"
-                        android:layout_marginTop="@dimen/_16sdp"
-                        android:background="@drawable/line_bg"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:background="@drawable/squre_line_bg"
                         android:orientation="horizontal">
 
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/wattRecycler"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/_1sdp" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -181,7 +182,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_20sdp"
+                        android:layout_marginTop="@dimen/_16sdp"
                         android:orientation="vertical">
 
                         <TextView
@@ -196,7 +197,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_16sdp"
+                        android:layout_marginTop="@dimen/_8sdp"
                         android:orientation="vertical">
 
                         <androidx.recyclerview.widget.RecyclerView
@@ -480,18 +481,18 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_20sdp"
+                        android:layout_marginTop="@dimen/_8sdp"
                         android:orientation="vertical">
 
                         <CheckBox
-                            style="@style/mont_semi_black_16"
+                            style="@style/mont_reg_black_16"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layoutDirection="rtl"
                             android:text="@string/Free_Station" />
 
                         <CheckBox
-                            style="@style/mont_semi_black_16"
+                            style="@style/mont_reg_black_16"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layoutDirection="rtl"
@@ -502,7 +503,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_marginTop="@dimen/_20sdp"
+                        android:layout_marginTop="@dimen/_8sdp"
                         android:gravity="center"
                         android:orientation="vertical">
 
@@ -511,8 +512,8 @@
                             style="@style/button_style"
                             android:layout_width="@dimen/_200sdp"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_16sdp"
-                            android:layout_marginBottom="@dimen/_16sdp"
+                            android:layout_marginTop="@dimen/_8sdp"
+                            android:layout_marginBottom="@dimen/_8sdp"
                             android:backgroundTint="@color/blue_10"
                             android:text="@string/Apply_Filter" />
 

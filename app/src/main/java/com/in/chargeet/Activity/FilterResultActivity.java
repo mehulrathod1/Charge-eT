@@ -183,6 +183,13 @@ public class FilterResultActivity extends AppCompatActivity {
             public void onTimeClick(int position) {
 
             }
+
+            @Override
+            public void onDirectionClick(int position) {
+
+                Intent intent = new Intent(getApplicationContext(), DirectionActivity.class);
+                startActivity(intent);
+            }
         });
 
 
@@ -194,8 +201,9 @@ public class FilterResultActivity extends AppCompatActivity {
 
     }
 
-    public void notAvailable(){
+    public void notAvailable() {
 
+        notAvailableFilterList.clear();
         NotAvailableFilterModel model = new NotAvailableFilterModel("schedule");
 
         notAvailableFilterList.add(model);
@@ -205,10 +213,17 @@ public class FilterResultActivity extends AppCompatActivity {
         notAvailableFilterList.add(model);
         notAvailableFilterList.add(model);
 
-        notAvailableFilterAdapter  = new NotAvailableFilterAdapter(notAvailableFilterList, getApplicationContext(), new NotAvailableFilterAdapter.Click() {
+        notAvailableFilterAdapter = new NotAvailableFilterAdapter(notAvailableFilterList, getApplicationContext(), new NotAvailableFilterAdapter.Click() {
             @Override
             public void onScheduleClick(int position) {
 
+            }
+
+            @Override
+            public void onDirectionClick(int position) {
+
+                Intent intent = new Intent(getApplicationContext(), DirectionActivity.class);
+                startActivity(intent);
             }
         });
 

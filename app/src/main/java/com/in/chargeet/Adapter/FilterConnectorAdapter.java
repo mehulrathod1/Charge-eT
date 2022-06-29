@@ -41,9 +41,9 @@ public class FilterConnectorAdapter extends RecyclerView.Adapter<FilterConnector
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view = inflater.inflate(R.layout.filter_connecter_item, parent, false);
-        return new ViewHolder(view);
+            LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+            View view = inflater.inflate(R.layout.filter_connecter_item, parent, false);
+            return new ViewHolder(view);
     }
 
     @Override

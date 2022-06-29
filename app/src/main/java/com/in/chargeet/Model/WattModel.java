@@ -2,6 +2,15 @@ package com.in.chargeet.Model;
 
 public class WattModel {
     String kiloWatt;
+    boolean isSelected = false;
+
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    public void setSelected(boolean selected) {
+        isSelected = selected;
+    }
 
     public WattModel(String kiloWatt) {
         this.kiloWatt = kiloWatt;

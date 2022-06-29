@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
 
     <LinearLayout
-        android:layout_width="@dimen/_80sdp"
-        android:layout_height="@dimen/_60sdp"
-        android:background="@drawable/line_bg"
+        android:layout_width="@dimen/_50sdp"
+        android:layout_height="@dimen/_50sdp"
+        android:background="@drawable/squre_line_bg"
         android:orientation="horizontal">
 
 
@@ -15,6 +15,7 @@
             android:id="@+id/layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_margin="@dimen/_1sdp"
             android:gravity="center">
 
             <TextView
@@ -23,7 +24,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center_horizontal"
-                android:src="@drawable/ic_outline_directions_car_24"
+                style="@style/mont_reg_black_14"
                 android:text="ooooo" />
 
 

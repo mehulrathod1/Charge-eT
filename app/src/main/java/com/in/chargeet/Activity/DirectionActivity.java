@@ -69,9 +69,9 @@ public class DirectionActivity extends AppCompatActivity implements OnMapReadyCa
     FusedLocationProviderClient fusedLocationProviderClient;
     private static final int REQUEST_CODE = 101;
     private List<Polyline> polylines = null;
-    LatLng start = new LatLng(23.020552, 72.529457);
+    LatLng start = new LatLng(22.3038945, 70.80215989999999);
     //    LatLng waypoint = new LatLng(23.034722, 72.546778);
-    LatLng end = new LatLng(23.024847, 72.506996);
+    LatLng end = new LatLng(23.047607986591494, 72.5155059550399);
 
     String TAG = "DirectionActivity";
 
@@ -113,6 +113,8 @@ public class DirectionActivity extends AppCompatActivity implements OnMapReadyCa
                 Log.i("TAG", "An error occurred: " + status);
             }
         });
+
+
         init();
 
 

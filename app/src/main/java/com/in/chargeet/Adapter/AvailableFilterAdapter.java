@@ -10,6 +10,7 @@ import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -31,7 +32,8 @@ public class AvailableFilterAdapter extends RecyclerView.Adapter<AvailableFilter
     List<AvailableFilterModel> list;
     Context context;
     Click click;
-    View thumbView ;
+    View thumbView;
+
     public interface Click {
         void onBookClick(int position);
 
@@ -40,6 +42,8 @@ public class AvailableFilterAdapter extends RecyclerView.Adapter<AvailableFilter
         void onUnitClick(int position);
 
         void onTimeClick(int position);
+
+        void onDirectionClick(int position);
 
     }
 
@@ -66,13 +70,39 @@ public class AvailableFilterAdapter extends RecyclerView.Adapter<AvailableFilter
         holder.units.setText(model.getUnits());
         holder.time.setText(model.getTimes());
 
-        thumbView =  LayoutInflater.from(context).inflate(R.layout.layout_seekbar_thumb, null, false);
+        holder.seekBar.setProgress(0);
+        holder.unitSeekbar.setProgress(0);
+
+
+        thumbView = LayoutInflater.from(context).inflate(R.layout.layout_seekbar_thumb, null, false);
 
         holder.seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
 
                 // You can have your own calculation for progress
+                progress = progress / 5;
+                progress = progress * 5;
+                seekBar.setThumb(getThumb(progress));
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+        holder.unitSeekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+
+                // You can have your own calculation for progress
+                progress = progress / 5;
+                progress = progress * 5;
                 seekBar.setThumb(getThumb(progress));
             }
 
@@ -151,6 +181,14 @@ public class AvailableFilterAdapter extends RecyclerView.Adapter<AvailableFilter
             }
         });
 
+        holder.showDirection.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                click.onDirectionClick(position);
+            }
+        });
+
+
     }
 
     @Override
@@ -162,7 +200,8 @@ public class AvailableFilterAdapter extends RecyclerView.Adapter<AvailableFilter
 
         TextView percentage, units, time, bookNow;
         LinearLayout percentageLayout, unitLayout, timeLayout;
-        SeekBar seekBar;
+        SeekBar seekBar, unitSeekbar;
+        ImageView showDirection;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -174,6 +213,9 @@ public class AvailableFilterAdapter extends RecyclerView.Adapter<AvailableFilter
             unitLayout = itemView.findViewById(R.id.unitLayout);
             timeLayout = itemView.findViewById(R.id.timeLayout);
             seekBar = itemView.findViewById(R.id.seekBar);
+            unitSeekbar = itemView.findViewById(R.id.unitSeekbar);
+            showDirection = itemView.findViewById(R.id.showDirection);
+
         }
     }
 
