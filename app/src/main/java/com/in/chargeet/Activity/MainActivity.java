@@ -103,6 +103,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Glob.progressDialog(this);
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         statusCheck();
@@ -252,7 +253,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     public void init() {
 
-        Glob.progressDialog(this);
         bottom_navigation = findViewById(R.id.bottom_navigation);
         myVehicles = findViewById(R.id.myVehicles);
         myBooking = findViewById(R.id.myBooking);
@@ -339,6 +339,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                 Intent intent = new Intent(getApplicationContext(), MyVehicleActivity.class);
                 startActivity(intent);
+                finish();
 
             }
         });
@@ -347,6 +348,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), MyBookingActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
         setting.setOnClickListener(new View.OnClickListener() {
@@ -354,6 +356,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), EditProfileActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -445,7 +448,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             public void onClick(View view) {
 
                 Intent intent = new Intent(getApplicationContext(), DirectionActivity.class);
-                intent.putExtra("Latitude",Latitude);
+                intent.putExtra("Latitude", Latitude);
                 intent.putExtra("Longitude", Longitude);
                 startActivity(intent);
             }
@@ -654,14 +657,14 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
 
-        public void statusCheck() {
-            final LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+    public void statusCheck() {
+        final LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
-            if (!manager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-                buildAlertMessageNoGps();
+        if (!manager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+            buildAlertMessageNoGps();
 
-            }
         }
+    }
 
     private void buildAlertMessageNoGps() {
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -692,4 +695,5 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         connectorsAdapter.notifyDataSetChanged();
 
     }
+
 }

@@ -78,7 +78,6 @@ public class MyVehicleActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 removeVehicle(Glob.token, Glob.userId, vehicleId);
-
             }
         });
 
@@ -86,8 +85,10 @@ public class MyVehicleActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
                 finish();
-
+                overridePendingTransition(0, 0);
             }
         });
         addVehicle.setOnClickListener(new View.OnClickListener() {
@@ -120,6 +121,7 @@ public class MyVehicleActivity extends AppCompatActivity {
                 vehicleId = model.getUser_vehicle_id();
                 Glob.dialog.dismiss();
 
+                Toast.makeText(MyVehicleActivity.this, "" + primaryVehicleModel.getMessage(), Toast.LENGTH_SHORT).show();
                 Log.e(TAG, "onResponse: " + model.getName());
 
                 if (vehicleName.getText().toString().equals("")) {
@@ -130,7 +132,7 @@ public class MyVehicleActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<PrimaryVehicleModel> call, Throwable t) {
-                Log.e(TAG, "onResponse: " + t.getMessage());
+                Log.e(TAG, "onFailure: " + t.getMessage());
 
                 Glob.dialog.dismiss();
                 if (vehicleName.getText().toString().equals("")) {
@@ -204,6 +206,7 @@ public class MyVehicleActivity extends AppCompatActivity {
         otherVehicleRecycler.setAdapter(otherVehicleAdapter);
 
 
+
     }
 
     public void makePrimary(String token, String userId, String userVehicleId) {
@@ -246,16 +249,15 @@ public class MyVehicleActivity extends AppCompatActivity {
                 Toast.makeText(MyVehicleActivity.this, "" + commonModel.getMessage(), Toast.LENGTH_SHORT).show();
 
 
-                Log.e(TAG, "onResponse: " + commonModel.getMessage());
-                getPrimaryVehicle(Glob.token, Glob.userId);
-
+                Log.e(TAG, "onResponse: " + commonModel.getMessage() + Glob.userId);
                 Glob.dialog.dismiss();
-
+                getPrimaryVehicle(Glob.token, Glob.userId);
 
             }
 
             @Override
             public void onFailure(Call<CommonModel> call, Throwable t) {
+
                 Glob.dialog.dismiss();
             }
         });

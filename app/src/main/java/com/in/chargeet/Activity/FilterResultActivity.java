@@ -110,11 +110,11 @@ public class FilterResultActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Intent intent;
-                intent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(intent);
+//                Intent intent;
+//                intent = new Intent(getApplicationContext(), MainActivity.class);
+//                startActivity(intent);
                 finish();
-                overridePendingTransition(0, 0);
+//                overridePendingTransition(0, 0);
             }
         });
 

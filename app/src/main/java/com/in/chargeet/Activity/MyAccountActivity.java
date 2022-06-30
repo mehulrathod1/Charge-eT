@@ -2,17 +2,31 @@ package com.in.chargeet.Activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
 
+import android.Manifest;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.res.AssetFileDescriptor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -26,7 +40,11 @@ import org.imaginativeworld.whynotimagecarousel.ImageCarousel;
 import org.imaginativeworld.whynotimagecarousel.model.CarouselItem;
 import org.imaginativeworld.whynotimagecarousel.utils.Utils;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -41,9 +59,19 @@ public class MyAccountActivity extends AppCompatActivity {
 
     BottomNavigationView bottom_navigation;
 
-    ImageView backButton, edtAccount, wallet, profileImage;
+    ImageView backButton, edtAccount, wallet, profileImage,editImage;
     TextView toolbarHading, userName, email, mobileNumber, name, surname, gender, town, country, dob, description;
     ImageCarousel carousel;
+
+
+    File photoFile, img_file;
+    String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+    public String photoFileName = "IMG_" + timeStamp + ".jpg";
+    Uri img_url;
+    public final static int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 1034;
+    private static final int MY_CAMERA_REQUEST_CODE = 100;
+    private static final int MY_Gallery_REQUEST_CODE = 101;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +90,7 @@ public class MyAccountActivity extends AppCompatActivity {
         edtAccount = findViewById(R.id.edtAccount);
         wallet = findViewById(R.id.wallet);
         profileImage = findViewById(R.id.profileImage);
+        editImage = findViewById(R.id.editImage);
         bottom_navigation.getMenu().findItem(R.id.account).setChecked(true);
 
         backButton = findViewById(R.id.backButton);
@@ -107,6 +136,30 @@ public class MyAccountActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), MyWalletActivity.class);
                 startActivity(intent);
             }
+        });
+
+        editImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final String[] options = {"Camera", "Add From Gallery", "Cancel"};
+                final AlertDialog.Builder builder = new AlertDialog.Builder(MyAccountActivity.this);
+                builder.setCancelable(false);
+                builder.setItems(options, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        if (options[i].equals("Camera")) {
+                            Toast.makeText(MyAccountActivity.this, "camera", Toast.LENGTH_SHORT).show();
+                            onLaunchCamera();
+                        } else if (options[i].equals("Add From Gallery")) {
+                            openMediaContent();
+                            Toast.makeText(MyAccountActivity.this, "Gallery", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+                builder.show();
+
+            }
+
         });
 
 
@@ -257,6 +310,101 @@ public class MyAccountActivity extends AppCompatActivity {
             }
         });
     }
+
+
+    public void onLaunchCamera() {
+
+
+        // create Intent to take a picture and return control to the calling application
+
+        if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+
+            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            // Create a File reference for future access
+            photoFile = getPhotoFileUri(photoFileName);
+            img_url = Uri.fromFile(photoFile);
+
+            Uri fileProvider = FileProvider.getUriForFile(getApplicationContext(), "com.in.chargeet.provider", photoFile);
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, fileProvider);
+
+            if (intent.resolveActivity(getPackageManager()) != null) {
+                // Start the image capture intent to take photo
+                startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
+            }
+        } else {
+            ActivityCompat.requestPermissions(MyAccountActivity.this, new String[]{Manifest.permission.CAMERA}, MY_CAMERA_REQUEST_CODE);
+        }
+
+    }
+
+    public File getPhotoFileUri(String fileName) {
+
+        File mediaStorageDir = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), "APP_TAG");
+        if (!mediaStorageDir.exists() && !mediaStorageDir.mkdirs()) {
+            Log.d("APP_TAG", "failed to create directory");
+        }
+        File file = new File(mediaStorageDir.getPath() + File.separator + fileName);
+        return file;
+    }
+
+    public void openMediaContent() {
+
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        intent.setType("image/*");
+//        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, false);
+        intent.putExtra(MediaStore.EXTRA_VIDEO_QUALITY, 1);
+        photoFile = getPhotoFileUri(photoFileName);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            Uri tempFileUri = FileProvider.getUriForFile(getApplicationContext(),
+                    "com.in.chargeet.provider", // As defined in Manifest
+                    photoFile);
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, tempFileUri);
+        } else {
+            Uri tempFileUri = Uri.fromFile(photoFile);
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, tempFileUri);
+        }
+
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), 2);
+    }
+
+    public Bitmap getBitmap(final Uri selectedimg) throws IOException {
+
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = true;
+        AssetFileDescriptor fileDescriptor = null;
+
+        fileDescriptor =
+                getContentResolver().openAssetFileDescriptor(selectedimg, "r");
+        Bitmap bitmap
+                = BitmapFactory.decodeFileDescriptor(
+                fileDescriptor.getFileDescriptor(), null, options);
+
+        options.inSampleSize = calculateInSampleSize(options, 1024, 1024);
+        options.inJustDecodeBounds = false;
+
+        Bitmap original
+                = BitmapFactory.decodeFileDescriptor(
+                fileDescriptor.getFileDescriptor(), null, options);
+        System.gc();
+        return original;
+    }
+
+    public int calculateInSampleSize(@NonNull BitmapFactory.Options options, int reqWidth, int reqHeight) {
+        // Raw height and width of image
+        int height = options.outHeight;
+        int width = options.outWidth;
+        int inSampleSize = 1;
+
+        if ((height > reqHeight) && (width > reqWidth)) {
+            // Calculate the largest inSampleSize value that is a power of 2 and keeps both
+            // height and width larger than the requested height and width.
+            inSampleSize++;
+        }
+        return inSampleSize;
+    }
+
+
 
     @Override
     public void onBackPressed() {

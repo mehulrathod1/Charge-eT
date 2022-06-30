@@ -120,7 +120,7 @@ public class FilterActivity extends AppCompatActivity {
                 Intent intent;
                 intent = new Intent(getApplicationContext(), FilterResultActivity.class);
                 startActivity(intent);
-                finish();
+//                finish();
                 overridePendingTransition(0, 0);
             }
         });

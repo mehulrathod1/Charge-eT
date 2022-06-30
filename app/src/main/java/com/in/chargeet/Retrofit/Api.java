@@ -4,6 +4,7 @@ import com.google.gson.annotations.Expose;
 import com.in.chargeet.Model.CommonModel;
 import com.in.chargeet.Model.CountryModel;
 import com.in.chargeet.Model.LoginModel;
+import com.in.chargeet.Model.MyBookingModel;
 import com.in.chargeet.Model.OtherVehicleModel;
 import com.in.chargeet.Model.PowerStationDetailModel;
 import com.in.chargeet.Model.PowerStationModel;
@@ -141,9 +142,7 @@ public interface Api {
     @FormUrlEncoded
     @POST("get_power_stations")
     Call<PowerStationModel> getPowerStation(
-
             @Field("token") String token
-
     );
 
 
@@ -168,6 +167,15 @@ public interface Api {
             @Field("booking_time") String booking_time,
             @Field("payment_method") String payment_method
 
+    );
+
+
+    @FormUrlEncoded
+    @POST("get_my_bookings")
+    Call<MyBookingModel> getMyBooking(
+
+            @Field("token") String token,
+            @Field("user_id") String user_id
     );
 
 }

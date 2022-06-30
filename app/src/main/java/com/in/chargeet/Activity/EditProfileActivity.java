@@ -78,7 +78,6 @@ public class EditProfileActivity extends AppCompatActivity {
         countryRecycler = dialogLayout.findViewById(R.id.countryRecycler);
 
 
-
         edtCountry.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

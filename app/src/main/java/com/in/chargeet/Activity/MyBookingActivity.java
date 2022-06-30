@@ -1,6 +1,8 @@
 package com.in.chargeet.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -14,30 +16,46 @@ import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import com.in.chargeet.Adapter.MyBookingAdapter;
+import com.in.chargeet.Model.MyBookingModel;
 import com.in.chargeet.R;
+import com.in.chargeet.Retrofit.Api;
+import com.in.chargeet.Retrofit.RetrofitClient;
+import com.in.chargeet.Utils.Glob;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MyBookingActivity extends AppCompatActivity {
 
     ImageView backButton;
-    TextView toolbarHading, reBooking;
-    SeekBar seekBar;
+    TextView toolbarHading;
+
 
     View thumbView;
+    RecyclerView bookingRecycle;
+    MyBookingAdapter myBookingAdapter;
+    List<MyBookingModel.Booking> bookingModelList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_booking);
         init();
+        getMyBooking(Glob.token, Glob.userId);
     }
 
     public void init() {
 
+        Glob.progressDialog(this);
         backButton = findViewById(R.id.backButton);
         toolbarHading = findViewById(R.id.toolbarHading);
         toolbarHading.setText("My Booking");
-        reBooking = findViewById(R.id.reBooking);
-        seekBar = findViewById(R.id.seekBar);
+        bookingRecycle = findViewById(R.id.bookingRecycle);
 
         thumbView = LayoutInflater.from(MyBookingActivity.this).inflate(R.layout.layout_seekbar_thumb, null, false);
 
@@ -45,52 +63,69 @@ public class MyBookingActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
                 finish();
+                overridePendingTransition(0, 0);
 
             }
         });
 
-        reBooking.setOnClickListener(new View.OnClickListener() {
+
+    }
+
+
+    public void getMyBooking(String token, String userId) {
+
+        Api call = RetrofitClient.getClient(Glob.baseUrl).create(Api.class);
+        Glob.dialog.show();
+
+        call.getMyBooking(token, userId).enqueue(new Callback<MyBookingModel>() {
             @Override
-            public void onClick(View view) {
+            public void onResponse(Call<MyBookingModel> call, Response<MyBookingModel> response) {
+
+                MyBookingModel myBookingModel = response.body();
+
+                List<MyBookingModel.Booking> dataList = myBookingModel.getBookingList();
+
+                for (int i = 0; i < dataList.size(); i++) {
+
+                    MyBookingModel.Booking model = dataList.get(i);
+                    MyBookingModel.Booking data = new MyBookingModel.Booking(
+                            model.getId(), model.getBooking_date(), model.getPower_station_name(),
+                            model.getDescription(), model.getCreated_at()
+                    );
+
+                    bookingModelList.add(data);
+
+                }
+                setBookingData();
+                Glob.dialog.dismiss();
+            }
+
+            @Override
+            public void onFailure(Call<MyBookingModel> call, Throwable t) {
+
+            }
+        });
+
+    }
+
+    public void setBookingData() {
+
+        myBookingAdapter = new MyBookingAdapter(bookingModelList, getApplicationContext(), new MyBookingAdapter.Click() {
+            @Override
+            public void onRebookClick(int position) {
 
                 Intent intent = new Intent(getApplicationContext(), ChargingActivity.class);
                 startActivity(intent);
-
             }
         });
 
-        seekBar.setThumb(getThumb(0));
-        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-
-                // You can have your own calculation for progress
-                seekBar.setThumb(getThumb(progress));
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-            }
-        });
-    }
-
-    public Drawable getThumb(int progress) {
-        ((TextView) thumbView.findViewById(R.id.tvProgress)).setText(progress + "");
-
-        thumbView.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
-        Bitmap bitmap = Bitmap.createBitmap(thumbView.getMeasuredWidth(), thumbView.getMeasuredHeight(), Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(bitmap);
-        thumbView.layout(0, 0, thumbView.getMeasuredWidth(), thumbView.getMeasuredHeight());
-        thumbView.draw(canvas);
-
-        return new BitmapDrawable(getResources(), bitmap);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+        bookingRecycle.setLayoutManager(mLayoutManager);
+        myBookingAdapter.notifyDataSetChanged();
+        bookingRecycle.setAdapter(myBookingAdapter);
     }
 }
