@@ -50,7 +50,7 @@ public class EditProfileActivity extends AppCompatActivity {
 
         init();
         getProfile(Glob.token, Glob.userId);
-        getCountryData(Glob.token);
+        getCountryData(Glob.token, "");
     }
 
     public void init() {
@@ -179,11 +179,11 @@ public class EditProfileActivity extends AppCompatActivity {
     }
 
 
-    public void getCountryData(String token) {
+    public void getCountryData(String token, String search) {
 
         Api call = RetrofitClient.getClient(Glob.baseUrl).create(Api.class);
 
-        call.getCountry(token).enqueue(new Callback<CountryModel>() {
+        call.getCountry(token, search).enqueue(new Callback<CountryModel>() {
             @Override
             public void onResponse(Call<CountryModel> call, Response<CountryModel> response) {
 

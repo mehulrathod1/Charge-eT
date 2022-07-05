@@ -6,8 +6,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.LayoutInflater;
@@ -18,6 +22,7 @@ import android.widget.Toast;
 
 import com.in.chargeet.Adapter.CountryAdapter;
 import com.in.chargeet.Model.CountryModel;
+import com.in.chargeet.Model.LoginModel;
 import com.in.chargeet.R;
 import com.in.chargeet.Retrofit.Api;
 import com.in.chargeet.Retrofit.RetrofitClient;
@@ -32,24 +37,26 @@ import retrofit2.Response;
 
 public class SignUpActivity extends AppCompatActivity {
 
-    EditText edtEmail, edtPhoneNo, edtUserName, edtPassword, edtCountry;
+    EditText edtEmail, edtPhoneNo, edtUserName, edtPassword, edtCountry, searchCountry;
     Button btnSignUp;
     AlertDialog alert;
     AlertDialog.Builder alertDialog;
     RecyclerView countryRecycler;
     CountryAdapter countryAdapter;
     List<CountryModel.Country> countryList = new ArrayList<>();
+    String countryId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
         init();
-        getCountryData(Glob.token);
+        getCountryData(Glob.token, "");
     }
 
     public void init() {
 
+        Glob.progressDialog(this);
         btnSignUp = findViewById(R.id.btnSignUp);
 
         edtEmail = findViewById(R.id.edtEmail);
@@ -65,6 +72,7 @@ public class SignUpActivity extends AppCompatActivity {
         alertDialog.setView(dialogLayout);
         alert = alertDialog.create();
         countryRecycler = dialogLayout.findViewById(R.id.countryRecycler);
+        searchCountry = dialogLayout.findViewById(R.id.searchCountry);
 
 
         edtCountry.setOnClickListener(new View.OnClickListener() {
@@ -76,6 +84,31 @@ public class SignUpActivity extends AppCompatActivity {
             }
         });
 
+
+        searchCountry.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                if (charSequence.length() != 0) {
+
+                    Log.e("onTextChanged", "onTextChanged: " + searchCountry.getText().toString());
+                    getCountryData(Glob.token, searchCountry.getText().toString());
+
+                }
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+
+            }
+        });
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -99,8 +132,11 @@ public class SignUpActivity extends AppCompatActivity {
                         edtCountry.setError("Please Select Country");
 
                     } else {
-                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                        startActivity(intent);
+
+                        signUp(Glob.token, emailToText, edtPhoneNo.getText().toString().trim(),
+                                edtUserName.getText().toString().trim(),
+                                password, countryId);
+
                     }
                 } else {
                     edtEmail.setError("Please Enter valid Email address");
@@ -112,17 +148,17 @@ public class SignUpActivity extends AppCompatActivity {
         });
     }
 
-    public void getCountryData(String token) {
+    public void getCountryData(String token, String search) {
 
         Api call = RetrofitClient.getClient(Glob.baseUrl).create(Api.class);
 
-        call.getCountry(token).enqueue(new Callback<CountryModel>() {
+        call.getCountry(token, search).enqueue(new Callback<CountryModel>() {
             @Override
             public void onResponse(Call<CountryModel> call, Response<CountryModel> response) {
 
                 CountryModel countryModel = response.body();
 
-
+                countryList.clear();
                 List<CountryModel.Country> dataList = countryModel.getDataList();
                 for (int i = 0; i < dataList.size(); i++) {
 
@@ -150,10 +186,12 @@ public class SignUpActivity extends AppCompatActivity {
             @Override
             public void itemClick(int position) {
 
-                String countryId = countryList.get(position).getId();
+                countryId = countryList.get(position).getId();
                 String countryName = countryList.get(position).getName();
                 alert.dismiss();
                 edtCountry.setText(countryName);
+
+                Log.e("TAGasff", "itemClick: " + countryId);
 
             }
         });
@@ -161,6 +199,50 @@ public class SignUpActivity extends AppCompatActivity {
         countryRecycler.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         countryAdapter.notifyDataSetChanged();
         countryRecycler.setAdapter(countryAdapter);
+
+    }
+
+    public void signUp(String token, String email, String phoneNumber, String username, String password, String country_id) {
+
+        Api call = RetrofitClient.getClient(Glob.baseUrl).create(Api.class);
+        Glob.dialog.show();
+
+        call.signUp(token, email, phoneNumber, username, password, country_id).enqueue(new Callback<LoginModel>() {
+            @Override
+            public void onResponse(Call<LoginModel> call, Response<LoginModel> response) {
+
+                LoginModel loginModel = response.body();
+                if (loginModel.getStatus().equals("true")) {
+                    LoginModel.Login model = loginModel.getData();
+
+                    Toast.makeText(SignUpActivity.this, "" + loginModel.getMessage(), Toast.LENGTH_SHORT).show();
+
+                    Glob.userId = model.getUser_id();
+                    Glob.dialog.dismiss();
+
+
+                    SharedPreferences sharedPref = getSharedPreferences("UserId", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPref.edit();
+                    editor.putString("UserId", Glob.userId);
+                    editor.apply();
+
+
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(intent);
+
+                } else {
+                    Glob.dialog.dismiss();
+
+                    Toast.makeText(SignUpActivity.this, "" + loginModel.getMessage(), Toast.LENGTH_SHORT).show();
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<LoginModel> call, Throwable t) {
+
+            }
+        });
 
     }
 
@@ -194,7 +276,6 @@ public class SignUpActivity extends AppCompatActivity {
                 edtCountry.setError("Please Select Country");
 
             } else {
-
 
             }
         } else {

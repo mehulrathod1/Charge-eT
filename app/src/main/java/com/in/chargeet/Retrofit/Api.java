@@ -20,6 +20,14 @@ import retrofit2.http.POST;
 public interface Api {
 
     @FormUrlEncoded
+    @POST("get_country")
+    Call<CountryModel> getCountry(
+            @Field("token") String token,
+            @Field("search") String search
+
+    );
+
+    @FormUrlEncoded
     @POST("login")
     Call<LoginModel> login(
             @Field("token") String token,
@@ -28,11 +36,19 @@ public interface Api {
 
     );
 
+
     @FormUrlEncoded
-    @POST("get_country")
-    Call<CountryModel> getCountry(
-            @Field("token") String token
+    @POST("sign_up")
+    Call<LoginModel> signUp(
+            @Field("token") String token,
+            @Field("email") String email,
+            @Field("phone_number") String phoneNumber,
+            @Field("username") String username,
+            @Field("password") String password,
+            @Field("country_id") String country_id
+
     );
+
 
     @FormUrlEncoded
     @POST("forgot_password")

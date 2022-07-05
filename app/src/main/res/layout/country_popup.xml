@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent">
 
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:id="@+id/searchLayout"
@@ -24,6 +24,7 @@
                 android:src="@drawable/quantum_ic_search_grey600_24" />
 
             <EditText
+                android:id="@+id/searchCountry"
                 style="@style/mont_reg_black_14"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -43,7 +44,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_below="@id/searchLayout"
             android:layout_marginStart="@dimen/_18sdp"
             android:layout_marginEnd="@dimen/_18sdp"
@@ -53,7 +54,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/countryRecycler"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="match_parent" />
 
         </LinearLayout>
     </RelativeLayout>

@@ -291,6 +291,14 @@ public class DirectionActivity extends AppCompatActivity implements OnMapReadyCa
     public void onMapReady(@NonNull GoogleMap googleMap) {
 
         mMap = googleMap;
+
+
+        if (currentLocation != null) {
+
+            LatLng pos = new LatLng(start.latitude, start.longitude);
+            mMap.animateCamera(CameraUpdateFactory.newLatLng(pos));
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(pos, 10));
+        }
 //        Polyline polyline1 = googleMap.addPolyline(new PolylineOptions()
 //                        .clickable(true)
 //                        .add(
@@ -370,7 +378,7 @@ public class DirectionActivity extends AppCompatActivity implements OnMapReadyCa
         for (int i = 0; i < route.size(); i++) {
 
             if (i == shortestRouteIndex) {
-                polyOptions.color(getResources().getColor(R.color.colorPrimary));
+                polyOptions.color(getResources().getColor(R.color.green));
                 polyOptions.width(7);
                 polyOptions.addAll(route.get(shortestRouteIndex).getPoints());
                 Polyline polyline = mMap.addPolyline(polyOptions);

@@ -87,11 +87,10 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     RecyclerView connectorRecycler;
     ConnectorsAdapter connectorsAdapter;
 
-//    LatLng sydney = new LatLng(-34, 151);
+    //    LatLng sydney = new LatLng(-34, 151);
 //    LatLng TamWorth = new LatLng(-31.083332, 150.916672);
 //    LatLng NewCastle = new LatLng(-32.916668, 151.750000);
 //    LatLng Brisbane = new LatLng(-27.470125, 153.021072);
-
     // creating array list for adding all our locations.
     public ArrayList<LatLng> locationArrayList = new ArrayList<>();
 
@@ -183,11 +182,24 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         mMap = googleMap;
 
 
+        if (currentLocation != null) {
+            LatLng pos = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
+
+
+            MarkerOptions markerOptions = new MarkerOptions().position(pos).title("");
+
+            markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.car_location_green));
+            mMap.animateCamera(CameraUpdateFactory.newLatLng(pos));
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(pos, 15));
+            mMap.addMarker(markerOptions);
+        }
+
 //        LatLng latLng = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
 //        MarkerOptions markerOptions = new MarkerOptions().position(latLng).title("");
 //        googleMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
 //        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
 //        googleMap.addMarker(markerOptions);
+
 
         Log.e("index", "onResponse: " + locationArrayList.toString());
 
@@ -195,7 +207,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(@NonNull Marker marker) {
-
 
                 LatLng markerLocation = marker.getPosition();
                 String markerLocationString = String.valueOf(markerLocation);
@@ -211,12 +222,11 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                 Log.e(TAG, "onMarkerClick:2 " + Latitude + "-----" + Longitude);
 
-//                if (!one.equals("")) {
-
+//                if (!Latitude.equals("")) {
                 bottomSheetDialog.show();
-                getPowerStationDetail(Glob.token, "23.047607986591494", "72.5155059550399");
+                getPowerStationDetail(Glob.token, String.valueOf(markerLocation.latitude), String.valueOf(markerLocation.longitude));
+//                getPowerStationDetail(Glob.token, "23.047607986591494", "72.5155059550399");
 //                }
-
 
                 return false;
 
@@ -297,7 +307,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 Intent intent;
-
                 switch (item.getItemId()) {
 
                     case R.id.location:
@@ -328,7 +337,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                         overridePendingTransition(0, 0);
                         break;
                 }
-
                 return false;
             }
         });
@@ -496,7 +504,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void getPowerStation(String token) {
 
         Api call = RetrofitClient.getClient(Glob.baseUrl).create(Api.class);
-        Glob.dialog.show();
+//        Glob.dialog.show();
 
 
         call.getPowerStation(token).enqueue(new Callback<PowerStationModel>() {
@@ -529,18 +537,18 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                     markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.location1));
 
                     // below lin is use to zoom our camera on map.
-                    mMap.animateCamera(CameraUpdateFactory.zoomTo(40));
-                    mMap.animateCamera(CameraUpdateFactory.newLatLng(locationArrayList.get(i)));
-                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(locationArrayList.get(i), 15));
+//                    mMap.animateCamera(CameraUpdateFactory.zoomTo(40));
+//                    mMap.animateCamera(CameraUpdateFactory.newLatLng(locationArrayList.get(i)));
+//                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(locationArrayList.get(i), 15));
 
                     // below line is use to move our camera to the specific location.
-                    mMap.moveCamera(CameraUpdateFactory.newLatLng(locationArrayList.get(i)));
+//                    mMap.moveCamera(CameraUpdateFactory.newLatLng(locationArrayList.get(i)));
                     mMap.addMarker(markerOptions.position(locationArrayList.get(i)));
 
 
                 }
 
-                Glob.dialog.dismiss();
+//                Glob.dialog.dismiss();
 
             }
 
@@ -631,9 +639,9 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     protected Marker createMarker(double latitude, double longitude, String title) {
 
         return mMap.addMarker(new MarkerOptions()
-                .position(new LatLng(latitude, longitude))
-                .title(title)
-
+                        .position(new LatLng(latitude, longitude))
+                        .title(title)
+//
         );
     }
 
@@ -688,8 +696,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         for (int i = 0; i < connectorsList.size(); i++) {
             connectorsList.get(i).setSelected(false);
-
-
             Log.e(TAG, "changeSlotSelected: " + connectorsList.get(i).getSelected());
         }
         connectorsAdapter.notifyDataSetChanged();
