@@ -3,6 +3,7 @@ package com.in.chargeet.Retrofit;
 import com.google.gson.annotations.Expose;
 import com.in.chargeet.Model.CommonModel;
 import com.in.chargeet.Model.CountryModel;
+import com.in.chargeet.Model.FilterModel;
 import com.in.chargeet.Model.LoginModel;
 import com.in.chargeet.Model.MyBookingModel;
 import com.in.chargeet.Model.OtherVehicleModel;
@@ -194,4 +195,15 @@ public interface Api {
             @Field("user_id") String user_id
     );
 
+
+    @FormUrlEncoded
+    @POST("search_power_station")
+    Call<FilterModel> getFillerResult(
+
+            @Field("token") String token,
+            @Field("power_levels") String power_levels,
+            @Field("connectors_id") String connectors_id,
+            @Field("free_station") String free_station,
+            @Field("working_station") String working_station
+    );
 }

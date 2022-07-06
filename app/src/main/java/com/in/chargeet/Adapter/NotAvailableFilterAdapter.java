@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -50,7 +51,12 @@ public class NotAvailableFilterAdapter extends RecyclerView.Adapter<NotAvailable
 
         NotAvailableFilterModel model = list.get(position);
 
-        holder.schedule.setText(model.getSchedule());
+
+        holder.name.setText(model.getName());
+        holder.description.setText(model.getDescription());
+        holder.power.setText(model.getPower());
+        holder.rate.setText(model.getRate());
+
 
         holder.schedule.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,8 +93,9 @@ public class NotAvailableFilterAdapter extends RecyclerView.Adapter<NotAvailable
     public class viewHolder extends RecyclerView.ViewHolder {
 
         Button schedule;
-        RangeSeekBar  rangeSeekbar;
+        RangeSeekBar rangeSeekbar;
         ImageView showDirection;
+        TextView name, description, power, rate;
 
 
         public viewHolder(@NonNull View itemView) {
@@ -97,6 +104,10 @@ public class NotAvailableFilterAdapter extends RecyclerView.Adapter<NotAvailable
             schedule = itemView.findViewById(R.id.schedule);
             rangeSeekbar = itemView.findViewById(R.id.rangeSeekbar);
             showDirection = itemView.findViewById(R.id.showDirection);
+            name = itemView.findViewById(R.id.name);
+            description = itemView.findViewById(R.id.description);
+            power = itemView.findViewById(R.id.power);
+            rate = itemView.findViewById(R.id.rate);
 
         }
     }

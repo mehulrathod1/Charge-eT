@@ -24,6 +24,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/name"
                     style="@style/mont_semi_black_14"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -31,6 +32,7 @@
 
 
                 <TextView
+                    android:id="@+id/description"
                     style="@style/mont_reg_black_14"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -95,6 +97,7 @@
                             android:text="Power - " />
 
                         <TextView
+                            android:id="@+id/power"
                             style="@style/mont_reg_black_14"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -115,6 +118,7 @@
                             android:text="Rate - " />
 
                         <TextView
+                            android:id="@+id/rate"
                             style="@style/mont_reg_black_14"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"

@@ -66,9 +66,10 @@ public class AvailableFilterAdapter extends RecyclerView.Adapter<AvailableFilter
 
         AvailableFilterModel model = list.get(position);
 
-        holder.percentage.setText(model.getPercentage());
-        holder.units.setText(model.getUnits());
-        holder.time.setText(model.getTimes());
+        holder.name.setText(model.getName());
+        holder.description.setText(model.getDescription());
+        holder.power.setText(model.getPower());
+        holder.rate.setText(model.getRate());
 
         holder.seekBar.setProgress(0);
         holder.unitSeekbar.setProgress(0);
@@ -116,8 +117,6 @@ public class AvailableFilterAdapter extends RecyclerView.Adapter<AvailableFilter
 
             }
         });
-
-
         holder.percentage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -198,7 +197,7 @@ public class AvailableFilterAdapter extends RecyclerView.Adapter<AvailableFilter
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView percentage, units, time, bookNow;
+        TextView percentage, units, time, bookNow, name, description, power, rate;
         LinearLayout percentageLayout, unitLayout, timeLayout;
         SeekBar seekBar, unitSeekbar;
         ImageView showDirection;
@@ -215,6 +214,10 @@ public class AvailableFilterAdapter extends RecyclerView.Adapter<AvailableFilter
             seekBar = itemView.findViewById(R.id.seekBar);
             unitSeekbar = itemView.findViewById(R.id.unitSeekbar);
             showDirection = itemView.findViewById(R.id.showDirection);
+            name = itemView.findViewById(R.id.name);
+            description = itemView.findViewById(R.id.description);
+            power = itemView.findViewById(R.id.power);
+            rate = itemView.findViewById(R.id.rate);
 
         }
     }

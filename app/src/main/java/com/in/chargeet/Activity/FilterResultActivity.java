@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -20,11 +21,20 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.in.chargeet.Adapter.AvailableFilterAdapter;
 import com.in.chargeet.Adapter.NotAvailableFilterAdapter;
 import com.in.chargeet.Model.AvailableFilterModel;
+import com.in.chargeet.Model.FilterModel;
 import com.in.chargeet.Model.NotAvailableFilterModel;
 import com.in.chargeet.R;
+import com.in.chargeet.Retrofit.Api;
+import com.in.chargeet.Retrofit.RetrofitClient;
+import com.in.chargeet.Utils.Glob;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class FilterResultActivity extends AppCompatActivity {
 
@@ -41,16 +51,23 @@ public class FilterResultActivity extends AppCompatActivity {
     NotAvailableFilterAdapter notAvailableFilterAdapter;
     List<NotAvailableFilterModel> notAvailableFilterList = new ArrayList<>();
 
+    String TAG = "FilterResultActivity";
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_filter_result);
         init();
-        availableData();
+
+
+        getFillerResult(Glob.token, "4", "1", "0", "0");
+
     }
 
     public void init() {
 
+        Glob.progressDialog(this);
         bottom_navigation = findViewById(R.id.bottom_navigation);
         backButton = findViewById(R.id.backButton);
         toolbarHading = findViewById(R.id.toolbarHading);
@@ -125,7 +142,8 @@ public class FilterResultActivity extends AppCompatActivity {
                 layoutNotAvailable.setBackgroundDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.filter_heading_white_bg));
                 notAvailableText.setTextColor(Color.parseColor("#1C1C1C"));
                 availableText.setTextColor(Color.parseColor("#ffffff"));
-                availableData();
+
+
             }
         });
 
@@ -136,10 +154,12 @@ public class FilterResultActivity extends AppCompatActivity {
                 layoutNotAvailable.setBackgroundDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.filter_heading_bg));
                 availableText.setTextColor(Color.parseColor("#1C1C1C"));
                 notAvailableText.setTextColor(Color.parseColor("#ffffff"));
-                notAvailable();
+                getNotAvailableFillerResult(Glob.token, "4", "1", "0", "0");
+
             }
         });
     }
+
 
     @Override
     public void onBackPressed() {
@@ -153,15 +173,120 @@ public class FilterResultActivity extends AppCompatActivity {
 
     }
 
+
+    public void getFillerResult(String token, String power_levels, String connectors_id, String free_station,
+                                String working_station) {
+
+        Api call = RetrofitClient.getClient(Glob.baseUrl).create(Api.class);
+        Glob.dialog.show();
+
+
+        call.getFillerResult(token, power_levels, connectors_id, free_station, working_station).enqueue(new Callback<FilterModel>() {
+            @Override
+            public void onResponse(Call<FilterModel> call, Response<FilterModel> response) {
+
+                availableFilterList.clear();
+                notAvailableFilterList.clear();
+
+                FilterModel filterModel = response.body();
+                FilterModel.FilterData filterData = filterModel.getFilterData();
+
+                List<AvailableFilterModel> availableFilterModelList = filterData.getAvailableFilterModelList();
+
+                for (int i = 0; i < availableFilterModelList.size(); i++) {
+
+                    AvailableFilterModel availableFilterModel = availableFilterModelList.get(i);
+                    AvailableFilterModel availableData = new AvailableFilterModel(
+
+                            availableFilterModel.getId(),
+                            availableFilterModel.getName(),
+                            availableFilterModel.getDescription(),
+                            availableFilterModel.getPower(),
+                            availableFilterModel.getRate(),
+                            availableFilterModel.getConnectors(),
+                            availableFilterModel.getLatitude(),
+                            availableFilterModel.getLongitude(),
+                            availableFilterModel.getIcon()
+                    );
+
+                    Log.e(TAG, "onResponse: " + availableFilterModel.getConnectors());
+
+                    availableFilterList.add(availableData);
+                }
+
+                availableData();
+                Glob.dialog.dismiss();
+
+
+            }
+
+            @Override
+            public void onFailure(Call<FilterModel> call, Throwable t) {
+
+            }
+        });
+
+    }
+
+
+    public void getNotAvailableFillerResult(String token, String power_levels, String connectors_id, String free_station,
+                                            String working_station) {
+
+        Api call = RetrofitClient.getClient(Glob.baseUrl).create(Api.class);
+        Glob.dialog.show();
+
+
+        call.getFillerResult(token, power_levels, connectors_id, free_station, working_station).enqueue(new Callback<FilterModel>() {
+            @Override
+            public void onResponse(Call<FilterModel> call, Response<FilterModel> response) {
+
+                notAvailableFilterList.clear();
+
+                FilterModel filterModel = response.body();
+                FilterModel.FilterData filterData = filterModel.getFilterData();
+
+                List<NotAvailableFilterModel> notAvailableFilterModelList = filterData.getNotAvailableFilterModelList();
+
+
+                for (int i = 0; i < notAvailableFilterModelList.size(); i++) {
+
+
+                    NotAvailableFilterModel notAvailableFilterModel = notAvailableFilterModelList.get(i);
+                    NotAvailableFilterModel notAvailableData = new NotAvailableFilterModel(
+
+                            notAvailableFilterModel.getId(),
+                            notAvailableFilterModel.getName(),
+                            notAvailableFilterModel.getDescription(),
+                            notAvailableFilterModel.getPower(),
+                            notAvailableFilterModel.getRate(),
+                            notAvailableFilterModel.getConnectors(),
+                            notAvailableFilterModel.getLatitude(),
+                            notAvailableFilterModel.getLongitude(),
+                            notAvailableFilterModel.getIcon()
+                    );
+
+                    Log.e(TAG, "onResponse: " + notAvailableFilterModel.getConnectors());
+
+                    notAvailableFilterModelList.add(notAvailableData);
+                }
+                notAvailable();
+                Glob.dialog.dismiss();
+
+
+            }
+
+            @Override
+            public void onFailure(Call<FilterModel> call, Throwable t) {
+
+                Log.e(TAG, "onResponse: " + t.getMessage());
+
+            }
+        });
+
+    }
+
     public void availableData() {
 
-        availableFilterList.clear();
-        AvailableFilterModel model = new AvailableFilterModel("percentage", "units", "times");
-        availableFilterList.add(model);
-        availableFilterList.add(model);
-        availableFilterList.add(model);
-        availableFilterList.add(model);
-        availableFilterList.add(model);
 
         availableFilterAdapter = new AvailableFilterAdapter(availableFilterList, getApplicationContext(), new AvailableFilterAdapter.Click() {
             @Override
@@ -203,15 +328,6 @@ public class FilterResultActivity extends AppCompatActivity {
 
     public void notAvailable() {
 
-        notAvailableFilterList.clear();
-        NotAvailableFilterModel model = new NotAvailableFilterModel("schedule");
-
-        notAvailableFilterList.add(model);
-        notAvailableFilterList.add(model);
-        notAvailableFilterList.add(model);
-        notAvailableFilterList.add(model);
-        notAvailableFilterList.add(model);
-        notAvailableFilterList.add(model);
 
         notAvailableFilterAdapter = new NotAvailableFilterAdapter(notAvailableFilterList, getApplicationContext(), new NotAvailableFilterAdapter.Click() {
             @Override
