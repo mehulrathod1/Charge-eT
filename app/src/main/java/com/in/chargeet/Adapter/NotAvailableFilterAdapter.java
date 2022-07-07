@@ -13,6 +13,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.directions.route.Parser;
 import com.in.chargeet.Model.NotAvailableFilterModel;
 import com.in.chargeet.R;
 import com.yahoo.mobile.client.android.util.rangeseekbar.RangeSeekBar;
@@ -70,7 +71,10 @@ public class NotAvailableFilterAdapter extends RecyclerView.Adapter<NotAvailable
             @Override
             public void onRangeSeekBarValuesChanged(RangeSeekBar<?> bar, Integer minValue, Integer maxValue) {
                 //Now you have the minValue and maxValue of your RangeSeekbar
-                Toast.makeText(context, minValue + "-" + maxValue, Toast.LENGTH_LONG).show();
+
+
+                holder.minTxt.setText(String.valueOf(minValue));
+                holder.maxTxt.setText(String.valueOf(maxValue));
             }
         });
 
@@ -95,7 +99,7 @@ public class NotAvailableFilterAdapter extends RecyclerView.Adapter<NotAvailable
         Button schedule;
         RangeSeekBar rangeSeekbar;
         ImageView showDirection;
-        TextView name, description, power, rate;
+        TextView name, description, power, rate, minTxt, maxTxt;
 
 
         public viewHolder(@NonNull View itemView) {
@@ -108,6 +112,8 @@ public class NotAvailableFilterAdapter extends RecyclerView.Adapter<NotAvailable
             description = itemView.findViewById(R.id.description);
             power = itemView.findViewById(R.id.power);
             rate = itemView.findViewById(R.id.rate);
+            minTxt = itemView.findViewById(R.id.minTxt);
+            maxTxt = itemView.findViewById(R.id.maxTxt);
 
         }
     }

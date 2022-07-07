@@ -142,6 +142,7 @@ public class FilterResultActivity extends AppCompatActivity {
                 layoutNotAvailable.setBackgroundDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.filter_heading_white_bg));
                 notAvailableText.setTextColor(Color.parseColor("#1C1C1C"));
                 availableText.setTextColor(Color.parseColor("#ffffff"));
+                getFillerResult(Glob.token, "4", "1", "0", "0");
 
 
             }
@@ -241,6 +242,7 @@ public class FilterResultActivity extends AppCompatActivity {
             public void onResponse(Call<FilterModel> call, Response<FilterModel> response) {
 
                 notAvailableFilterList.clear();
+                availableFilterList.clear();
 
                 FilterModel filterModel = response.body();
                 FilterModel.FilterData filterData = filterModel.getFilterData();
@@ -248,10 +250,10 @@ public class FilterResultActivity extends AppCompatActivity {
                 List<NotAvailableFilterModel> notAvailableFilterModelList = filterData.getNotAvailableFilterModelList();
 
 
-                for (int i = 0; i < notAvailableFilterModelList.size(); i++) {
+                for (int j = 0; j < notAvailableFilterModelList.size(); j++) {
 
 
-                    NotAvailableFilterModel notAvailableFilterModel = notAvailableFilterModelList.get(i);
+                    NotAvailableFilterModel notAvailableFilterModel = notAvailableFilterModelList.get(j);
                     NotAvailableFilterModel notAvailableData = new NotAvailableFilterModel(
 
                             notAvailableFilterModel.getId(),
@@ -267,7 +269,7 @@ public class FilterResultActivity extends AppCompatActivity {
 
                     Log.e(TAG, "onResponse: " + notAvailableFilterModel.getConnectors());
 
-                    notAvailableFilterModelList.add(notAvailableData);
+                    notAvailableFilterList.add(notAvailableData);
                 }
                 notAvailable();
                 Glob.dialog.dismiss();

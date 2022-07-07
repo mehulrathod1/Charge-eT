@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     // creating array list for adding all our locations.
     public ArrayList<LatLng> locationArrayList = new ArrayList<>();
 
-    String Latitude, Longitude;
+    String Latitude, Longitude, connectorId, powerStationId, paymentMethod;
 
 
     @Override
@@ -181,13 +181,12 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         getPowerStation(Glob.token);
         mMap = googleMap;
 
-
+        Log.e(TAG, "onCreate: " + currentLocation.getLongitude());
         if (currentLocation != null) {
             LatLng pos = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
 
 
             MarkerOptions markerOptions = new MarkerOptions().position(pos).title("");
-
             markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.car_location_green));
             mMap.animateCamera(CameraUpdateFactory.newLatLng(pos));
             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(pos, 15));
@@ -216,17 +215,23 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 Log.e(TAG, "onMarkerClick: " + markerLocation);
                 Log.e(TAG, "onMarkerClick:2 " + separated[0] + "-----" + separated[1]);
 
-                Latitude = separated[0];
-                Longitude = separated[1];
+                Latitude = String.valueOf(markerLocation.latitude);
+                Longitude = String.valueOf(markerLocation.longitude);
 
 
-                Log.e(TAG, "onMarkerClick:2 " + Latitude + "-----" + Longitude);
+                String cur = String.valueOf(currentLocation.getLatitude());
 
-//                if (!Latitude.equals("")) {
-                bottomSheetDialog.show();
-                getPowerStationDetail(Glob.token, String.valueOf(markerLocation.latitude), String.valueOf(markerLocation.longitude));
-//                getPowerStationDetail(Glob.token, "23.047607986591494", "72.5155059550399");
-//                }
+
+                Log.e(TAG, "Latitude: " + Latitude + "---" + cur);
+
+                if (!Latitude.equals(cur)) {
+                    Log.e(TAG, "onMarkerClick: " + markerLocation);
+                    bottomSheetDialog.show();
+                    getPowerStationDetail(Glob.token, String.valueOf(markerLocation.latitude), String.valueOf(markerLocation.longitude));
+                } else {
+
+                }
+
 
                 return false;
 
@@ -458,6 +463,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 Intent intent = new Intent(getApplicationContext(), DirectionActivity.class);
                 intent.putExtra("Latitude", Latitude);
                 intent.putExtra("Longitude", Longitude);
+                Log.e(TAG, "Latitude: " + Latitude + "---" + Longitude);
+
                 startActivity(intent);
             }
         });
@@ -469,6 +476,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                 alert.dismiss();
                 wallet.setText(googlePay.getText().toString().trim());
+
             }
         });
 
@@ -487,6 +495,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                 alert.dismiss();
                 wallet.setText(radioWallet.getText().toString().trim());
+                paymentMethod = "wallet";
             }
         });
 
@@ -497,6 +506,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                 alert.dismiss();
                 wallet.setText(creditCard.getText().toString().trim());
+                paymentMethod = "card";
             }
         });
     }
@@ -580,6 +590,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 stationRate.setText(powerStationData.getRate());
 
 
+                powerStationId = powerStationData.getId();
+
                 connectorsList.clear();
                 List<PowerStationDetailModel.PowerStationData.Connectors> dataList = powerStationData.getConnectors();
                 for (int i = 0; i < dataList.size(); i++) {
@@ -589,6 +601,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                             model.getId(), model.getConnectors(), model.getImage()
                     );
                     connectorsList.add(data);
+
 
                     Log.e(TAG, "onResponse: " + model.getImage());
                 }
@@ -636,14 +649,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         });
     }
 
-    protected Marker createMarker(double latitude, double longitude, String title) {
-
-        return mMap.addMarker(new MarkerOptions()
-                        .position(new LatLng(latitude, longitude))
-                        .title(title)
-//
-        );
-    }
 
     public void setConnector() {
 
@@ -655,6 +660,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 connectorsList.get(position).setSelected(true);
                 connectorsAdapter.notifyDataSetChanged();
 
+                connectorId = connectorsList.get(position).getId();
                 Log.e(TAG, "onConnectorClick: " + connectorsList.get(position).getSelected());
 
 

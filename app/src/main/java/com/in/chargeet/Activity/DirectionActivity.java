@@ -69,11 +69,14 @@ public class DirectionActivity extends AppCompatActivity implements OnMapReadyCa
     FusedLocationProviderClient fusedLocationProviderClient;
     private static final int REQUEST_CODE = 101;
     private List<Polyline> polylines = null;
-    LatLng start = new LatLng(22.3038945, 70.80215989999999);
+    LatLng start;
     //    LatLng waypoint = new LatLng(23.034722, 72.546778);
-    LatLng end = new LatLng(23.047607986591494, 72.5155059550399);
+    LatLng end;
 
     String TAG = "DirectionActivity";
+
+    String latitude, longitude;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,9 +84,6 @@ public class DirectionActivity extends AppCompatActivity implements OnMapReadyCa
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_direction);
 
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         statusCheck();
@@ -113,6 +113,16 @@ public class DirectionActivity extends AppCompatActivity implements OnMapReadyCa
                 Log.i("TAG", "An error occurred: " + status);
             }
         });
+
+        Intent intent = getIntent();
+
+        latitude = intent.getStringExtra("Latitude");
+        longitude = intent.getStringExtra("Longitude");
+
+
+        Log.e(TAG, "onCreate: " + latitude + "sdfghhgf" + longitude);
+
+//        Log.e(TAG, "onCreate: "+ currentLocation.getLongitude() );
 
 
         init();
@@ -291,6 +301,10 @@ public class DirectionActivity extends AppCompatActivity implements OnMapReadyCa
     public void onMapReady(@NonNull GoogleMap googleMap) {
 
         mMap = googleMap;
+
+//        start = new LatLng(22.3038945, 70.80215989999999);
+        start = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
+        end = new LatLng(Double.parseDouble(latitude), Double.parseDouble(longitude));
 
 
         if (currentLocation != null) {

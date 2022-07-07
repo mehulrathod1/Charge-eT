@@ -190,6 +190,26 @@
                     android:layout_height="wrap_content"
                     app:absoluteMaxValue="0"
                     app:absoluteMinValue="100" />
+
+                <TextView
+                    android:id="@+id/minTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/rangeSeekbar"
+                    android:text="0"
+                    android:textColor="@color/red"
+                    style="@style/mont_semi_black_14"
+                    />
+                <TextView
+                    android:id="@+id/maxTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/rangeSeekbar"
+                    android:text="0"
+                    android:layout_alignParentRight="true"
+                    android:textColor="@color/green"
+                    style="@style/mont_semi_black_14"
+                    />
             </RelativeLayout>
 
 
