@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     // creating array list for adding all our locations.
     public ArrayList<LatLng> locationArrayList = new ArrayList<>();
 
-    String Latitude, Longitude, connectorId, powerStationId, paymentMethod;
+    String Latitude, Longitude, connectorId , powerStationId, paymentMethod = "wallet";
 
 
     @Override
@@ -386,8 +386,16 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         bookNow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), ChargingActivity.class);
-                startActivity(intent);
+
+                if (connectorId == null) {
+                    Toast.makeText(MainActivity.this, "" + "Please select connector type", Toast.LENGTH_SHORT).show();
+                } else {
+                    Intent intent = new Intent(getApplicationContext(), ChargingActivity.class);
+                    intent.putExtra("connectorId", connectorId);
+                    intent.putExtra("powerStationId", powerStationId);
+                    intent.putExtra("paymentMethod", paymentMethod);
+                    startActivity(intent);
+                }
             }
         });
 
@@ -601,8 +609,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                             model.getId(), model.getConnectors(), model.getImage()
                     );
                     connectorsList.add(data);
-
-
                     Log.e(TAG, "onResponse: " + model.getImage());
                 }
                 setConnector();

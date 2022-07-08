@@ -313,6 +313,7 @@ public class DirectionActivity extends AppCompatActivity implements OnMapReadyCa
             mMap.animateCamera(CameraUpdateFactory.newLatLng(pos));
             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(pos, 10));
         }
+
 //        Polyline polyline1 = googleMap.addPolyline(new PolylineOptions()
 //                        .clickable(true)
 //                        .add(

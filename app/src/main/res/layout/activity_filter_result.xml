@@ -116,6 +116,7 @@
             android:background="@drawable/bottom_navigation_bg"
             android:fitsSystemWindows="true"
             app:itemIconSize="@dimen/_28sdp"
+            android:visibility="gone"
             app:labelVisibilityMode="unlabeled"
             app:menu="@menu/bottom_menu" />
     </LinearLayout>
