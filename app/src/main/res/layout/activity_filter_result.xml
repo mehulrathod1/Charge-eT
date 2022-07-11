@@ -79,16 +79,16 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/_1sdp"
-            android:background="@color/gray_dark"/>
+            android:background="@color/gray_dark" />
 
 
     </LinearLayout>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/bottomMenu"
         android:layout_below="@id/headingg"
-
         android:orientation="vertical">
 
         <androidx.recyclerview.widget.RecyclerView
@@ -115,12 +115,11 @@
             android:layout_gravity="center"
             android:background="@drawable/bottom_navigation_bg"
             android:fitsSystemWindows="true"
-            app:itemIconSize="@dimen/_28sdp"
             android:visibility="gone"
+            app:itemIconSize="@dimen/_28sdp"
             app:labelVisibilityMode="unlabeled"
             app:menu="@menu/bottom_menu" />
     </LinearLayout>
-
 
 
 </RelativeLayout>

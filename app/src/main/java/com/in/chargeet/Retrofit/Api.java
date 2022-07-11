@@ -13,10 +13,14 @@ import com.in.chargeet.Model.PrimaryVehicleModel;
 import com.in.chargeet.Model.ProfileDetail;
 import com.in.chargeet.Model.VehicleModel;
 
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 
 public interface Api {
 
@@ -205,5 +209,16 @@ public interface Api {
             @Field("connectors_id") String connectors_id,
             @Field("free_station") String free_station,
             @Field("working_station") String working_station
+    );
+
+
+    @Multipart
+    @POST("update_profile_image")
+    Call<CommonModel> updateProfileImage(
+
+            @Part("token") RequestBody token,
+            @Part("user_id") RequestBody user_id,
+            @Part MultipartBody.Part profile_image
+
     );
 }

@@ -75,6 +75,7 @@ public class GetStartOneActivity extends AppCompatActivity {
 
                     Intent intent = new Intent(getApplicationContext(), WelcomeActivity.class);
                     startActivity(intent);
+                    finish();
                 } else {
 
                     viewPager.setCurrentItem(getItem(+1), true);
@@ -90,6 +91,7 @@ public class GetStartOneActivity extends AppCompatActivity {
 
                 Intent intent = new Intent(getApplicationContext(), WelcomeActivity.class);
                 startActivity(intent);
+                finish();
 
             }
         });

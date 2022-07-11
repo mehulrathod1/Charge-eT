@@ -1,12 +1,14 @@
 package com.in.chargeet.Activity;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -30,6 +32,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.in.chargeet.Model.CommonModel;
 import com.in.chargeet.Model.ProfileDetail;
 import com.in.chargeet.R;
 import com.in.chargeet.Retrofit.Api;
@@ -40,7 +43,9 @@ import org.imaginativeworld.whynotimagecarousel.ImageCarousel;
 import org.imaginativeworld.whynotimagecarousel.model.CarouselItem;
 import org.imaginativeworld.whynotimagecarousel.utils.Utils;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -51,6 +56,9 @@ import java.util.Map;
 
 import javax.security.auth.login.LoginException;
 
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -59,7 +67,7 @@ public class MyAccountActivity extends AppCompatActivity {
 
     BottomNavigationView bottom_navigation;
 
-    ImageView backButton, edtAccount, wallet, profileImage,editImage;
+    ImageView backButton, edtAccount, wallet, profileImage, editImage,amazon;
     TextView toolbarHading, userName, email, mobileNumber, name, surname, gender, town, country, dob, description;
     ImageCarousel carousel;
 
@@ -106,7 +114,7 @@ public class MyAccountActivity extends AppCompatActivity {
         dob = findViewById(R.id.dob);
         description = findViewById(R.id.description);
         toolbarHading.setText("Profile");
-
+        amazon = findViewById(R.id.amazon);
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -294,7 +302,7 @@ public class MyAccountActivity extends AppCompatActivity {
                 description.setText(model.getDescription());
 
 
-                Glide.with(getApplicationContext()).load("https://images.unsplash.com/photo-1534447677768-be436bb09401?w=1080").into(profileImage);
+                Glide.with(getApplicationContext()).load(model.getProfile_image()).into(profileImage);
 
 
                 Log.e("TAG", "onResponse: " + model.getProfile_image());
@@ -310,7 +318,6 @@ public class MyAccountActivity extends AppCompatActivity {
             }
         });
     }
-
 
     public void onLaunchCamera() {
 
@@ -404,6 +411,142 @@ public class MyAccountActivity extends AppCompatActivity {
         return inSampleSize;
     }
 
+
+    public void updateProfileImage(String token, String userId, File profile_image) {
+
+        Api call = RetrofitClient.getClient(Glob.baseUrl).create(Api.class);
+        Glob.dialog.show();
+
+        RequestBody requestBody_token = RequestBody.create(MediaType.parse("multipart/form-data"), token);
+        RequestBody requestBody_user_id = RequestBody.create(MediaType.parse("multipart/form-data"), userId);
+        MultipartBody.Part requestBody_profile_image = null;
+        RequestBody requestBody_req_img = RequestBody.create(MediaType.parse("multipart/form-data"), profile_image);
+        requestBody_profile_image = MultipartBody.Part.createFormData("profile_image", img_file.getName(), requestBody_req_img);
+
+
+        call.updateProfileImage(requestBody_token, requestBody_user_id, requestBody_profile_image).enqueue(new Callback<CommonModel>() {
+            @Override
+            public void onResponse(Call<CommonModel> call, Response<CommonModel> response) {
+
+                CommonModel commonModel = response.body();
+                Toast.makeText(MyAccountActivity.this, "" + commonModel.getMessage(), Toast.LENGTH_SHORT).show();
+                Glob.dialog.dismiss();
+            }
+
+            @Override
+            public void onFailure(Call<CommonModel> call, Throwable t) {
+
+            }
+        });
+
+
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+
+        super.onActivityResult(requestCode, resultCode, data);
+        Bitmap bitmap = null;
+
+        if (resultCode == Activity.RESULT_OK) {
+            try {
+                switch (requestCode) {
+                    case 1034:
+
+                        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new
+                                Date());
+                        img_file = new File(getCacheDir(), "IMG_" + timeStamp + ".jpg");
+
+                        bitmap = null;
+
+                        try {
+                            if (img_url != null) {
+                                bitmap = getBitmap(img_url);
+                            }
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+
+                        if (bitmap != null) {
+                            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+                            bitmap.compress(Bitmap.CompressFormat.JPEG, 100 /*ignored for PNG*/, bos);
+                            byte[] bitmapdata = bos.toByteArray();
+
+                            try {
+                                FileOutputStream fos = new FileOutputStream(img_file);
+                                fos.write(bitmapdata);
+                                fos.flush();
+                                fos.close();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                            Log.e("img__file", "onClick: " + img_file);
+
+//                            updateDoctorPersonal("123456789", Glob.user_id, edtFirstName.getText().toString(),
+//                                    edtLastName.getText().toString(), "1",
+//                                    edtEducation.getText().toString(), edtLanguageSpoken.getText().toString(),
+//                                    edtExperience.getText().toString(), edtAddress.getText().toString(), img_file);
+//
+//                            Uri temporary_Image = Uri.fromFile(new File(String.valueOf(img_file)));
+//                            profileImage.setImageURI(temporary_Image);
+
+                            updateProfileImage(Glob.token, Glob.userId, img_file);
+                        }
+                        break;
+                    case 2:
+                        if (data.getData() != null) {
+//                            post();
+                            bitmap = getBitmap(data.getData());
+                            img_url = data.getData();
+
+                            timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new
+                                    Date());
+                            img_file = new File(getApplicationContext().getCacheDir(), "IMG_" + timeStamp + ".jpg");
+
+                            bitmap = null;
+
+                            try {
+                                if (img_url != null) {
+                                    bitmap = getBitmap(img_url);
+                                }
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+
+                            if (bitmap != null) {
+                                ByteArrayOutputStream bos = new ByteArrayOutputStream();
+                                bitmap.compress(Bitmap.CompressFormat.JPEG, 100 /*ignored for PNG*/, bos);
+                                byte[] bitmapdata = bos.toByteArray();
+
+                                try {
+                                    FileOutputStream fos = new FileOutputStream(img_file);
+                                    fos.write(bitmapdata);
+                                    fos.flush();
+                                    fos.close();
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                                Log.e("img_file", "onClick: " + img_file);
+//                                Uri temporary_Image = Uri.fromFile(new File(String.valueOf(img_file)));
+//                                profileImage.setImageURI(temporary_Image);
+
+                                updateProfileImage(Glob.token, Glob.userId, img_file);
+
+//                                updateDoctorPersonal("123456789", Glob.user_id, edtFirstName.getText().toString(),
+//                                        edtLastName.getText().toString(), "1",
+//                                        edtEducation.getText().toString(), edtLanguageSpoken.getText().toString(),
+//                                        edtExperience.getText().toString(), edtAddress.getText().toString(), img_file);
+                            }
+
+                        }
+                        break;
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
 
 
     @Override

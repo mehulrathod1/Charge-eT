@@ -54,6 +54,7 @@ public class SignInActivity extends AppCompatActivity {
 
                 Intent intent = new Intent(getApplicationContext(), ForgotPasswordActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
         signUp.setOnClickListener(new View.OnClickListener() {
@@ -62,6 +63,7 @@ public class SignInActivity extends AppCompatActivity {
 
                 Intent intent = new Intent(getApplicationContext(), SignUpActivity.class);
                 startActivity(intent);
+                finish();
 
             }
         });
@@ -69,9 +71,7 @@ public class SignInActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-
                 emailValidator(edtEmail);
-
 
             }
         });
@@ -125,6 +125,7 @@ public class SignInActivity extends AppCompatActivity {
 
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(intent);
+                    finish();
 
 
                 } else {
