@@ -71,8 +71,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     TextView myVehicles, myBooking, setting, wallet, bookNow, StationName, stationPower, power, stationRate, navigateLocation;
     ImageView location, menuImage, zoomOut, zoomIn, goToCurrentLocation, connector3, connector2, connector1;
     BottomSheetDialog bottomSheetDialog;
-    AlertDialog alert;
-    AlertDialog.Builder alertDialog;
+    AlertDialog alert, percentageAlert;
+    AlertDialog.Builder alertDialog, percentageDialog;
     RadioButton googlePay, amazonPay, radioWallet, creditCard;
     LinearLayout menuLayout, menuButton;
     GoogleMap mMap;
@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     // creating array list for adding all our locations.
     public ArrayList<LatLng> locationArrayList = new ArrayList<>();
 
-    String Latitude, Longitude, connectorId , powerStationId, paymentMethod = "wallet";
+    String Latitude, Longitude, connectorId, powerStationId, paymentMethod = "wallet";
 
 
     @Override
@@ -295,6 +295,14 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         connector3 = bottomSheetDialog.findViewById(R.id.connector3);
         navigateLocation = bottomSheetDialog.findViewById(R.id.navigateLocation);
 
+
+        percentageDialog = new AlertDialog.Builder(MainActivity.this);
+        LayoutInflater inflater1 = getLayoutInflater();
+        View layout = inflater1.inflate(R.layout.percentage_popup, null);
+        percentageDialog.setView(layout);
+        percentageAlert = percentageDialog.create();
+
+
         alertDialog = new AlertDialog.Builder(MainActivity.this);
         LayoutInflater inflater = getLayoutInflater();
         View dialogLayout = inflater.inflate(R.layout.payment_option_layout, null);
@@ -395,15 +403,15 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                     intent.putExtra("powerStationId", powerStationId);
                     intent.putExtra("paymentMethod", paymentMethod);
                     startActivity(intent);
+
+//                    percentageAlert.show();
                 }
             }
         });
-
         wallet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 alert.show();
-
             }
         });
 

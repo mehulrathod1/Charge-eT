@@ -314,7 +314,11 @@ public class FilterResultActivity extends AppCompatActivity {
             @Override
             public void onDirectionClick(int position) {
 
+                String Latitude = availableFilterList.get(position).getLatitude();
+                String Longitude = availableFilterList.get(position).getLongitude();
                 Intent intent = new Intent(getApplicationContext(), DirectionActivity.class);
+                intent.putExtra("Latitude", Latitude);
+                intent.putExtra("Longitude", Longitude);
                 startActivity(intent);
             }
         });
