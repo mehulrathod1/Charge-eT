@@ -12,8 +12,11 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.in.chargeet.Adapter.FilterConnectorAdapter;
@@ -30,6 +33,9 @@ public class FilterActivity extends AppCompatActivity {
     ImageView backButton;
     TextView toolbarHading;
     Button applyFilter;
+    CheckBox freeStationCheck, workingStationCheck;
+
+    String freeStation, workingStation, powerLevels, connectorId;
 
     RecyclerView filterConnectorRecycler, wattRecycler;
     FilterConnectorAdapter filterConnectorAdapter;
@@ -57,7 +63,8 @@ public class FilterActivity extends AppCompatActivity {
         applyFilter = findViewById(R.id.applyFilter);
         filterConnectorRecycler = findViewById(R.id.filterConnectorRecycler);
         wattRecycler = findViewById(R.id.wattRecycler);
-
+        freeStationCheck = findViewById(R.id.freeStationCheck);
+        workingStationCheck = findViewById(R.id.workingStationCheck);
         bottom_navigation.getMenu().findItem(R.id.filter).setChecked(true);
         bottom_navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -117,13 +124,68 @@ public class FilterActivity extends AppCompatActivity {
         applyFilter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent;
-                intent = new Intent(getApplicationContext(), FilterResultActivity.class);
-                startActivity(intent);
+
+
+                if (freeStationCheck.isChecked()) {
+                    freeStation = "1";
+                } else {
+                    freeStation = "0";
+                }
+                if (workingStationCheck.isChecked()) {
+                    workingStation = "1";
+                } else {
+                    workingStation = "0";
+                }
+                Log.e("freeStation", "onClick: " + freeStation + workingStation + powerLevels + connectorId);
+
+                if (powerLevels == null) {
+                    Toast.makeText(FilterActivity.this, "Please Select Power Level", Toast.LENGTH_SHORT).show();
+                } else if (connectorId == null) {
+                    Toast.makeText(FilterActivity.this, "Please Select Connector", Toast.LENGTH_SHORT).show();
+                } else {
+
+                    Intent intent;
+                    intent = new Intent(getApplicationContext(), FilterResultActivity.class);
+                    intent.putExtra("powerLevels", powerLevels);
+                    intent.putExtra("connectorId", connectorId);
+                    intent.putExtra("freeStation", freeStation);
+                    intent.putExtra("workingStation", workingStation);
+                    startActivity(intent);
 //                finish();
-                overridePendingTransition(0, 0);
+                    overridePendingTransition(0, 0);
+                }
             }
         });
+
+        workingStationCheck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+
+                if (b) {
+
+                    workingStation = "1";
+                } else {
+
+                    workingStation = "0";
+                }
+            }
+        });
+
+        freeStationCheck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+
+                if (b) {
+
+                    freeStation = "1";
+                } else {
+
+                    freeStation = "0";
+                }
+
+            }
+        });
+
     }
 
     public void setConnectorData() {
@@ -155,6 +217,9 @@ public class FilterActivity extends AppCompatActivity {
 
                 changeSelected();
                 filterConnectorModelList.get(position).setSelected(true);
+
+                connectorId = "1";
+
             }
         });
 
@@ -192,7 +257,11 @@ public class FilterActivity extends AppCompatActivity {
                 changeWattSelected();
                 wattList.get(position).setSelected(true);
                 wattAdapter.notifyDataSetChanged();
+                powerLevels = wattList.get(position).getKiloWatt();
+                Log.e("FilterActivity", "OnItemClick: " + powerLevels);
+
             }
+
         });
         wattRecycler.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
         wattRecycler.setAdapter(wattAdapter);

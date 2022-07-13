@@ -427,7 +427,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                     menuLayout.setVisibility(View.VISIBLE);
                     menuImage.setImageResource(R.drawable.ic_baseline_close_24);
                 }
-
             }
         });
 
@@ -436,7 +435,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             public void onClick(View view) {
 
                 mMap.animateCamera(CameraUpdateFactory.zoomOut());
-
 
             }
         });

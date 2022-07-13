@@ -128,4 +128,16 @@ public class MyBookingActivity extends AppCompatActivity {
         myBookingAdapter.notifyDataSetChanged();
         bookingRecycle.setAdapter(myBookingAdapter);
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(intent);
+        finish();
+        overridePendingTransition(0, 0);
+
+    }
 }

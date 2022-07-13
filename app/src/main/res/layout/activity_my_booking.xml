@@ -20,66 +20,62 @@
     </LinearLayout>
 
 
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/header">
+        android:layout_below="@id/header"
+        android:orientation="vertical">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_16sdp"
+            android:layout_marginTop="@dimen/_30sdp"
+            android:layout_marginRight="@dimen/_16sdp">
+
+
+            <ImageView
+                android:id="@+id/person"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_outline_directions_car_24" />
+
+            <TextView
+                style="@style/play_semi_black_16"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/_12sdp"
+                android:layout_toEndOf="@+id/person"
+                android:text="My Booking" />
+        </RelativeLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_16sdp"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="@dimen/_16sdp"
+            android:background="@drawable/line_bg"
             android:orientation="vertical">
 
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/_16sdp"
-                android:layout_marginTop="@dimen/_30sdp"
-                android:layout_marginRight="@dimen/_16sdp">
-
-
-                <ImageView
-                    android:id="@+id/person"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_outline_directions_car_24" />
-
-                <TextView
-                    style="@style/play_semi_black_16"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/_12sdp"
-                    android:layout_toEndOf="@+id/person"
-                    android:text="My Booking" />
-            </RelativeLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/_16sdp"
-                android:layout_marginTop="16dp"
-                android:layout_marginRight="@dimen/_16sdp"
-                android:background="@drawable/line_bg"
-                android:orientation="vertical">
+                android:orientation="horizontal">
 
 
-                <LinearLayout
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/bookingRecycle"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/bookingRecycle"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-                </LinearLayout>
-
-
+                    android:layout_height="wrap_content" />
             </LinearLayout>
 
+
         </LinearLayout>
-    </ScrollView>
+
+    </LinearLayout>
+
 </RelativeLayout>

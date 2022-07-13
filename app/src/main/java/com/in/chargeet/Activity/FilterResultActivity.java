@@ -53,15 +53,22 @@ public class FilterResultActivity extends AppCompatActivity {
 
     String TAG = "FilterResultActivity";
 
+    String freeStation, workingStation, powerLevels, connectorId, powerStationId;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_filter_result);
+
+        Intent intent = getIntent();
+        freeStation = intent.getStringExtra("freeStation");
+        workingStation = intent.getStringExtra("workingStation");
+        powerLevels = intent.getStringExtra("powerLevels");
+        connectorId = intent.getStringExtra("connectorId");
         init();
-
-
-        getFillerResult(Glob.token, "4", "1", "0", "0");
+        getFillerResult(Glob.token, powerLevels, connectorId, freeStation, workingStation);
+        Log.e("freeStation", "onClick: " + freeStation + workingStation + powerLevels + connectorId);
 
     }
 
@@ -294,6 +301,14 @@ public class FilterResultActivity extends AppCompatActivity {
             @Override
             public void onBookClick(int position) {
 
+
+                powerStationId = availableFilterList.get(position).getId();
+                Intent intent = new Intent(getApplicationContext(), ChargingActivity.class);
+                intent.putExtra("connectorId", connectorId);
+                intent.putExtra("powerStationId", powerStationId);
+                intent.putExtra("paymentMethod", "wallet");
+                startActivity(intent);
+
             }
 
             @Override
@@ -339,12 +354,26 @@ public class FilterResultActivity extends AppCompatActivity {
             @Override
             public void onScheduleClick(int position) {
 
+                powerStationId = notAvailableFilterList.get(position).getId();
+                Intent intent = new Intent(getApplicationContext(), ChargingActivity.class);
+                intent.putExtra("connectorId", connectorId);
+                intent.putExtra("powerStationId", powerStationId);
+                intent.putExtra("paymentMethod", "wallet");
+                startActivity(intent);
             }
 
             @Override
             public void onDirectionClick(int position) {
+//
+//                Intent intent = new Intent(getApplicationContext(), DirectionActivity.class);
+//                startActivity(intent);
 
+
+                String Latitude = notAvailableFilterList.get(position).getLatitude();
+                String Longitude = notAvailableFilterList.get(position).getLongitude();
                 Intent intent = new Intent(getApplicationContext(), DirectionActivity.class);
+                intent.putExtra("Latitude", Latitude);
+                intent.putExtra("Longitude", Longitude);
                 startActivity(intent);
             }
         });
