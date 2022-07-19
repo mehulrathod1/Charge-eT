@@ -53,9 +53,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class DirectionActivity extends AppCompatActivity implements OnMapReadyCallback,
-
-        RoutingListener {
+public class DirectionActivity extends AppCompatActivity implements OnMapReadyCallback, RoutingListener {
 
     BottomNavigationView bottom_navigation;
     TextView myVehicles, myBooking, setting, wallet, bookNow;
@@ -97,8 +95,17 @@ public class DirectionActivity extends AppCompatActivity implements OnMapReadyCa
 // Initialize the AutocompleteSupportFragment.
         AutocompleteSupportFragment autocompleteFragment = (AutocompleteSupportFragment)
                 getSupportFragmentManager().findFragmentById(R.id.autocomplete_fragment);
+        autocompleteFragment.setHint("Your location");
+
+
+        AutocompleteSupportFragment autocomplete = (AutocompleteSupportFragment)
+                getSupportFragmentManager().findFragmentById(R.id.autocomplete);
+        autocomplete.setHint("Choose destination");
+
 
         autocompleteFragment.setPlaceFields(Arrays.asList(Place.Field.ID, Place.Field.NAME));
+        autocomplete.setPlaceFields(Arrays.asList(Place.Field.ID, Place.Field.NAME));
+
 
         autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
             @Override
@@ -114,6 +121,19 @@ public class DirectionActivity extends AppCompatActivity implements OnMapReadyCa
             }
         });
 
+        autocomplete.setOnPlaceSelectedListener(new PlaceSelectionListener() {
+            @Override
+            public void onPlaceSelected(Place place) {
+                // TODO: Get info about the selected place.
+                Log.i("TAG", "Place: " + place.getName() + ", " + place.getId());
+            }
+
+            @Override
+            public void onError(Status status) {
+                // TODO: Handle the error.
+                Log.i("TAG", "An error occurred: " + status);
+            }
+        });
         Intent intent = getIntent();
 
         latitude = intent.getStringExtra("Latitude");

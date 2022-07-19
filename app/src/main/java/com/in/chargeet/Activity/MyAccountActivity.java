@@ -67,7 +67,7 @@ public class MyAccountActivity extends AppCompatActivity {
 
     BottomNavigationView bottom_navigation;
 
-    ImageView backButton, edtAccount, wallet, profileImage, editImage,amazon;
+    ImageView backButton, edtAccount, wallet, profileImage, editImage, amazon;
     TextView toolbarHading, userName, email, mobileNumber, name, surname, gender, town, country, dob, description;
     ImageCarousel carousel;
 
@@ -188,10 +188,10 @@ public class MyAccountActivity extends AppCompatActivity {
 
 
                     case R.id.order:
-                        intent = new Intent(getApplicationContext(), DirectionActivity.class);
-                        startActivity(intent);
-                        finish();
-                        overridePendingTransition(0, 0);
+//                        intent = new Intent(getApplicationContext(), DirectionActivity.class);
+//                        startActivity(intent);
+//                        finish();
+//                        overridePendingTransition(0, 0);
                         break;
 
                     case R.id.filter:
@@ -208,6 +208,7 @@ public class MyAccountActivity extends AppCompatActivity {
                         overridePendingTransition(0, 0);
                         break;
                 }
+
                 return false;
             }
         });
@@ -221,33 +222,23 @@ public class MyAccountActivity extends AppCompatActivity {
                         "Photo by Aaron Wu on Unsplash"
                 )
         );
-        list.add(
-                new CarouselItem(
-                        "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=1080"
-                )
-        );
+
+        list.add(new CarouselItem("https://images.unsplash.com/photo-1534447677768-be436bb09401?w=1080"));
+
+
         Map<String, String> headers = new HashMap<>();
         headers.put("header_key", "header_value");
-
-        list.add(
-                new CarouselItem(
-                        "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=1080",
-                        headers
+        list.add(new CarouselItem(
+                "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=1080",
+                headers
                 )
         );
         list.add(
-                new CarouselItem(
-                        R.drawable.images,
-                        "Photo by Kimiya Oveisi on Unsplash"
-                )
+                new CarouselItem(R.drawable.images, "Photo by Kimiya Oveisi on Unsplash")
         );
-        list.add(
-                new CarouselItem(
-                        R.drawable.images
-                )
+        list.add(new CarouselItem(R.drawable.images)
         );
         carousel.setData(list);
-
 
 //        carousel.setCarouselPadding(Utils.dpToPx(0, getApplicationContext()));
 //        carousel.setCarouselPaddingStart(Utils.dpToPx(0, getApplicationContext()));
@@ -273,6 +264,7 @@ public class MyAccountActivity extends AppCompatActivity {
 //        carousel.setShowNavigationButtons(true);
 //        carousel.setImageScaleType(ImageView.ScaleType.CENTER);
 //        carousel.setCarouselBackground(new ColorDrawable(Color.parseColor("#333333")));
+
     }
 
 
@@ -292,7 +284,6 @@ public class MyAccountActivity extends AppCompatActivity {
                 userName.setText(model.getUsername());
                 email.setText(model.getEmail());
                 mobileNumber.setText(model.getPhone_number());
-
                 name.setText(model.getName());
                 surname.setText(model.getSurname());
                 gender.setText(model.getGender());
@@ -311,7 +302,6 @@ public class MyAccountActivity extends AppCompatActivity {
 
 
             }
-
             @Override
             public void onFailure(Call<ProfileDetail> call, Throwable t) {
                 Glob.dialog.dismiss();

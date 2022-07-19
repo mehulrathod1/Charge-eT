@@ -50,6 +50,7 @@ import com.google.android.libraries.places.widget.listener.PlaceSelectionListene
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.in.chargeet.Adapter.ConnectorsAdapter;
+import com.in.chargeet.Model.CommonModel;
 import com.in.chargeet.Model.PowerStationDetailModel;
 import com.in.chargeet.Model.PowerStationModel;
 import com.in.chargeet.R;
@@ -212,8 +213,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 String[] separated = markerLocationString.split(",");
 
 
-                Log.e(TAG, "onMarkerClick: " + markerLocation);
-                Log.e(TAG, "onMarkerClick:2 " + separated[0] + "-----" + separated[1]);
+                Log.e(TAG, "onMarkerClick:" + markerLocation);
+                Log.e(TAG, "onMarkerClick:2" + separated[0] + "-----" + separated[1]);
 
                 Latitude = String.valueOf(markerLocation.latitude);
                 Longitude = String.valueOf(markerLocation.longitude);
@@ -327,13 +328,15 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                         startActivity(intent);
                         finish();
                         overridePendingTransition(0, 0);
+
+
                         break;
 
                     case R.id.order:
-                        intent = new Intent(getApplicationContext(), DirectionActivity.class);
-                        startActivity(intent);
-                        finish();
-                        overridePendingTransition(0, 0);
+//                        intent = new Intent(getApplicationContext(), DirectionActivity.class);
+//                        startActivity(intent);
+//                        finish();
+//                        overridePendingTransition(0, 0);
                         break;
 
                     case R.id.filter:
@@ -719,5 +722,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         connectorsAdapter.notifyDataSetChanged();
 
     }
+
 
 }

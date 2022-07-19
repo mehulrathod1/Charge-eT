@@ -349,7 +349,6 @@ public class FilterResultActivity extends AppCompatActivity {
 
     public void notAvailable() {
 
-
         notAvailableFilterAdapter = new NotAvailableFilterAdapter(notAvailableFilterList, getApplicationContext(), new NotAvailableFilterAdapter.Click() {
             @Override
             public void onScheduleClick(int position) {
@@ -364,7 +363,8 @@ public class FilterResultActivity extends AppCompatActivity {
 
             @Override
             public void onDirectionClick(int position) {
-//
+
+
 //                Intent intent = new Intent(getApplicationContext(), DirectionActivity.class);
 //                startActivity(intent);
 
@@ -375,6 +375,7 @@ public class FilterResultActivity extends AppCompatActivity {
                 intent.putExtra("Latitude", Latitude);
                 intent.putExtra("Longitude", Longitude);
                 startActivity(intent);
+
             }
         });
 

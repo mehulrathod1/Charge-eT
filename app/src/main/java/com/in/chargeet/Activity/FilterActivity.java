@@ -82,10 +82,10 @@ public class FilterActivity extends AppCompatActivity {
 
 
                     case R.id.order:
-                        intent = new Intent(getApplicationContext(), DirectionActivity.class);
-                        startActivity(intent);
-                        finish();
-                        overridePendingTransition(0, 0);
+//                        intent = new Intent(getApplicationContext(), DirectionActivity.class);
+//                        startActivity(intent);
+//                        finish();
+//                        overridePendingTransition(0, 0);
                         break;
 
                     case R.id.filter:

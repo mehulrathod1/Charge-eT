@@ -6,15 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".Activity.DirectionActivity">
 
-    <fragment
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:map="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-         />
+        android:layout_height="match_parent" />
 
 
     <RelativeLayout
@@ -37,6 +35,7 @@
                 android:layout_width="40dp"
                 android:layout_height="@dimen/_40sdp"
                 android:layout_gravity="center"
+                android:visibility="gone"
                 android:background="@drawable/connectors_bg"
                 android:gravity="center">
 
@@ -62,9 +61,26 @@
                     android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
+
             </LinearLayout>
+
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginLeft="@dimen/_8sdp"
+            android:layout_below="@id/search_layout"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:background="@drawable/connectors_bg">
+
+            <fragment
+                android:id="@+id/autocomplete"
+                android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </LinearLayout>
         <LinearLayout
             android:id="@+id/menuLayout"
             android:layout_width="match_parent"
@@ -317,26 +333,26 @@
 
     </RelativeLayout>
 
-<!--    <LinearLayout-->
-<!--        android:id="@+id/bottomMenu"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_alignParentBottom="true"-->
-<!--        android:layout_gravity="center_vertical"-->
-<!--        android:orientation="horizontal">-->
+    <!--    <LinearLayout-->
+    <!--        android:id="@+id/bottomMenu"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_alignParentBottom="true"-->
+    <!--        android:layout_gravity="center_vertical"-->
+    <!--        android:orientation="horizontal">-->
 
 
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/bottom_navigation"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_gravity="center"
-            android:background="@drawable/bottom_navigation_bg"
-            android:fitsSystemWindows="true"
-            app:itemIconSize="@dimen/_28sdp"
-            app:labelVisibilityMode="unlabeled"
-            app:menu="@menu/bottom_menu" />
-<!--    </LinearLayout>-->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="center"
+        android:background="@drawable/bottom_navigation_bg"
+        android:fitsSystemWindows="true"
+        app:itemIconSize="@dimen/_28sdp"
+        app:labelVisibilityMode="unlabeled"
+        app:menu="@menu/bottom_menu" />
+    <!--    </LinearLayout>-->
 
 </RelativeLayout>

@@ -261,18 +261,17 @@ public class MyVehicleActivity extends AppCompatActivity {
                 Glob.dialog.dismiss();
             }
         });
-
     }
 
     @Override
     public void onBackPressed() {
+
         super.onBackPressed();
-
-
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intent);
         finish();
         overridePendingTransition(0, 0);
+
 
     }
 }
