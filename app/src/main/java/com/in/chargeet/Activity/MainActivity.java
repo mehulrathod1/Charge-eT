@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -13,6 +14,11 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
@@ -23,6 +29,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -69,13 +76,17 @@ import retrofit2.Response;
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     BottomNavigationView bottom_navigation;
-    TextView myVehicles, myBooking, setting, wallet, bookNow, StationName, stationPower, power, stationRate, navigateLocation;
+    TextView myVehicles, myBooking, setting, wallet, bookNow, StationName, stationPower, power, stationRate, navigateLocation,
+            percentage, units, time, bookPoint;
+    SeekBar seekBar, unitSeekbar;
+    View thumbView;
+    RadioButton radioButton1, radioButton2, radioButton3;
     ImageView location, menuImage, zoomOut, zoomIn, goToCurrentLocation, connector3, connector2, connector1;
     BottomSheetDialog bottomSheetDialog;
     AlertDialog alert, percentageAlert;
     AlertDialog.Builder alertDialog, percentageDialog;
     RadioButton googlePay, amazonPay, radioWallet, creditCard;
-    LinearLayout menuLayout, menuButton;
+    LinearLayout menuLayout, menuButton, percentageLayout, unitLayout, timeLayout;
     GoogleMap mMap;
     String TAG = "MainActivity";
     Location currentLocation;
@@ -87,6 +98,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     List<PowerStationDetailModel.PowerStationData.Connectors> connectorsList = new ArrayList<>();
     RecyclerView connectorRecycler;
     ConnectorsAdapter connectorsAdapter;
+
+    String SelectedPercentage = "0", SelectedUnit = "0", SelectedTime = "00:00";
 
     //    LatLng sydney = new LatLng(-34, 151);
 //    LatLng TamWorth = new LatLng(-31.083332, 150.916672);
@@ -144,7 +157,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 //        locationArrayList.add(Brisbane);
 //
         init();
-
+        thumbView = LayoutInflater.from(getApplicationContext()).inflate(R.layout.layout_seekbar_thumb, null, false);
     }
 
 
@@ -304,6 +317,20 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         percentageAlert = percentageDialog.create();
 
 
+        percentage = layout.findViewById(R.id.percentage);
+        units = layout.findViewById(R.id.units);
+        time = layout.findViewById(R.id.times);
+        percentageLayout = layout.findViewById(R.id.percentageLayout);
+        unitLayout = layout.findViewById(R.id.unitLayout);
+        timeLayout = layout.findViewById(R.id.timeLayout);
+        seekBar = layout.findViewById(R.id.seekBar);
+        unitSeekbar = layout.findViewById(R.id.unitSeekbar);
+        bookPoint = layout.findViewById(R.id.bookPoint);
+        radioButton1 = layout.findViewById(R.id.radioButton1);
+        radioButton2 = layout.findViewById(R.id.radioButton2);
+        radioButton3 = layout.findViewById(R.id.radioButton3);
+
+
         alertDialog = new AlertDialog.Builder(MainActivity.this);
         LayoutInflater inflater = getLayoutInflater();
         View dialogLayout = inflater.inflate(R.layout.payment_option_layout, null);
@@ -401,13 +428,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 if (connectorId == null) {
                     Toast.makeText(MainActivity.this, "" + "Please select connector type", Toast.LENGTH_SHORT).show();
                 } else {
-                    Intent intent = new Intent(getApplicationContext(), ChargingActivity.class);
-                    intent.putExtra("connectorId", connectorId);
-                    intent.putExtra("powerStationId", powerStationId);
-                    intent.putExtra("paymentMethod", paymentMethod);
-                    startActivity(intent);
 
-//                    percentageAlert.show();
+                    percentageAlert.show();
                 }
             }
         });
@@ -526,6 +548,175 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 paymentMethod = "card";
             }
         });
+
+
+        percentage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                percentage.setBackgroundDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.filter_heading_blue_bg));
+                units.setBackgroundDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.filter_heading_white_bg));
+                time.setBackgroundDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.filter_heading_white_bg));
+
+                percentage.setTextColor(Color.parseColor("#ffffff"));
+                units.setTextColor(Color.parseColor("#1C1C1C"));
+                time.setTextColor(Color.parseColor("#1C1C1C"));
+
+                percentageLayout.setVisibility(View.VISIBLE);
+                unitLayout.setVisibility(View.GONE);
+                timeLayout.setVisibility(View.GONE);
+
+                SelectedTime = "00:00";
+                SelectedUnit = "0";
+
+
+                seekBar.setProgress(0);
+                unitSeekbar.setProgress(0);
+            }
+        });
+        units.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                units.setBackgroundDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.filter_heading_blue_bg));
+                percentage.setBackgroundDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.filter_heading_white_bg));
+                time.setBackgroundDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.filter_heading_white_bg));
+
+                units.setTextColor(Color.parseColor("#ffffff"));
+                percentage.setTextColor(Color.parseColor("#1C1C1C"));
+                time.setTextColor(Color.parseColor("#1C1C1C"));
+
+
+                percentageLayout.setVisibility(View.GONE);
+                unitLayout.setVisibility(View.VISIBLE);
+                timeLayout.setVisibility(View.GONE);
+
+
+                SelectedTime = "00:00";
+                SelectedPercentage = "0";
+
+                seekBar.setProgress(0);
+                unitSeekbar.setProgress(0);
+            }
+        });
+
+        time.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                time.setBackgroundDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.filter_heading_blue_bg));
+                percentage.setBackgroundDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.filter_heading_white_bg));
+                units.setBackgroundDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.filter_heading_white_bg));
+
+                time.setTextColor(Color.parseColor("#ffffff"));
+                percentage.setTextColor(Color.parseColor("#1C1C1C"));
+                units.setTextColor(Color.parseColor("#1C1C1C"));
+
+                percentageLayout.setVisibility(View.GONE);
+                unitLayout.setVisibility(View.GONE);
+                timeLayout.setVisibility(View.VISIBLE);
+
+
+                SelectedUnit = "0";
+                SelectedPercentage = "0";
+                radioButton1.setChecked(false);
+                radioButton2.setChecked(false);
+                radioButton3.setChecked(false);
+
+            }
+        });
+
+
+        bookPoint.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.e(TAG, "onClick: " + SelectedPercentage + "------" + SelectedUnit + "-----" + SelectedTime);
+
+                Intent intent = new Intent(getApplicationContext(), ChargingActivity.class);
+                intent.putExtra("connectorId", connectorId);
+                intent.putExtra("powerStationId", powerStationId);
+                intent.putExtra("paymentMethod", paymentMethod);
+                intent.putExtra("SelectedPercentage",SelectedPercentage);
+                intent.putExtra("SelectedUnit", SelectedUnit);
+                intent.putExtra("SelectedTime", SelectedTime);
+                startActivity(intent);
+
+            }
+        });
+
+
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+
+                // You can have your own calculation for progress
+                progress = progress / 5;
+                progress = progress * 5;
+                seekBar.setThumb(getThumb(progress));
+
+                SelectedPercentage = String.valueOf(progress);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+        unitSeekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+
+                // You can have your own calculation for progress
+                progress = progress / 5;
+                progress = progress * 5;
+                seekBar.setThumb(getThumb(progress));
+
+                SelectedUnit = String.valueOf(progress);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+
+        radioButton1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (radioButton1.isChecked()) {
+
+                    SelectedTime = "1:00";
+                }
+            }
+        });
+        radioButton2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (radioButton2.isChecked()) {
+                    SelectedTime = "2:00";
+                }
+            }
+        });
+        radioButton3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (radioButton3.isChecked()) {
+
+                    SelectedTime = "3:00";
+                }
+            }
+        });
+
     }
 
     public void getPowerStation(String token) {
@@ -720,7 +911,18 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             Log.e(TAG, "changeSlotSelected: " + connectorsList.get(i).getSelected());
         }
         connectorsAdapter.notifyDataSetChanged();
+    }
 
+    public Drawable getThumb(int progress) {
+        ((TextView) thumbView.findViewById(R.id.tvProgress)).setText(progress + "");
+
+        thumbView.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
+        Bitmap bitmap = Bitmap.createBitmap(thumbView.getMeasuredWidth(), thumbView.getMeasuredHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        thumbView.layout(0, 0, thumbView.getMeasuredWidth(), thumbView.getMeasuredHeight());
+        thumbView.draw(canvas);
+
+        return new BitmapDrawable(getResources(), bitmap);
     }
 
 

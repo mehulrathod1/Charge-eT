@@ -186,7 +186,10 @@ public interface Api {
             @Field("connectors_id") String connectors_id,
             @Field("booking_date") String booking_date,
             @Field("booking_time") String booking_time,
-            @Field("payment_method") String payment_method
+            @Field("payment_method") String payment_method,
+            @Field("percentage") String percentage,
+            @Field("unit") String unit,
+            @Field("time") String time
 
     );
 
@@ -221,8 +224,6 @@ public interface Api {
             @Part MultipartBody.Part profile_image
 
     );
-
-
 
 
 }

@@ -47,7 +47,7 @@ public class ChargingActivity extends AppCompatActivity {
     RadioButton googlePay, amazonPay, radioWallet, creditCard;
     TextView wallet;
 
-    String connectorId, powerStationId, paymentMethod, bookingDate, BookingTime;
+    String connectorId, powerStationId, paymentMethod, bookingDate, BookingTime, SelectedPercentage, SelectedUnit, SelectedTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +58,9 @@ public class ChargingActivity extends AppCompatActivity {
         connectorId = intent.getStringExtra("connectorId");
         powerStationId = intent.getStringExtra("powerStationId");
         paymentMethod = intent.getStringExtra("paymentMethod");
-
+        SelectedPercentage = intent.getStringExtra("SelectedPercentage");
+        SelectedUnit = intent.getStringExtra("SelectedUnit");
+        SelectedTime = intent.getStringExtra("SelectedTime");
         init();
     }
 
@@ -103,7 +105,7 @@ public class ChargingActivity extends AppCompatActivity {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView calendarView, int i, int i1, int i2) {
 
-                int a =i1+1;
+                int a = i1 + 1;
                 bookingDate = i + "-" + a + "-" + i2;
                 Log.e("onSelectedDayChange", "onSelectedDayChange: " + bookingDate);
 
@@ -289,7 +291,7 @@ public class ChargingActivity extends AppCompatActivity {
                             connectorId,
                             bookingDate,
                             BookingTime,
-                            paymentMethod);
+                            paymentMethod, SelectedPercentage, SelectedUnit, SelectedTime);
                 }
             }
 
@@ -304,11 +306,14 @@ public class ChargingActivity extends AppCompatActivity {
                                   String connectors_id,
                                   String booking_date,
                                   String booking_time,
-                                  String payment_method) {
+                                  String payment_method,
+                                  String percentage,
+                                  String unit,
+                                  String time) {
 
         Api call = RetrofitClient.getClient(Glob.baseUrl).create(Api.class);
         Glob.dialog.show();
-        call.bookChargingPoint(token, user_id, power_station_id, connectors_id, booking_date, booking_time, payment_method).enqueue(new Callback<CommonModel>() {
+        call.bookChargingPoint(token, user_id, power_station_id, connectors_id, booking_date, booking_time, payment_method, percentage, unit, time).enqueue(new Callback<CommonModel>() {
             @Override
             public void onResponse(Call<CommonModel> call, Response<CommonModel> response) {
 
