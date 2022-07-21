@@ -93,8 +93,12 @@ public class MyBookingActivity extends AppCompatActivity {
 
                     MyBookingModel.Booking model = dataList.get(i);
                     MyBookingModel.Booking data = new MyBookingModel.Booking(
-                            model.getId(), model.getBooking_date(), model.getPower_station_name(),
-                            model.getDescription(), model.getCreated_at()
+                            model.getId(),model.getPower_station_id(), model.getBooking_date(), model.getPower_station_name(),
+                            model.getConnectors_id(), model.getDescription(),
+                            model.getPercentage(),
+                            model.getUnit(),
+                            model.getTime(),
+                            model.getCreated_at()
                     );
 
                     bookingModelList.add(data);
@@ -118,7 +122,21 @@ public class MyBookingActivity extends AppCompatActivity {
             @Override
             public void onRebookClick(int position) {
 
+                String connectorId = bookingModelList.get(position).getConnectors_id();
+                String paymentMethod = "Wallet";
+                String SelectedPercentage = bookingModelList.get(position).getPercentage();
+                String SelectedUnit = bookingModelList.get(position).getUnit();
+                String SelectedTime = bookingModelList.get(position).getTime();
+                String powerStationId = bookingModelList.get(position).getPower_station_id();
+
+
                 Intent intent = new Intent(getApplicationContext(), ChargingActivity.class);
+                intent.putExtra("connectorId", connectorId);
+                intent.putExtra("powerStationId", powerStationId);
+                intent.putExtra("paymentMethod", paymentMethod);
+                intent.putExtra("SelectedPercentage", SelectedPercentage);
+                intent.putExtra("SelectedUnit", SelectedUnit);
+                intent.putExtra("SelectedTime", SelectedTime);
                 startActivity(intent);
             }
         });

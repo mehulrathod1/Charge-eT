@@ -44,6 +44,10 @@ public class AvailableFilterModel {
     String icon;
 
 
+    String percentage = "0";
+    String unit = "0";
+    String time = "00:00";
+
     public AvailableFilterModel(String id, String name, String description, String power, String rate, String connectors, String latitude, String longitude, String icon) {
         this.id = id;
         this.name = name;
@@ -54,6 +58,30 @@ public class AvailableFilterModel {
         this.latitude = latitude;
         this.longitude = longitude;
         this.icon = icon;
+    }
+
+    public String getUnit() {
+        return unit;
+    }
+
+    public void setUnit(String unit) {
+        this.unit = unit;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public String getPercentage() {
+        return percentage;
+    }
+
+    public void setPercentage(String percentage) {
+        this.percentage = percentage;
     }
 
     public String getId() {

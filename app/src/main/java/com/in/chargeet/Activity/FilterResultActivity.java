@@ -54,6 +54,7 @@ public class FilterResultActivity extends AppCompatActivity {
     String TAG = "FilterResultActivity";
 
     String freeStation, workingStation, powerLevels, connectorId, powerStationId;
+    String SelectedPercentage = "0", SelectedUnit = "0", SelectedTime = "00:00";
 
 
     @Override
@@ -301,28 +302,56 @@ public class FilterResultActivity extends AppCompatActivity {
             @Override
             public void onBookClick(int position) {
 
+                Log.e(TAG, "onClick: " + availableFilterList.get(position).getPercentage() + "------" + availableFilterList.get(position).getUnit()
+                        + "-----" + availableFilterList.get(position).getTime());
+
+                SelectedPercentage = availableFilterList.get(position).getPercentage();
+                SelectedUnit = availableFilterList.get(position).getUnit();
+                SelectedTime = availableFilterList.get(position).getTime();
 
                 powerStationId = availableFilterList.get(position).getId();
+
+//                Intent intent = new Intent(getApplicationContext(), ChargingActivity.class);
+//                intent.putExtra("connectorId", connectorId);
+//                intent.putExtra("powerStationId", powerStationId);
+//                intent.putExtra("paymentMethod", "wallet");
+//                startActivity(intent);
+
+
                 Intent intent = new Intent(getApplicationContext(), ChargingActivity.class);
                 intent.putExtra("connectorId", connectorId);
                 intent.putExtra("powerStationId", powerStationId);
-                intent.putExtra("paymentMethod", "wallet");
+                intent.putExtra("paymentMethod", "Wallet");
+                intent.putExtra("SelectedPercentage", SelectedPercentage);
+                intent.putExtra("SelectedUnit", SelectedUnit);
+                intent.putExtra("SelectedTime", SelectedTime);
                 startActivity(intent);
+
 
             }
 
             @Override
             public void onPercentageClick(int position) {
 
+
+//                SelectedTime = "00:00";
+//                SelectedUnit = "0";
+
             }
 
             @Override
             public void onUnitClick(int position) {
 
+//                SelectedTime = "00:00";
+//                SelectedPercentage = "0";
             }
 
             @Override
             public void onTimeClick(int position) {
+
+//                SelectedUnit = "0";
+//                SelectedPercentage = "0";
+
 
             }
 
@@ -359,6 +388,15 @@ public class FilterResultActivity extends AppCompatActivity {
                 intent.putExtra("powerStationId", powerStationId);
                 intent.putExtra("paymentMethod", "wallet");
                 startActivity(intent);
+
+//                Intent intent = new Intent(getApplicationContext(), ChargingActivity.class);
+//                intent.putExtra("connectorId", connectorId);
+//                intent.putExtra("powerStationId", "3");
+//                intent.putExtra("paymentMethod", paymentMethod);
+//                intent.putExtra("SelectedPercentage", SelectedPercentage);
+//                intent.putExtra("SelectedUnit", SelectedUnit);
+//                intent.putExtra("SelectedTime", SelectedTime);
+//                startActivity(intent);
             }
 
             @Override

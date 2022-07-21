@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -33,6 +34,7 @@ public class AvailableFilterAdapter extends RecyclerView.Adapter<AvailableFilter
     Context context;
     Click click;
     View thumbView;
+
 
     public interface Click {
         void onBookClick(int position);
@@ -85,6 +87,10 @@ public class AvailableFilterAdapter extends RecyclerView.Adapter<AvailableFilter
                 progress = progress / 5;
                 progress = progress * 5;
                 seekBar.setThumb(getThumb(progress));
+
+                String pr = String.valueOf(progress);
+                model.setPercentage(pr);
+
             }
 
             @Override
@@ -105,6 +111,9 @@ public class AvailableFilterAdapter extends RecyclerView.Adapter<AvailableFilter
                 progress = progress / 5;
                 progress = progress * 5;
                 seekBar.setThumb(getThumb(progress));
+
+                String pr = String.valueOf(progress);
+                model.setUnit(pr);
             }
 
             @Override
@@ -133,6 +142,10 @@ public class AvailableFilterAdapter extends RecyclerView.Adapter<AvailableFilter
                 holder.percentageLayout.setVisibility(View.VISIBLE);
                 holder.unitLayout.setVisibility(View.GONE);
                 holder.timeLayout.setVisibility(View.GONE);
+
+                holder.seekBar.setProgress(0);
+                holder.unitSeekbar.setProgress(0);
+                model.setTime("00:00");
             }
         });
         holder.units.setOnClickListener(new View.OnClickListener() {
@@ -152,6 +165,10 @@ public class AvailableFilterAdapter extends RecyclerView.Adapter<AvailableFilter
                 holder.percentageLayout.setVisibility(View.GONE);
                 holder.unitLayout.setVisibility(View.VISIBLE);
                 holder.timeLayout.setVisibility(View.GONE);
+
+                holder.seekBar.setProgress(0);
+                holder.unitSeekbar.setProgress(0);
+                model.setTime("00:00");
             }
         });
         holder.time.setOnClickListener(new View.OnClickListener() {
@@ -170,6 +187,13 @@ public class AvailableFilterAdapter extends RecyclerView.Adapter<AvailableFilter
                 holder.percentageLayout.setVisibility(View.GONE);
                 holder.unitLayout.setVisibility(View.GONE);
                 holder.timeLayout.setVisibility(View.VISIBLE);
+
+                holder.radioButton1.setChecked(false);
+                holder.radioButton2.setChecked(false);
+                holder.radioButton3.setChecked(false);
+
+                holder.seekBar.setProgress(0);
+                holder.unitSeekbar.setProgress(0);
             }
         });
 
@@ -188,6 +212,41 @@ public class AvailableFilterAdapter extends RecyclerView.Adapter<AvailableFilter
         });
 
 
+        holder.radioButton1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if (holder.radioButton1.isChecked()) {
+
+                    model.setTime("01:00");
+                } else {
+
+                }
+
+            }
+        });
+        holder.radioButton2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if (holder.radioButton2.isChecked()) {
+                    model.setTime("02:00");
+                } else {
+
+                }
+            }
+        });
+        holder.radioButton3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (holder.radioButton3.isChecked()) {
+
+                    model.setTime("03:00");
+                } else {
+
+                }
+            }
+        });
     }
 
     @Override
@@ -201,6 +260,7 @@ public class AvailableFilterAdapter extends RecyclerView.Adapter<AvailableFilter
         LinearLayout percentageLayout, unitLayout, timeLayout;
         SeekBar seekBar, unitSeekbar;
         ImageView showDirection;
+        RadioButton radioButton1, radioButton2, radioButton3;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -218,6 +278,9 @@ public class AvailableFilterAdapter extends RecyclerView.Adapter<AvailableFilter
             description = itemView.findViewById(R.id.description);
             power = itemView.findViewById(R.id.power);
             rate = itemView.findViewById(R.id.rate);
+            radioButton1 = itemView.findViewById(R.id.radioButton1);
+            radioButton2 = itemView.findViewById(R.id.radioButton2);
+            radioButton3 = itemView.findViewById(R.id.radioButton3);
 
         }
     }
