@@ -141,7 +141,6 @@ public class ChargingActivity extends AppCompatActivity {
                     String as = String.valueOf(pluse);
                     hour.setText(as);
                 }
-
             }
         });
 

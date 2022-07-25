@@ -76,11 +76,20 @@ public class DirectionActivity extends AppCompatActivity implements OnMapReadyCa
     String latitude, longitude;
 
 
+    List<LatLng> allMark = new ArrayList<>();
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_direction);
+
+
+        allMark.add(new LatLng(Double.parseDouble("21.085211"), Double.parseDouble("71.762057")));
+        allMark.add(new LatLng(Double.parseDouble("21.353628"), Double.parseDouble("72.032716")));
+        allMark.add(new LatLng(Double.parseDouble("21.757772"), Double.parseDouble("72.156965")));
+        allMark.add(new LatLng(Double.parseDouble("22.493525 "), Double.parseDouble("72.657416")));
 
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
@@ -440,6 +449,11 @@ public class DirectionActivity extends AppCompatActivity implements OnMapReadyCa
         endMarker.title("Destination");
         mMap.addMarker(endMarker);
 
+
+        for (int i = 0; i < allMark.size(); i++) {
+            MarkerOptions markerOptions = new MarkerOptions().position(allMark.get(i));
+            mMap.addMarker(markerOptions.position(allMark.get(i)));
+        }
 
     }
 
